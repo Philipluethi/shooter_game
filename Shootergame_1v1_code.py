@@ -80,7 +80,7 @@ class PLAYER:
         if keys[pygame.K_SPACE] and current_time - self.last_shot > BULLET_COOLDOWN:
             bullet_x = self.player_rect.centerx
             bullet_y = self.player_rect.centery
-            new_bullet = BULLET(bullet_x, bullet_y)
+            new_bullet = BULLET(bullet_x, bullet_y, self.direction)
             self.bullets.append(new_bullet)
             self.last_shot = current_time
 
@@ -100,17 +100,19 @@ class BULLET:
     COLOR = pygame.Color("yellow")
     SPEED = 10
     WIDTH, HEIGHT = 10, 5
-    DISTANCE = 60
 
-    def __init__(self, x, y):
+    def __init__(self, x, y, direction):
         self.rect = pygame.Rect(x, y, self.WIDTH, self.HEIGHT)
+        self.direction = direction
 
     def draw(self):
         pygame.draw.rect(screen, self.COLOR, self.rect)
 
-
     def update(self):
-        self.rect.x += self.SPEED
+        if self.direction == "right":
+            self.rect.x += self.SPEED
+        elif self.direction == "left":
+            self.rect.x -= self.SPEED
         self.draw()
 
 
