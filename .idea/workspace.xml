@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="shoot right direction">
+    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="shoot with direction">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shootergame_1v1_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shootergame_1v1_code.py" afterDir="false" />
     </list>
@@ -142,7 +142,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718694305701</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="shoot with direction">
+      <option name="closed" value="true" />
+      <created>1718712604223</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1718712604223</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -161,6 +169,7 @@
     <MESSAGE value="Basics no jump" />
     <MESSAGE value="Block collision + jump" />
     <MESSAGE value="shoot right direction" />
-    <option name="LAST_COMMIT_MESSAGE" value="shoot right direction" />
+    <MESSAGE value="shoot with direction" />
+    <option name="LAST_COMMIT_MESSAGE" value="shoot with direction" />
   </component>
 </project>

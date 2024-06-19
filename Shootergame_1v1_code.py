@@ -37,22 +37,29 @@ class PLAYER:
     def draw(self):
         pygame.draw.rect(screen, self.COLOR, self.player_rect)
 
-    def move_horizontaly(self):
+    def check_keys(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            self.player_rect.x -= self.x_vel
-            self.direction = "left"
+            self.move_left()
         if keys[pygame.K_RIGHT]:
-            self.player_rect.x += self.x_vel
-            self.direction = "right"
+            self.move_right()
+        if keys[pygame.K_UP] and self.jump_count < 1:
+            self.jump()
+        if keys[pygame.K_SPACE]:
+            self.shoot()
+
+    def move_left(self):
+        self.player_rect.x -= self.x_vel
+        self.direction = "left"
+
+    def move_right(self):
+        self.player_rect.x += self.x_vel
+        self.direction = "right"
 
     def jump(self):
-        keys = pygame.key.get_pressed()
-        if self.touching_ground == True:
-            self.jump_count = 0
-        if keys[pygame.K_UP] and self.jump_count < 1:
-                self.y_vel = -JUMP_SPEED
-                self.jump_count += 1
+        self.y_vel = -JUMP_SPEED
+        self.jump_count += 1
+
     def gravity(self):
         self.y_vel += GRAVITY
         self.player_rect.y += self.y_vel
@@ -65,6 +72,7 @@ class PLAYER:
                     self.player_rect.bottom = block.block_rect.top
                     self.y_vel = 0
                     self.touching_ground = True
+                    self.jump_count = 0
 
     def collide_horizontal(self, blocks):
         for block in blocks:
@@ -75,9 +83,8 @@ class PLAYER:
                     self.player_rect.left = block.block_rect.right
 
     def shoot(self):
-        keys = pygame.key.get_pressed()
         current_time = pygame.time.get_ticks()
-        if keys[pygame.K_SPACE] and current_time - self.last_shot > BULLET_COOLDOWN:
+        if current_time - self.last_shot > BULLET_COOLDOWN:
             bullet_x = self.player_rect.centerx
             bullet_y = self.player_rect.centery
             new_bullet = BULLET(bullet_x, bullet_y, self.direction)
@@ -86,12 +93,10 @@ class PLAYER:
 
 
     def update(self):
-        self.move_horizontaly()
+        self.check_keys()
         self.gravity()
         self.collide_vertical(blocks)
         self.collide_horizontal(blocks)
-        self.jump()
-        self.shoot()
         for bullet in self.bullets:
             bullet.update()
 
