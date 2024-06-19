@@ -24,7 +24,8 @@ class BLOCK:
 class PLAYER:
     COLOR = pygame.Color("red")
 
-    def __init__(self, x, y, width, height):
+    def __init__(self, player_number, x, y):
+        width, height = 50, 50
         self.player_rect = pygame.Rect(x, y, width, height)
         self.direction = "right"
         self.x_vel = 5
@@ -32,6 +33,7 @@ class PLAYER:
         self.jump_count = 0
         self.bullets = []
         self.last_shot = pygame.time.get_ticks()
+        self.player_number = player_number
 
 
     def draw(self):
@@ -39,14 +41,24 @@ class PLAYER:
 
     def check_keys(self):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            self.move_left()
-        if keys[pygame.K_RIGHT]:
-            self.move_right()
-        if keys[pygame.K_UP] and self.jump_count < 1:
-            self.jump()
-        if keys[pygame.K_SPACE]:
-            self.shoot()
+        if self.player_number == 1:
+            if keys[pygame.K_LEFT]:
+                self.move_left()
+            if keys[pygame.K_RIGHT]:
+                self.move_right()
+            if keys[pygame.K_UP] and self.jump_count < 1:
+                self.jump()
+            if keys[pygame.K_SPACE]:
+                self.shoot()
+        if self.player_number == 2:
+            if keys[pygame.K_a]:
+                self.move_left()
+            if keys[pygame.K_d]:
+                self.move_right()
+            if keys[pygame.K_w] and self.jump_count < 1:
+                self.jump()
+            if keys[pygame.K_CAPSLOCK]:
+                self.shoot()
 
     def move_left(self):
         self.player_rect.x -= self.x_vel
@@ -121,12 +133,15 @@ class BULLET:
         self.draw()
 
 
-def draw_elements(blocks, player):
-    player.draw()
+def draw_elements(blocks, player_1, player_2):
+    player_1.draw()
+    player_2.draw()
     for block in blocks:
         block.draw()
 
-player = PLAYER(300, 0, 50, 50)
+player_1 = PLAYER(1, 200, 0)
+player_2 = PLAYER(2, 500, 0)
+
 blocks = [
     BLOCK(200, 450, 500, 50),
     BLOCK(300, 400, 200, 50)
@@ -142,8 +157,9 @@ while running:
             running = False
     screen.fill(pygame.Color("light blue"))
 
-    draw_elements(blocks, player)
-    player.update()
+    draw_elements(blocks, player_1, player_2)
+    player_1.update()
+    player_2.update()
 
     pygame.display.update()
     clock.tick(FPS)
