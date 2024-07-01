@@ -9,6 +9,7 @@ JUMP_SPEED = 15
 DODGE_SPEED = 50
 JUMP_LIMIT = 2
 BULLET_COOLDOWN = 1000 / 5
+TEXT_FONT = pygame.font.SysFont("Arial", 30)
 
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode((WIDTH,HEIGHT))
@@ -178,12 +179,18 @@ class BULLET:
             self.draw()
             self.collide_player(player_1, player_2)
 
+def draw_text(text, font, color, x, y):
+    text_img = font.render(text, True, color)
+    screen.blit(text_img, (x, y))
 
 def draw_elements(blocks, player_1, player_2):
     player_1.draw()
     player_2.draw()
     for block in blocks:
         block.draw()
+
+    draw_text("P1: " + str(player_1.lives), TEXT_FONT, (255, 255, 255), WIDTH - 100, 50)
+    draw_text("P2: " + str(player_2.lives), TEXT_FONT, (255, 255, 255), 100, 50)
 
 player_1 = PLAYER(1, 500, 0)
 player_2 = PLAYER(2, 200, 0)
