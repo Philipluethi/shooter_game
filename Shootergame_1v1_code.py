@@ -6,6 +6,8 @@ WIDTH, HEIGHT = 1000, 500
 FPS = 60
 GRAVITY = 1
 JUMP_SPEED = 15
+DODGE_SPEED = 30
+JUMP_LIMIT = 2
 BULLET_COOLDOWN = 1000 / 5
 
 clock = pygame.time.Clock()
@@ -31,9 +33,13 @@ class PLAYER:
         self.x_vel = 5
         self.y_vel = 0
         self.jump_count = 0
+        self.jump_pressed = False
+        self.dodge_ground = False
         self.bullets = []
         self.last_shot = pygame.time.get_ticks()
         self.player_number = player_number
+        self.lives = 10
+
 
 
     def draw(self):
@@ -44,19 +50,41 @@ class PLAYER:
         if self.player_number == 1:
             if keys[pygame.K_LEFT]:
                 self.move_left()
+
             if keys[pygame.K_RIGHT]:
                 self.move_right()
-            if keys[pygame.K_UP] and self.jump_count < 1:
-                self.jump()
+
+            if keys[pygame.K_UP]:
+                if self.jump_pressed == False and self.jump_count < JUMP_LIMIT:
+                    self.jump()
+                    self.jump_count += 1
+                    self.jump_pressed = True
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_UP:
+                    self.jump_pressed = False
+
             if keys[pygame.K_SPACE]:
                 self.shoot()
+
+            if keys[pygame.K_DOWN]:
+                self.dodge()
+
         if self.player_number == 2:
             if keys[pygame.K_a]:
                 self.move_left()
+
             if keys[pygame.K_d]:
                 self.move_right()
-            if keys[pygame.K_w] and self.jump_count < 1:
-                self.jump()
+
+            if keys[pygame.K_w]:
+                if self.jump_pressed == False and self.jump_count < JUMP_LIMIT:
+                    self.jump()
+                    self.jump_count += 1
+                    self.jump_pressed = True
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_w:
+                    self.jump_pressed = False
+
             if keys[pygame.K_CAPSLOCK]:
                 self.shoot()
 
@@ -74,7 +102,14 @@ class PLAYER:
 
     def jump(self):
         self.y_vel = -JUMP_SPEED
-        self.jump_count += 1
+
+    def dodge(self):
+        self.y_vel = DODGE_SPEED
+        if self.touching_ground:
+            self.dodge_ground = True
+
+
+
 
     def shoot(self):
         current_time = pygame.time.get_ticks()
@@ -87,33 +122,24 @@ class PLAYER:
             self.last_shot = current_time
 
 
-
     def collide_vertical(self, blocks):
         self.touching_ground = False
         for block in blocks:
             if self.rect.colliderect(block.block_rect):
                 if self.y_vel > 0:
                     self.rect.bottom = block.block_rect.top
-                    self.y_vel = 0
                     self.touching_ground = True
                     self.jump_count = 0
+                    self.y_vel = 0
 
-    def collide_horizontal(self, blocks):
-        for block in blocks:
-            if self.rect.colliderect(block.block_rect) and self.rect.bottom != block.block_rect.top and self.x_vel != 0:
-                if self.rect.right > block.block_rect.left and self.rect.left < block.block_rect.left:
-                    self.rect.right = block.block_rect.left
-                elif self.rect.left < block.block_rect.right and self.rect.right > block.block_rect.right:
-                    self.rect.left = block.block_rect.right
 
     def update(self):
         self.check_keys()
         self.gravity()
         self.collide_vertical(blocks)
-        self.collide_horizontal(blocks)
         for bullet in self.bullets:
             bullet.update()
-
+        print("dodge ground: " + str(player_1.dodge_ground), "touch ground: " + str(player_1.touching_ground))
 
 class BULLET:
     COLOR = pygame.Color("yellow")
