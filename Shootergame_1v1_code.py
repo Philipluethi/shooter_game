@@ -6,10 +6,10 @@ WIDTH, HEIGHT = 1000, 500
 FPS = 60
 GRAVITY = 1
 JUMP_SPEED = 15
-DODGE_SPEED = 50
+DODGE_SPEED = 15
 JUMP_LIMIT = 2
 BULLET_COOLDOWN = 1000 / 5
-TEXT_FONT = pygame.font.SysFont("Arial", 30)
+WINNER = None
 
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode((WIDTH,HEIGHT))
@@ -19,13 +19,12 @@ pygame.display.set_caption("Shooter Game 1v1")
 class BLOCK:
     COLOR = pygame.Color("dark green")
     def __init__(self, x, y, width, height):
-        self.block_rect = pygame.Rect(x, y, width, height)
+        self.rect = pygame.Rect(x, y, width, height)
 
     def draw(self):
-        pygame.draw.rect(screen, self.COLOR, self.block_rect)
+        pygame.draw.rect(screen, self.COLOR, self.rect)
 
 class PLAYER:
-    COLOR = pygame.Color("red")
 
     def __init__(self, player_number, x, y):
         width, height = 50, 50
@@ -40,10 +39,14 @@ class PLAYER:
         self.last_shot = pygame.time.get_ticks()
         self.player_number = player_number
         self.lives = 10
-
+        self.touching_ground = False
+        if self.player_number == 1:
+            self.color = pygame.Color("red")
+        if self.player_number == 2:
+            self.color = pygame.Color("blue")
 
     def draw(self):
-        pygame.draw.rect(screen, self.COLOR, self.rect)
+        pygame.draw.rect(screen, self.color, self.rect)
 
     def check_keys(self):
         keys = pygame.key.get_pressed()
@@ -66,10 +69,14 @@ class PLAYER:
 
             if keys[pygame.K_SPACE]:
                 self.shoot()
+            #
+            #
+            # if event.type == pygame.KEYUP:
+            #     if event.key == pygame.K_DOWN:
+            #         self.dodge()
+            #         if self.touching_ground == True:
+            #             self.dodge_ground = True
 
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_DOWN:
-                    self.dodge()
 
     # P2
         if self.player_number == 2:
@@ -106,10 +113,8 @@ class PLAYER:
     def jump(self):
         self.y_vel = -JUMP_SPEED
 
-    def dodge(self):
-        self.y_vel = DODGE_SPEED
-        if self.touching_ground:
-            self.dodge_ground = True
+    # def dodge(self):
+    #     self.y_vel += DODGE_SPEED
 
     def shoot(self):
         current_time = pygame.time.get_ticks()
@@ -122,17 +127,31 @@ class PLAYER:
             self.last_shot = current_time
 
 
-
     def collide_vertical(self, blocks):
         self.touching_ground = False
 
         for block in blocks:
-            if self.rect.colliderect(block.block_rect):
-                    if self.y_vel > 0:
-                        self.rect.bottom = block.block_rect.top
-                        self.touching_ground = True
-                        self.jump_count = 0
-                        self.y_vel = 0
+            if self.rect.colliderect(block.rect):
+                # if self.dodge_ground == False:
+                    if self.rect.bottom <= block.rect.centery:
+                        if self.y_vel > 0:
+                            self.rect.bottom = block.rect.top
+                            self.touching_ground = True
+                            self.jump_count = 0
+                            self.y_vel = 0
+
+                # else:
+                #     if self.rect.top < block.rect.centery:
+                #         self.dodge_ground = False
+
+    def check_lives(self):
+        global WINNER
+        if self.lives < 1:
+            if self.player_number == 1:
+                WINNER = 2
+            if self.player_number == 2:
+                WINNER = 1
+            game_over()
 
 
     def update(self):
@@ -141,9 +160,7 @@ class PLAYER:
         self.collide_vertical(blocks)
         for bullet in self.bullets:
             bullet.update()
-        # print("dodge ground: " + str(player_1.dodge_ground), "touch ground: " + str(player_1.touching_ground))
-        print("p1 " + str(player_1.lives))
-        print("p2 " +str(player_2.lives))
+        self.check_lives()
 
 class BULLET:
     COLOR = pygame.Color("yellow")
@@ -179,9 +196,24 @@ class BULLET:
             self.draw()
             self.collide_player(player_1, player_2)
 
-def draw_text(text, font, color, x, y):
+def game_over():
+    screen.fill((0,0,0))
+    if WINNER == 1:
+        game_over_color = pygame.Color("red")
+    elif WINNER == 2:
+        game_over_color = pygame.Color("blue")
+    draw_text("GAME OVER", TITEL_FONT, game_over_color, WIDTH // 2, HEIGHT // 2)
+    draw_text(f"PLAYER {WINNER} wins", SUBTITEL_FONT, game_over_color, WIDTH // 2, HEIGHT // 2 + 50 )
+
+LIVES_FONT = pygame.font.SysFont("Arial", 30)
+TITEL_FONT = pygame.font.SysFont("Arial", 50, True)
+SUBTITEL_FONT = pygame.font.SysFont("Arial", 30)
+
+
+def draw_text(text, font, color, center_x, center_y):
     text_img = font.render(text, True, color)
-    screen.blit(text_img, (x, y))
+    text_rect = text_img.get_rect(center=(center_x, center_y))
+    screen.blit(text_img, text_rect)
 
 def draw_elements(blocks, player_1, player_2):
     player_1.draw()
@@ -189,8 +221,9 @@ def draw_elements(blocks, player_1, player_2):
     for block in blocks:
         block.draw()
 
-    draw_text("P1: " + str(player_1.lives), TEXT_FONT, (255, 255, 255), WIDTH - 100, 50)
-    draw_text("P2: " + str(player_2.lives), TEXT_FONT, (255, 255, 255), 100, 50)
+    # F-String from Vid 3
+    draw_text(f"P1: {player_1.lives}", LIVES_FONT, (255, 255, 255), WIDTH - 100, 50)
+    draw_text(f"P2: {player_2.lives}", LIVES_FONT, (255, 255, 255), 100, 50)
 
 player_1 = PLAYER(1, 500, 0)
 player_2 = PLAYER(2, 200, 0)
