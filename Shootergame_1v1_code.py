@@ -1,28 +1,23 @@
 import pygame
+import random
 
 pygame.init()
 
-WIDTH, HEIGHT = 1000, 500
+SCREEN_W, SCREEN_H = 1000, 500
+BLOCK_W, BLOCK_H = 50, 50
 FPS = 60
 GRAVITY = 1
 JUMP_SPEED = 15
 DODGE_SPEED = 15
 JUMP_LIMIT = 2
-BULLET_COOLDOWN = 1000 / 5
+BULLET_COOLDOWN = 1000 / 10
 WINNER = None
 
+
 clock = pygame.time.Clock()
-screen = pygame.display.set_mode((WIDTH,HEIGHT))
+screen = pygame.display.set_mode((SCREEN_W, SCREEN_H))
 pygame.display.update()
 pygame.display.set_caption("Shooter Game 1v1")
-
-class BLOCK:
-    COLOR = pygame.Color("dark green")
-    def __init__(self, x, y, width, height):
-        self.rect = pygame.Rect(x, y, width, height)
-
-    def draw(self):
-        pygame.draw.rect(screen, self.COLOR, self.rect)
 
 class PLAYER:
 
@@ -69,14 +64,6 @@ class PLAYER:
 
             if keys[pygame.K_SPACE]:
                 self.shoot()
-            #
-            #
-            # if event.type == pygame.KEYUP:
-            #     if event.key == pygame.K_DOWN:
-            #         self.dodge()
-            #         if self.touching_ground == True:
-            #             self.dodge_ground = True
-
 
     # P2
         if self.player_number == 2:
@@ -158,7 +145,7 @@ class PLAYER:
         self.check_lives()
 
 class BULLET:
-    COLOR = pygame.Color("yellow")
+    COLOR = pygame.Color("black")
     SPEED = 10
     WIDTH, HEIGHT = 10, 5
 
@@ -191,6 +178,26 @@ class BULLET:
             self.draw()
             self.collide_player(player_1, player_2)
 
+class BLOCK:
+    COLOR = pygame.Color("dark green")
+    def __init__(self, x, y, width, height):
+        self.rect = pygame.Rect(x, y, width, height)
+
+    def draw(self):
+        pygame.draw.rect(screen, self.COLOR, self.rect)
+
+class RANDOM_MAP:
+
+    def __init__(self, blocks):
+
+        for col in range(SCREEN_H // BLOCK_H):
+            if col % random.randint(3, 4) == 0:
+                for row in range(SCREEN_W // BLOCK_W):
+                    if row % random.randint(5, 6) == 0:
+                        blocks.append(BLOCK(row * BLOCK_H, col * BLOCK_H, random.randint(1, 5) * BLOCK_W, BLOCK_H))
+
+
+
 class MAIN:
     def __init__(self):
         self.lives_font = pygame.font.SysFont("Arial", 30)
@@ -209,8 +216,8 @@ class MAIN:
         elif WINNER == 2:
             game_over_color = pygame.Color("blue")
 
-        self.draw_text("GAME OVER", self.title_font, game_over_color, WIDTH // 2, HEIGHT // 2)
-        self.draw_text(f"Player {WINNER} wins", self.subtitle_font, game_over_color, WIDTH // 2, HEIGHT // 2 + 50 )
+        self.draw_text("GAME OVER", self.title_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2)
+        self.draw_text(f"Player {WINNER} wins", self.subtitle_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2 + 50)
 
 
     def draw_elements(self, blocks, player_1, player_2):
@@ -218,8 +225,9 @@ class MAIN:
         player_2.draw()
         for block in blocks:
             block.draw()
+
 # F-String from Vid 3
-        self.draw_text(f"P1: {player_1.lives}", self.lives_font, (255, 255, 255), WIDTH - 100, 50)
+        self.draw_text(f"P1: {player_1.lives}", self.lives_font, (255, 255, 255), SCREEN_W - 100, 50)
         self.draw_text(f"P2: {player_2.lives}", self.lives_font, (255, 255, 255), 100, 50)
 
 
@@ -228,10 +236,10 @@ main = MAIN()
 player_1 = PLAYER(1, 500, 0)
 player_2 = PLAYER(2, 200, 0)
 blocks = [
-    BLOCK(300, 300, 200, 50),
-    BLOCK(200, 450, 500, 50)
+    BLOCK(0, SCREEN_H - BLOCK_H, SCREEN_W, BLOCK_H)
 ]
 bullet = BULLET
+rand_map = RANDOM_MAP(blocks)
 
 
 # GAME LOOP
