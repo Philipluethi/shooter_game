@@ -132,17 +132,12 @@ class PLAYER:
 
         for block in blocks:
             if self.rect.colliderect(block.rect):
-                # if self.dodge_ground == False:
                     if self.rect.bottom <= block.rect.centery:
                         if self.y_vel > 0:
                             self.rect.bottom = block.rect.top
                             self.touching_ground = True
                             self.jump_count = 0
                             self.y_vel = 0
-
-                # else:
-                #     if self.rect.top < block.rect.centery:
-                #         self.dodge_ground = False
 
     def check_lives(self):
         global WINNER
@@ -151,7 +146,7 @@ class PLAYER:
                 WINNER = 2
             if self.player_number == 2:
                 WINNER = 1
-            game_over()
+            main.game_over()
 
 
     def update(self):
@@ -196,38 +191,42 @@ class BULLET:
             self.draw()
             self.collide_player(player_1, player_2)
 
-def game_over():
-    screen.fill((0,0,0))
-    if WINNER == 1:
-        game_over_color = pygame.Color("red")
-    elif WINNER == 2:
-        game_over_color = pygame.Color("blue")
-    draw_text("GAME OVER", TITEL_FONT, game_over_color, WIDTH // 2, HEIGHT // 2)
-    draw_text(f"PLAYER {WINNER} wins", SUBTITEL_FONT, game_over_color, WIDTH // 2, HEIGHT // 2 + 50 )
+class MAIN:
+    def __init__(self):
+        self.lives_font = pygame.font.SysFont("Arial", 30)
+        self.title_font = pygame.font.SysFont("Arial", 50, True)
+        self.subtitle_font = pygame.font.SysFont("Arial", 30)
 
-LIVES_FONT = pygame.font.SysFont("Arial", 30)
-TITEL_FONT = pygame.font.SysFont("Arial", 50, True)
-SUBTITEL_FONT = pygame.font.SysFont("Arial", 30)
+    def draw_text(self, text, font, color, center_x, center_y):
+        text_img = font.render(text, True, color)
+        text_rect = text_img.get_rect(center=(center_x, center_y))
+        screen.blit(text_img, text_rect)
+
+    def game_over(self):
+        screen.fill((0,0,0))
+        if WINNER == 1:
+            game_over_color = pygame.Color("red")
+        elif WINNER == 2:
+            game_over_color = pygame.Color("blue")
+
+        self.draw_text("GAME OVER", self.title_font, game_over_color, WIDTH // 2, HEIGHT // 2)
+        self.draw_text(f"Player {WINNER} wins", self.subtitle_font, game_over_color, WIDTH // 2, HEIGHT // 2 + 50 )
 
 
-def draw_text(text, font, color, center_x, center_y):
-    text_img = font.render(text, True, color)
-    text_rect = text_img.get_rect(center=(center_x, center_y))
-    screen.blit(text_img, text_rect)
+    def draw_elements(self, blocks, player_1, player_2):
+        player_1.draw()
+        player_2.draw()
+        for block in blocks:
+            block.draw()
+# F-String from Vid 3
+        self.draw_text(f"P1: {player_1.lives}", self.lives_font, (255, 255, 255), WIDTH - 100, 50)
+        self.draw_text(f"P2: {player_2.lives}", self.lives_font, (255, 255, 255), 100, 50)
 
-def draw_elements(blocks, player_1, player_2):
-    player_1.draw()
-    player_2.draw()
-    for block in blocks:
-        block.draw()
 
-    # F-String from Vid 3
-    draw_text(f"P1: {player_1.lives}", LIVES_FONT, (255, 255, 255), WIDTH - 100, 50)
-    draw_text(f"P2: {player_2.lives}", LIVES_FONT, (255, 255, 255), 100, 50)
-
+# INSTANZEN
+main = MAIN()
 player_1 = PLAYER(1, 500, 0)
 player_2 = PLAYER(2, 200, 0)
-
 blocks = [
     BLOCK(300, 300, 200, 50),
     BLOCK(200, 450, 500, 50)
@@ -235,6 +234,7 @@ blocks = [
 bullet = BULLET
 
 
+# GAME LOOP
 running = True
 while running:
     for event in pygame.event.get():
@@ -242,7 +242,7 @@ while running:
             running = False
     screen.fill(pygame.Color("light blue"))
 
-    draw_elements(blocks, player_1, player_2)
+    main.draw_elements(blocks, player_1, player_2)
     player_1.update()
     player_2.update()
 
