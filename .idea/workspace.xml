@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="random Map">
-      <change afterPath="$PROJECT_DIR$/block.py" afterDir="false" />
+    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="BLOCK class in separate file">
+      <change afterPath="$PROJECT_DIR$/bullet.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shootergame_1v1_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shootergame_1v1_code.py" afterDir="false" />
     </list>
@@ -44,6 +44,7 @@
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "Python.Shootergame_1v1_code.executor": "Run",
+    "Python.bullet.executor": "Run",
     "Python.chatGPT.executor": "Run",
     "Python.player.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
@@ -73,6 +74,28 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Shootergame_1v1_code.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="bullet" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Shootergame_1v1_code" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bullet.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -128,10 +151,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.Shootergame_1v1_code" />
+        <item itemvalue="Python.bullet" />
         <item itemvalue="Python.player" />
         <item itemvalue="Python.chatGPT" />
         <item itemvalue="Python.Shootergame_1v1_code" />
-        <item itemvalue="Python.chatGPT" />
       </list>
     </recent_temporary>
   </component>
@@ -247,7 +270,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720372352029</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="BLOCK class in separate file">
+      <option name="closed" value="true" />
+      <created>1720451051693</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1720451051693</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -275,6 +306,7 @@
     <MESSAGE value="draw Player Lives" />
     <MESSAGE value="Game over screen + 2 player colors" />
     <MESSAGE value="MAIN CLASS" />
-    <option name="LAST_COMMIT_MESSAGE" value="MAIN CLASS" />
+    <MESSAGE value="BLOCK class in separate file" />
+    <option name="LAST_COMMIT_MESSAGE" value="BLOCK class in separate file" />
   </component>
 </project>
