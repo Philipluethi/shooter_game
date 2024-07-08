@@ -2,6 +2,7 @@ import pygame
 import random
 from block import BLOCK
 from bullet import BULLET
+from player import PLAYER
 
 pygame.init()
 
@@ -15,80 +16,11 @@ JUMP_LIMIT = 2
 BULLET_COOLDOWN = 1000 / 10
 WINNER = None
 
-
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode((SCREEN_W, SCREEN_H))
 pygame.display.update()
 pygame.display.set_caption("Shooter Game 1v1")
 
-class PLAYER:
-
-    def __init__(self, player_number, x, y):
-        width, height = 50, 50
-        self.rect = pygame.Rect(x, y, width, height)
-        self.direction = "right"
-        self.x_vel = 5
-        self.y_vel = 0
-        self.jump_count = 0
-        self.jump_pressed = False
-        self.dodge_ground = False
-        self.bullets = []
-        self.last_shot = pygame.time.get_ticks()
-        self.player_number = player_number
-        self.lives = 10
-        self.touching_ground = False
-        if self.player_number == 1:
-            self.color = pygame.Color("red")
-        if self.player_number == 2:
-            self.color = pygame.Color("blue")
-
-    def draw(self):
-        pygame.draw.rect(screen, self.color, self.rect)
-
-    def move_left(self):
-        self.rect.x -= self.x_vel
-        self.direction = "left"
-
-    def move_right(self):
-        self.rect.x += self.x_vel
-        self.direction = "right"
-
-    def gravity(self):
-        self.y_vel += GRAVITY
-        self.rect.y += self.y_vel
-
-    def jump(self):
-        self.y_vel = -JUMP_SPEED
-
-    def shoot(self):
-        current_time = pygame.time.get_ticks()
-
-        if current_time - self.last_shot > BULLET_COOLDOWN:
-            bullet_x = self.rect.centerx
-            bullet_y = self.rect.centery
-            new_bullet = BULLET(bullet_x, bullet_y, self.direction, self.player_number)
-            self.bullets.append(new_bullet)
-            self.last_shot = current_time
-
-
-    def collide_vertical(self, blocks):
-        self.touching_ground = False
-
-        for block in blocks:
-            if self.rect.colliderect(block.rect):
-                    if self.rect.bottom <= block.rect.centery:
-                        if self.y_vel > 0:
-                            self.rect.bottom = block.rect.top
-                            self.touching_ground = True
-                            self.jump_count = 0
-                            self.y_vel = 0
-
-
-    def update(self):
-        self.gravity()
-        self.collide_vertical(blocks)
-        for bullet in self.bullets:
-            bullet.update(screen, player_1, player_2)
 
 class MAIN:
     def __init__(self):
@@ -107,7 +39,7 @@ class MAIN:
 
         if keys[pygame.K_UP]:
             if player_1.jump_pressed == False and player_1.jump_count < JUMP_LIMIT:
-                player_1.jump()
+                player_1.jump(GRAVITY)
                 player_1.jump_count += 1
                 player_1.jump_pressed = True
         if event.type == pygame.KEYUP:
@@ -115,7 +47,7 @@ class MAIN:
                 player_1.jump_pressed = False
 
         if keys[pygame.K_SPACE]:
-            player_1.shoot()
+            player_1.shoot(BULLET, BULLET_COOLDOWN)
 
 # P2
 
@@ -127,7 +59,7 @@ class MAIN:
 
         if keys[pygame.K_w]:
             if player_2.jump_pressed == False and player_2.jump_count < JUMP_LIMIT:
-                player_2.jump()
+                player_2.jump(GRAVITY)
                 player_2.jump_count += 1
                 player_2.jump_pressed = True
         if event.type == pygame.KEYUP:
@@ -135,7 +67,7 @@ class MAIN:
                 player_2.jump_pressed = False
 
         if keys[pygame.K_CAPSLOCK]:
-            player_2.shoot()
+            player_2.shoot(BULLET, BULLET_COOLDOWN)
 
     def check_lives(self):
         global WINNER
@@ -157,8 +89,8 @@ class MAIN:
 
 
     def draw_elements(self, blocks, player_1, player_2):
-        player_1.draw()
-        player_2.draw()
+        player_1.draw(screen)
+        player_2.draw(screen)
         for block in blocks:
             block.draw(screen)
         # F-String from Vid 3
@@ -192,6 +124,7 @@ blocks = [
 bullet = BULLET
 
 
+
 # GAME LOOP
 running = True
 main.random_map()
@@ -204,8 +137,8 @@ while running:
     main.draw_elements(blocks, player_1, player_2)
     main.check_keys()
     main.check_lives()
-    player_1.update()
-    player_2.update()
+    player_1.update(GRAVITY, blocks, screen, player_1, player_2)
+    player_2.update(GRAVITY, blocks, screen, player_1, player_2)
 
     pygame.display.update()
     clock.tick(FPS)
