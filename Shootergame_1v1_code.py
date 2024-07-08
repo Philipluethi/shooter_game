@@ -83,22 +83,12 @@ class PLAYER:
                             self.jump_count = 0
                             self.y_vel = 0
 
-    def check_lives(self):
-        global WINNER
-        if self.lives < 1:
-            if self.player_number == 1:
-                WINNER = 2
-            if self.player_number == 2:
-                WINNER = 1
-            main.game_over()
-
 
     def update(self):
         self.gravity()
         self.collide_vertical(blocks)
         for bullet in self.bullets:
             bullet.update(screen, player_1, player_2)
-        self.check_lives()
 
 class MAIN:
     def __init__(self):
@@ -146,6 +136,16 @@ class MAIN:
 
         if keys[pygame.K_CAPSLOCK]:
             player_2.shoot()
+
+    def check_lives(self):
+        global WINNER
+        if player_1.lives < 1:
+            WINNER = 2
+            main.game_over()
+
+        if player_2.lives < 1:
+            WINNER = 1
+            main.game_over()
 
 
     def random_map(self):
@@ -203,6 +203,7 @@ while running:
 
     main.draw_elements(blocks, player_1, player_2)
     main.check_keys()
+    main.check_lives()
     player_1.update()
     player_2.update()
 
