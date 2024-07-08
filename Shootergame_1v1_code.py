@@ -146,21 +146,20 @@ class PLAYER:
             bullet.update(screen, player_1, player_2)
         self.check_lives()
 
-class RANDOM_MAP:
-
-    def __init__(self, blocks):
-
-        for col in range(SCREEN_H // BLOCK_H):
-            if col % random.randint(3, 4) == 0:
-                for row in range(SCREEN_W // BLOCK_W):
-                    if row % random.randint(5, 6) == 0:
-                        blocks.append(BLOCK(row * BLOCK_H, col * BLOCK_H, random.randint(1, 5) * BLOCK_W, BLOCK_H))
 
 class MAIN:
     def __init__(self):
         self.lives_font = pygame.font.SysFont("Arial", 30)
         self.title_font = pygame.font.SysFont("Arial", 50, True)
         self.subtitle_font = pygame.font.SysFont("Arial", 30)
+
+    def random_map(self):
+        for col in range(SCREEN_H // BLOCK_H):
+            if col % random.randint(3, 4) == 0:
+                for row in range(SCREEN_W // BLOCK_W):
+                    if row % random.randint(5, 6) == 0:
+                        blocks.append(BLOCK(row * BLOCK_H, col * BLOCK_H, random.randint(1, 5) * BLOCK_W, BLOCK_H))
+
 
     def draw_elements(self, blocks, player_1, player_2):
         player_1.draw()
@@ -196,11 +195,11 @@ blocks = [
     BLOCK(0, SCREEN_H - BLOCK_H, SCREEN_W, BLOCK_H)
 ]
 bullet = BULLET
-rand_map = RANDOM_MAP(blocks)
 
 
 # GAME LOOP
 running = True
+main.random_map()
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
