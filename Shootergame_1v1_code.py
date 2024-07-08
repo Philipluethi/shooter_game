@@ -39,7 +39,7 @@ class MAIN:
 
         if keys[pygame.K_UP]:
             if player_1.jump_pressed == False and player_1.jump_count < JUMP_LIMIT:
-                player_1.jump(GRAVITY)
+                player_1.jump(JUMP_SPEED)
                 player_1.jump_count += 1
                 player_1.jump_pressed = True
         if event.type == pygame.KEYUP:
@@ -59,7 +59,7 @@ class MAIN:
 
         if keys[pygame.K_w]:
             if player_2.jump_pressed == False and player_2.jump_count < JUMP_LIMIT:
-                player_2.jump(GRAVITY)
+                player_2.jump(JUMP_SPEED)
                 player_2.jump_count += 1
                 player_2.jump_pressed = True
         if event.type == pygame.KEYUP:
@@ -103,14 +103,17 @@ class MAIN:
         screen.blit(text_img, text_rect)
 
     def game_over(self):
+        winner_color = None
         screen.fill((0,0,0))
         if WINNER == 1:
             game_over_color = pygame.Color("red")
+            winner_color = "RED"
         elif WINNER == 2:
             game_over_color = pygame.Color("blue")
+            winner_color = "BLUE"
 
         self.draw_text("GAME OVER", self.title_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2)
-        self.draw_text(f"Player {WINNER} wins", self.subtitle_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2 + 50)
+        self.draw_text(f"Player {winner_color} wins", self.subtitle_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2 + 50)
 
 
 

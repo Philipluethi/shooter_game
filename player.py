@@ -3,7 +3,7 @@ import pygame
 class PLAYER:
 
     def __init__(self, player_number, x, y):
-        width, height = 50, 50
+        width, height = 40, 40
         self.rect = pygame.Rect(x, y, width, height)
         self.direction = "right"
         self.x_vel = 5

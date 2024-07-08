@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="Lives checked in MAIN">
+    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="PLAYER class in separate file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shootergame_1v1_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shootergame_1v1_code.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/player.py" afterDir="false" />
@@ -151,8 +151,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.Shootergame_1v1_code" />
-        <item itemvalue="Python.bullet" />
         <item itemvalue="Python.player" />
+        <item itemvalue="Python.bullet" />
         <item itemvalue="Python.chatGPT" />
         <item itemvalue="Python.Shootergame_1v1_code" />
       </list>
@@ -310,7 +310,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720454065534</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="PLAYER class in separate file">
+      <option name="closed" value="true" />
+      <created>1720474360606</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1720474360606</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -343,6 +351,7 @@
     <MESSAGE value="RANDOM MAP als methode in MAIN" />
     <MESSAGE value="Keys checked in MAIN" />
     <MESSAGE value="Lives checked in MAIN" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lives checked in MAIN" />
+    <MESSAGE value="PLAYER class in separate file" />
+    <option name="LAST_COMMIT_MESSAGE" value="PLAYER class in separate file" />
   </component>
 </project>
