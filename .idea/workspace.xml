@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="BULLET class in separate file">
-      <change afterPath="$PROJECT_DIR$/random_map.py" afterDir="false" />
+    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="RANDOM MAP als methode in MAIN">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shootergame_1v1_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shootergame_1v1_code.py" afterDir="false" />
     </list>
@@ -286,7 +285,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720452027908</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="RANDOM MAP als methode in MAIN">
+      <option name="closed" value="true" />
+      <created>1720452795284</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1720452795284</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -316,6 +323,7 @@
     <MESSAGE value="MAIN CLASS" />
     <MESSAGE value="BLOCK class in separate file" />
     <MESSAGE value="BULLET class in separate file" />
-    <option name="LAST_COMMIT_MESSAGE" value="BULLET class in separate file" />
+    <MESSAGE value="RANDOM MAP als methode in MAIN" />
+    <option name="LAST_COMMIT_MESSAGE" value="RANDOM MAP als methode in MAIN" />
   </component>
 </project>

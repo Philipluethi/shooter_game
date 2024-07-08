@@ -45,48 +45,6 @@ class PLAYER:
     def draw(self):
         pygame.draw.rect(screen, self.color, self.rect)
 
-    def check_keys(self):
-        keys = pygame.key.get_pressed()
-    # P1
-        if self.player_number == 1:
-            if keys[pygame.K_LEFT]:
-                self.move_left()
-
-            if keys[pygame.K_RIGHT]:
-                self.move_right()
-
-            if keys[pygame.K_UP]:
-                if self.jump_pressed == False and self.jump_count < JUMP_LIMIT:
-                    self.jump()
-                    self.jump_count += 1
-                    self.jump_pressed = True
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_UP:
-                    self.jump_pressed = False
-
-            if keys[pygame.K_SPACE]:
-                self.shoot()
-
-    # P2
-        if self.player_number == 2:
-            if keys[pygame.K_a]:
-                self.move_left()
-
-            if keys[pygame.K_d]:
-                self.move_right()
-
-            if keys[pygame.K_w]:
-                if self.jump_pressed == False and self.jump_count < JUMP_LIMIT:
-                    self.jump()
-                    self.jump_count += 1
-                    self.jump_pressed = True
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_w:
-                    self.jump_pressed = False
-
-            if keys[pygame.K_CAPSLOCK]:
-                self.shoot()
-
     def move_left(self):
         self.rect.x -= self.x_vel
         self.direction = "left"
@@ -101,9 +59,6 @@ class PLAYER:
 
     def jump(self):
         self.y_vel = -JUMP_SPEED
-
-    # def dodge(self):
-    #     self.y_vel += DODGE_SPEED
 
     def shoot(self):
         current_time = pygame.time.get_ticks()
@@ -139,19 +94,59 @@ class PLAYER:
 
 
     def update(self):
-        self.check_keys()
         self.gravity()
         self.collide_vertical(blocks)
         for bullet in self.bullets:
             bullet.update(screen, player_1, player_2)
         self.check_lives()
 
-
 class MAIN:
     def __init__(self):
         self.lives_font = pygame.font.SysFont("Arial", 30)
         self.title_font = pygame.font.SysFont("Arial", 50, True)
         self.subtitle_font = pygame.font.SysFont("Arial", 30)
+
+    def check_keys(self):
+        keys = pygame.key.get_pressed()
+# P1
+        if keys[pygame.K_LEFT]:
+            player_1.move_left()
+
+        if keys[pygame.K_RIGHT]:
+            player_1.move_right()
+
+        if keys[pygame.K_UP]:
+            if player_1.jump_pressed == False and player_1.jump_count < JUMP_LIMIT:
+                player_1.jump()
+                player_1.jump_count += 1
+                player_1.jump_pressed = True
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_UP:
+                player_1.jump_pressed = False
+
+        if keys[pygame.K_SPACE]:
+            player_1.shoot()
+
+# P2
+
+        if keys[pygame.K_a]:
+            player_2.move_left()
+
+        if keys[pygame.K_d]:
+            player_2.move_right()
+
+        if keys[pygame.K_w]:
+            if player_2.jump_pressed == False and player_2.jump_count < JUMP_LIMIT:
+                player_2.jump()
+                player_2.jump_count += 1
+                player_2.jump_pressed = True
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_w:
+                player_2.jump_pressed = False
+
+        if keys[pygame.K_CAPSLOCK]:
+            player_2.shoot()
+
 
     def random_map(self):
         for col in range(SCREEN_H // BLOCK_H):
@@ -207,6 +202,7 @@ while running:
     screen.fill(pygame.Color("light blue"))
 
     main.draw_elements(blocks, player_1, player_2)
+    main.check_keys()
     player_1.update()
     player_2.update()
 
