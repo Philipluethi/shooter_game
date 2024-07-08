@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="PLAYER class in separate file">
+    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="PLAYER class in separate file DEBUG">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shootergame_1v1_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shootergame_1v1_code.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/player.py" afterDir="false" />
@@ -318,7 +318,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720474360606</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="PLAYER class in separate file DEBUG">
+      <option name="closed" value="true" />
+      <created>1720475217436</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1720475217436</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -352,6 +360,7 @@
     <MESSAGE value="Keys checked in MAIN" />
     <MESSAGE value="Lives checked in MAIN" />
     <MESSAGE value="PLAYER class in separate file" />
-    <option name="LAST_COMMIT_MESSAGE" value="PLAYER class in separate file" />
+    <MESSAGE value="PLAYER class in separate file DEBUG" />
+    <option name="LAST_COMMIT_MESSAGE" value="PLAYER class in separate file DEBUG" />
   </component>
 </project>

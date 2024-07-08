@@ -140,8 +140,8 @@ while running:
     main.draw_elements(blocks, player_1, player_2)
     main.check_keys()
     main.check_lives()
-    player_1.update(GRAVITY, blocks, screen, player_1, player_2)
-    player_2.update(GRAVITY, blocks, screen, player_1, player_2)
+    player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W)
+    player_2.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W)
 
     pygame.display.update()
     clock.tick(FPS)

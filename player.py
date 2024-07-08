@@ -3,8 +3,8 @@ import pygame
 class PLAYER:
 
     def __init__(self, player_number, x, y):
-        width, height = 40, 40
-        self.rect = pygame.Rect(x, y, width, height)
+        self.width, self.height = 40, 40
+        self.rect = pygame.Rect(x, y, self.width, self.height)
         self.direction = "right"
         self.x_vel = 5
         self.y_vel = 0
@@ -62,9 +62,18 @@ class PLAYER:
                             self.jump_count = 0
                             self.y_vel = 0
 
+    def collide_border(self, SCREEN_W):
+        if self.rect.centerx > SCREEN_W:
+            self.rect.centerx = 0
+            print("colided right")
+        if self.rect.centerx < 0:
+            self.rect.centerx = SCREEN_W
+            print("colided left")
 
-    def update(self, GRAVITY, blocks, screen, player_1, player_2):
+
+    def update(self, GRAVITY, blocks, screen, player_1, player_2, SCREEN_W):
         self.gravity(GRAVITY)
         self.collide_vertical(blocks)
         for bullet in self.bullets:
             bullet.update(screen, player_1, player_2)
+        self.collide_border(SCREEN_W)
