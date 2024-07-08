@@ -1,5 +1,6 @@
 import pygame
 import random
+from block import BLOCK
 
 pygame.init()
 
@@ -158,9 +159,6 @@ class BULLET:
     def draw(self):
         pygame.draw.rect(screen, self.COLOR, self.rect)
 
-
-
-
     def collide_player(self, player_1, player_2):
         if self.rect.colliderect(player_1.rect) and self.bullet_number == 2:
             self.collided = True
@@ -178,14 +176,6 @@ class BULLET:
             self.draw()
             self.collide_player(player_1, player_2)
 
-class BLOCK:
-    COLOR = pygame.Color("dark green")
-    def __init__(self, x, y, width, height):
-        self.rect = pygame.Rect(x, y, width, height)
-
-    def draw(self):
-        pygame.draw.rect(screen, self.COLOR, self.rect)
-
 class RANDOM_MAP:
 
     def __init__(self, blocks):
@@ -196,13 +186,20 @@ class RANDOM_MAP:
                     if row % random.randint(5, 6) == 0:
                         blocks.append(BLOCK(row * BLOCK_H, col * BLOCK_H, random.randint(1, 5) * BLOCK_W, BLOCK_H))
 
-
-
 class MAIN:
     def __init__(self):
         self.lives_font = pygame.font.SysFont("Arial", 30)
         self.title_font = pygame.font.SysFont("Arial", 50, True)
         self.subtitle_font = pygame.font.SysFont("Arial", 30)
+
+    def draw_elements(self, blocks, player_1, player_2):
+        player_1.draw()
+        player_2.draw()
+        for block in blocks:
+            block.draw(screen)
+        # F-String from Vid 3
+        self.draw_text(f"P1: {player_1.lives}", self.lives_font, (255, 255, 255), SCREEN_W - 100, 50)
+        self.draw_text(f"P2: {player_2.lives}", self.lives_font, (255, 255, 255), 100, 50)
 
     def draw_text(self, text, font, color, center_x, center_y):
         text_img = font.render(text, True, color)
@@ -219,16 +216,6 @@ class MAIN:
         self.draw_text("GAME OVER", self.title_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2)
         self.draw_text(f"Player {WINNER} wins", self.subtitle_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2 + 50)
 
-
-    def draw_elements(self, blocks, player_1, player_2):
-        player_1.draw()
-        player_2.draw()
-        for block in blocks:
-            block.draw()
-
-# F-String from Vid 3
-        self.draw_text(f"P1: {player_1.lives}", self.lives_font, (255, 255, 255), SCREEN_W - 100, 50)
-        self.draw_text(f"P2: {player_2.lives}", self.lives_font, (255, 255, 255), 100, 50)
 
 
 # INSTANZEN
