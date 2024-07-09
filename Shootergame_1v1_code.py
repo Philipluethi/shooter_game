@@ -115,6 +115,8 @@ class MAIN:
         self.draw_text("GAME OVER", self.title_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2)
         self.draw_text(f"Player {winner_color} wins", self.subtitle_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2 + 50)
 
+    def start_screen(self):
+        screen.fill(pygame.Color("white"))
 
 
 # INSTANZEN
@@ -128,8 +130,34 @@ bullet = BULLET
 
 
 
+# START SCREEN LOOP
+start_screen = True
+running = False
+
+while start_screen:
+    main.start_screen()
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            start_screen = False
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_1]:
+        print("2-PLAYER")
+        start_screen = False
+        running = True
+
+    if keys[pygame.K_2]:
+        print("SINGLE PLAYER")
+        start_screen = False
+
+    main.draw_text("CHOOSE A GAME MODE", main.title_font, pygame.Color("black"), SCREEN_W // 2, SCREEN_H // 2 - 150)
+    main.draw_text("press 1 for single player", main.subtitle_font, pygame.Color("black"), SCREEN_W // 2, SCREEN_H // 2)
+    main.draw_text("press 2 for two-player", main.subtitle_font, pygame.Color("black"), SCREEN_W // 2, SCREEN_H // 2 + 50)
+
+    clock.tick(FPS)
+    pygame.display.update()
+
 # GAME LOOP
-running = True
+# running = True
 main.random_map()
 while running:
     for event in pygame.event.get():

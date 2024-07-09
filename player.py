@@ -65,10 +65,8 @@ class PLAYER:
     def collide_border(self, SCREEN_W):
         if self.rect.centerx > SCREEN_W:
             self.rect.centerx = 0
-            print("colided right")
         if self.rect.centerx < 0:
             self.rect.centerx = SCREEN_W
-            print("colided left")
 
 
     def update(self, GRAVITY, blocks, screen, player_1, player_2, SCREEN_W):
