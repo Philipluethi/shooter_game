@@ -140,12 +140,12 @@ while start_screen:
         if event.type == pygame.QUIT:
             start_screen = False
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_1]:
+    if keys[pygame.K_2]:
         print("2-PLAYER")
         start_screen = False
         running = True
 
-    if keys[pygame.K_2]:
+    if keys[pygame.K_1]:
         print("SINGLE PLAYER")
         start_screen = False
 
