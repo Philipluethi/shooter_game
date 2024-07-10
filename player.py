@@ -7,6 +7,7 @@ class PLAYER:
         self.rect = pygame.Rect(x, y, self.width, self.height)
         self.direction = "right"
         self.x_vel = 5
+        self.dx = 0
         self.y_vel = 0
         self.jump_count = 0
         self.jump_pressed = False
@@ -26,12 +27,21 @@ class PLAYER:
         pygame.draw.rect(screen, self.color, self.rect)
 
     def move_left(self):
-        self.rect.x -= self.x_vel
+        self.dx -= self.x_vel
         self.direction = "left"
+        print(self.dx)
 
     def move_right(self):
-        self.rect.x += self.x_vel
+        self.dx += self.x_vel
         self.direction = "right"
+        print(self.dx)
+
+
+    def handle_move(self):
+        self.rect.x += self.dx
+        self.dx = 0
+
+
 
     def gravity(self, GRAVITY):
         self.y_vel += GRAVITY
@@ -104,3 +114,5 @@ class PLAYER:
         self.collide_border(SCREEN_W)
         self.collide_bottom(SCREEN_H)
         # self.collide_horizontal(blocks)
+        self.handle_move()
+
