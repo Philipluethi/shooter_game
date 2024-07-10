@@ -54,13 +54,18 @@ class PLAYER:
         self.touching_ground = False
 
         for block in blocks:
-            if self.rect.colliderect(block.rect):
-                    if self.rect.bottom <= block.rect.centery:
-                        if self.y_vel > 0:
-                            self.rect.bottom = block.rect.top
-                            self.touching_ground = True
-                            self.jump_count = 0
-                            self.y_vel = 0
+            if self.rect.colliderect(block.rect) and self.dodge_ground == False:
+                if self.rect.bottom <= block.rect.centery:
+                    if self.y_vel > 0:
+                        self.rect.bottom = block.rect.top
+                        self.touching_ground = True
+                        self.jump_count = 0
+                        self.y_vel = 0
+
+            if self.dodge_ground == True:
+                if self.rect.colliderect(block.rect):
+                    if self.rect.centery >= block.rect.bottom:
+                        self.dodge_ground = False
 
     def collide_border(self, SCREEN_W):
         if self.rect.centerx > SCREEN_W:

@@ -49,6 +49,11 @@ class MAIN:
         if keys[pygame.K_SPACE]:
             player_1.shoot(BULLET, BULLET_COOLDOWN)
 
+        if player_1.touching_ground == True:
+            if keys[pygame.K_DOWN]:
+                player_1.dodge_ground = True
+
+
 # P2
 
         if keys[pygame.K_a]:
@@ -68,6 +73,11 @@ class MAIN:
 
         if keys[pygame.K_CAPSLOCK]:
             player_2.shoot(BULLET, BULLET_COOLDOWN)
+
+        if player_2.touching_ground == True:
+            if keys[pygame.K_s]:
+                player_2.dodge_ground = True
+
 
     def check_lives(self):
         global WINNER
