@@ -132,7 +132,8 @@ bullet = BULLET
 
 # START SCREEN LOOP
 start_screen = True
-running = False
+two_player = False
+one_player = False
 
 while start_screen:
     main.start_screen()
@@ -143,11 +144,12 @@ while start_screen:
     if keys[pygame.K_2]:
         print("2-PLAYER")
         start_screen = False
-        running = True
+        two_player = True
 
     if keys[pygame.K_1]:
         print("SINGLE PLAYER")
         start_screen = False
+        one_player = True
 
     main.draw_text("CHOOSE A GAME MODE", main.title_font, pygame.Color("black"), SCREEN_W // 2, SCREEN_H // 2 - 150)
     main.draw_text("press 1 for single player", main.subtitle_font, pygame.Color("black"), SCREEN_W // 2, SCREEN_H // 2)
@@ -159,10 +161,10 @@ while start_screen:
 # GAME LOOP
 # running = True
 main.random_map()
-while running:
+while two_player:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+            two_player = False
     screen.fill(pygame.Color("light blue"))
 
     main.draw_elements(blocks, player_1, player_2)
@@ -170,6 +172,24 @@ while running:
     main.check_lives()
     player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W)
     player_2.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W)
+
+    pygame.display.update()
+    clock.tick(FPS)
+
+
+main.random_map()
+while one_player:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            one_player = False
+    screen.fill(pygame.Color("grey"))
+
+    player_1.draw(screen)
+    for block in blocks:
+        block.draw(screen)
+    main.check_keys()
+    main.check_lives()
+    player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W)
 
     pygame.display.update()
     clock.tick(FPS)
