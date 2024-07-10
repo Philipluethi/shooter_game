@@ -11,9 +11,9 @@ BLOCK_W, BLOCK_H = 50, 50
 FPS = 60
 GRAVITY = 1
 JUMP_SPEED = 15
-DODGE_SPEED = 15
+
 JUMP_LIMIT = 2
-BULLET_COOLDOWN = 1000 / 10
+BULLET_COOLDOWN = 1000 / 3
 WINNER = None
 
 clock = pygame.time.Clock()
@@ -22,9 +22,10 @@ pygame.display.update()
 pygame.display.set_caption("Shooter Game 1v1")
 
 
+
 class MAIN:
     def __init__(self):
-        self.lives_font = pygame.font.SysFont("Arial", 30)
+        self.lives_font = pygame.font.SysFont("Arial", 30, True)
         self.title_font = pygame.font.SysFont("Arial", 50, True)
         self.subtitle_font = pygame.font.SysFont("Arial", 30)
 
@@ -92,9 +93,9 @@ class MAIN:
 
     def random_map(self):
         for col in range(SCREEN_H // BLOCK_H):
-            if col % random.randint(3, 4) == 0:
+            if col % random.randint(1,3) == 0:
                 for row in range(SCREEN_W // BLOCK_W):
-                    if row % random.randint(5, 6) == 0:
+                    if row % random.randint(3, 4) == 0:
                         blocks.append(BLOCK(row * BLOCK_H, col * BLOCK_H, random.randint(1, 5) * BLOCK_W, BLOCK_H))
 
 
@@ -104,8 +105,8 @@ class MAIN:
         for block in blocks:
             block.draw(screen)
         # F-String from Vid 3
-        self.draw_text(f"P1: {player_1.lives}", self.lives_font, (255, 255, 255), SCREEN_W - 100, 50)
-        self.draw_text(f"P2: {player_2.lives}", self.lives_font, (255, 255, 255), 100, 50)
+        self.draw_text(f"P1: {player_1.lives}", self.lives_font, (0,0,0), SCREEN_W - 100, 50)
+        self.draw_text(f"P2: {player_2.lives}", self.lives_font, (0,0,0), 100, 50)
 
     def draw_text(self, text, font, color, center_x, center_y):
         text_img = font.render(text, True, color)
@@ -122,11 +123,12 @@ class MAIN:
             game_over_color = pygame.Color("blue")
             winner_color = "BLUE"
 
-        self.draw_text("GAME OVER", self.title_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2)
-        self.draw_text(f"Player {winner_color} wins", self.subtitle_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2 + 50)
+        self.draw_text("GAME OVER", self.title_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2 - 50)
+        self.draw_text(f"Player {winner_color} wins", self.subtitle_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2)
 
     def start_screen(self):
         screen.fill(pygame.Color("white"))
+
 
 
 # INSTANZEN
@@ -137,7 +139,6 @@ blocks = [
     BLOCK(0, SCREEN_H - BLOCK_H, SCREEN_W, BLOCK_H)
 ]
 bullet = BULLET
-
 
 
 # GAME LOOPS

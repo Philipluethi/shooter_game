@@ -16,6 +16,7 @@ class PLAYER:
         self.player_number = player_number
         self.lives = 10
         self.touching_ground = False
+
         if self.player_number == 1:
             self.color = pygame.Color("red")
         if self.player_number == 2:
@@ -52,11 +53,20 @@ class PLAYER:
 
     def collide_vertical(self, blocks):
         self.touching_ground = False
+        self.inside_block = False
 
         for block in blocks:
-            if self.rect.colliderect(block.rect) and self.dodge_ground == False:
-                if self.rect.bottom <= block.rect.centery:
-                    if self.y_vel > 0:
+            if (self.rect.colliderect(block.rect)
+                    and self.rect.top > block.rect.top
+                    and self.rect.centerx > block.rect.left
+                    and self.rect.centerx < block.rect.right):
+                self.inside_block = True
+
+            if (self.rect.colliderect(block.rect)
+                    and self.dodge_ground == False
+                    and self.inside_block == False
+                    and self.rect.bottom <= block.rect.centery
+                    and self.y_vel > 0):
                         self.rect.bottom = block.rect.top
                         self.touching_ground = True
                         self.jump_count = 0
@@ -66,6 +76,15 @@ class PLAYER:
                 if self.rect.colliderect(block.rect):
                     if self.rect.centery >= block.rect.bottom:
                         self.dodge_ground = False
+
+    # def collide_horizontal(self, blocks):
+    #     for block in blocks:
+    #         if (self.rect.colliderect(block.rect)
+    #                 # and self.rect.left >= block.rect.right
+    #                 and self.x_vel > 0):
+    #             # self.x_vel = 0
+    #             # self.rect.left = block.rect.right
+    #             print(f"collided left {self.x_vel} ")
 
     def collide_border(self, SCREEN_W):
         if self.rect.centerx > SCREEN_W:
@@ -84,3 +103,4 @@ class PLAYER:
             bullet.update(screen, player_1, player_2)
         self.collide_border(SCREEN_W)
         self.collide_bottom(SCREEN_H)
+        # self.collide_horizontal(blocks)
