@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="single player screen">
-      <change afterPath="$PROJECT_DIR$/bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shootergame_1v1_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shootergame_1v1_code.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/player.py" afterDir="false" />
-    </list>
+    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="dodge debuged" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -359,7 +354,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720611670317</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="dodge debuged">
+      <option name="closed" value="true" />
+      <created>1720618076163</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1720618076163</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -398,6 +401,7 @@
     <MESSAGE value="start screen" />
     <MESSAGE value="start screen debug" />
     <MESSAGE value="single player screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="single player screen" />
+    <MESSAGE value="dodge debuged" />
+    <option name="LAST_COMMIT_MESSAGE" value="dodge debuged" />
   </component>
 </project>

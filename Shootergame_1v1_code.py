@@ -140,10 +140,12 @@ bullet = BULLET
 
 
 
-# START SCREEN LOOP
+# GAME LOOPS
+
 start_screen = True
 two_player = False
 one_player = False
+main.random_map()
 
 while start_screen:
     main.start_screen()
@@ -168,9 +170,6 @@ while start_screen:
     clock.tick(FPS)
     pygame.display.update()
 
-# GAME LOOP
-# running = True
-main.random_map()
 while two_player:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -180,14 +179,12 @@ while two_player:
     main.draw_elements(blocks, player_1, player_2)
     main.check_keys()
     main.check_lives()
-    player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W)
-    player_2.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W)
+    player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
+    player_2.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
 
     pygame.display.update()
     clock.tick(FPS)
 
-
-main.random_map()
 while one_player:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -199,7 +196,7 @@ while one_player:
         block.draw(screen)
     main.check_keys()
     main.check_lives()
-    player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W)
+    player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
 
     pygame.display.update()
     clock.tick(FPS)
