@@ -27,21 +27,18 @@ class PLAYER:
         pygame.draw.rect(screen, self.color, self.rect)
 
     def move_left(self):
-        self.dx -= self.x_vel
-        self.direction = "left"
-        print(self.dx)
+        # if self.collided_left == False:
+            self.dx -= self.x_vel
+            self.direction = "left"
 
     def move_right(self):
         self.dx += self.x_vel
         self.direction = "right"
-        print(self.dx)
 
 
     def handle_move(self):
         self.rect.x += self.dx
         self.dx = 0
-
-
 
     def gravity(self, GRAVITY):
         self.y_vel += GRAVITY
@@ -90,11 +87,16 @@ class PLAYER:
     # def collide_horizontal(self, blocks):
     #     for block in blocks:
     #         if (self.rect.colliderect(block.rect)
-    #                 # and self.rect.left >= block.rect.right
-    #                 and self.x_vel > 0):
-    #             # self.x_vel = 0
-    #             # self.rect.left = block.rect.right
+    #                 and self.rect.left >= block.rect.centerx
+    #                 and self.dx < 0
+    #                 ):
+    #             self.dx = 0
+    #             self.rect.left = block.rect.right
+    #             self.collided_left = True
     #             print(f"collided left {self.x_vel} ")
+    #
+    #         else:
+    #             self.collided_left = False
 
     def collide_border(self, SCREEN_W):
         if self.rect.centerx > SCREEN_W:
@@ -115,4 +117,5 @@ class PLAYER:
         self.collide_bottom(SCREEN_H)
         # self.collide_horizontal(blocks)
         self.handle_move()
+        # print(self.collided_left)
 

@@ -93,10 +93,10 @@ class MAIN:
 
     def random_map(self):
         for col in range(SCREEN_H // BLOCK_H):
-            if col % random.randint(1,3) == 0:
+            if col % random.randint(1,2) == 0:
                 for row in range(SCREEN_W // BLOCK_W):
-                    if row % random.randint(3, 4) == 0:
-                        blocks.append(BLOCK(row * BLOCK_H, col * BLOCK_H, random.randint(1, 5) * BLOCK_W, BLOCK_H))
+                    if row % random.randint(1, 5) == 0:
+                        blocks.append(BLOCK(row * BLOCK_H, col * BLOCK_H, BLOCK_W, BLOCK_H))
 
 
     def draw_elements(self, blocks, player_1, player_2):
@@ -177,6 +177,10 @@ while two_player:
             two_player = False
     screen.fill(pygame.Color("light blue"))
 
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_r]:
+        blocks[1:] = []
+        main.random_map()
     main.draw_elements(blocks, player_1, player_2)
     main.check_keys()
     main.check_lives()
