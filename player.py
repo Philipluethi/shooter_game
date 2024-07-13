@@ -27,7 +27,7 @@ class PLAYER:
         pygame.draw.rect(screen, self.color, self.rect)
 
     def move_left(self):
-        # if self.collided_left == False:
+        # if not self.collided_left:
             self.dx -= self.x_vel
             self.direction = "left"
 
@@ -65,8 +65,8 @@ class PLAYER:
         for block in blocks:
             if (self.rect.colliderect(block.rect)
                     and self.rect.top > block.rect.top
-                    and self.rect.centerx > block.rect.left
-                    and self.rect.centerx < block.rect.right):
+                    and self.rect.left < block.rect.centerx
+                    and self.rect.right > block.rect.centerx):
                 self.inside_block = True
 
             if (self.rect.colliderect(block.rect)
@@ -87,16 +87,16 @@ class PLAYER:
     # def collide_horizontal(self, blocks):
     #     for block in blocks:
     #         if (self.rect.colliderect(block.rect)
-    #                 and self.rect.left >= block.rect.centerx
+    #                 and self.rect.left >= block.rect.right - 5
     #                 and self.dx < 0
     #                 ):
     #             self.dx = 0
     #             self.rect.left = block.rect.right
     #             self.collided_left = True
-    #             print(f"collided left {self.x_vel} ")
+    #             print(f"collided left {self.dx} ")
     #
-    #         else:
-    #             self.collided_left = False
+            # else:
+            #     self.collided_left = False
 
     def collide_border(self, SCREEN_W):
         if self.rect.centerx > SCREEN_W:

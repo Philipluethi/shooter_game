@@ -3,6 +3,7 @@ import random
 from block import BLOCK
 from bullet import BULLET
 from player import PLAYER
+from  item import ITEM
 
 pygame.init()
 
@@ -129,6 +130,9 @@ class MAIN:
     def start_screen(self):
         screen.fill(pygame.Color("white"))
 
+    # def update_1_player(self):
+
+
 
 
 # INSTANZEN
@@ -139,6 +143,7 @@ blocks = [
     BLOCK(0, SCREEN_H - BLOCK_H, SCREEN_W, BLOCK_H)
 ]
 bullet = BULLET
+item = ITEM(SCREEN_W, SCREEN_H)
 
 
 # GAME LOOPS
@@ -186,6 +191,10 @@ while two_player:
     main.check_lives()
     player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
     player_2.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
+    item.draw(screen)
+    for block in blocks:
+        if keys[pygame.K_i] or item.rect.colliderect(block.rect):
+            item.reroll_pos(SCREEN_W, SCREEN_H)
 
     pygame.display.update()
     clock.tick(FPS)
