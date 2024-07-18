@@ -101,11 +101,11 @@ class MAIN:
 
 
     def draw_elements(self, blocks, player_1, player_2):
-        player_1.draw(screen)
-        player_2.draw(screen)
         for block in blocks:
             block.draw(screen)
-        # F-String from Vid 3
+        player_1.draw(screen)
+        player_2.draw(screen)
+# F-String from Vid 3
         self.draw_text(f"P1: {player_1.lives}", self.lives_font, (0,0,0), SCREEN_W - 100, 50)
         self.draw_text(f"P2: {player_2.lives}", self.lives_font, (0,0,0), 100, 50)
 
@@ -120,10 +120,11 @@ class MAIN:
         if WINNER == 1:
             game_over_color = pygame.Color("red")
             winner_color = "RED"
+            player_1.draw(screen)
         elif WINNER == 2:
             game_over_color = pygame.Color("blue")
             winner_color = "BLUE"
-
+            player_2.draw(screen)
         self.draw_text("GAME OVER", self.title_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2 - 50)
         self.draw_text(f"Player {winner_color} wins", self.subtitle_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2)
 
@@ -188,10 +189,11 @@ while two_player:
         main.random_map()
     main.draw_elements(blocks, player_1, player_2)
     main.check_keys()
-    main.check_lives()
     player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
     player_2.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
-    item.draw(screen)
+    item.update(screen, player_1, player_2)
+    main.check_lives()
+
     for block in blocks:
         if keys[pygame.K_i] or item.rect.colliderect(block.rect):
             item.reroll_pos(SCREEN_W, SCREEN_H)
