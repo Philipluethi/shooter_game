@@ -79,10 +79,11 @@ class PLAYER:
                         self.jump_count = 0
                         self.y_vel = 0
 
-            if self.dodge_ground == True:
-                if self.rect.colliderect(block.rect):
-                    if self.rect.centery >= block.rect.bottom:
-                        self.dodge_ground = False
+            if (self.dodge_ground == True
+                    and self.rect.colliderect(block.rect)
+                    and self.rect.centery >= block.rect.bottom
+            ):
+                self.dodge_ground = False
 
     # def collide_horizontal(self, blocks):
     #     for block in blocks:
@@ -106,7 +107,7 @@ class PLAYER:
 
     def collide_bottom(self, SCREEN_H):
         if self.rect.centery > SCREEN_H:
-            self.lives = 0
+            self.rect.centery = 0
 
     def update(self, GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H):
         self.gravity(GRAVITY)
@@ -117,5 +118,4 @@ class PLAYER:
         self.collide_bottom(SCREEN_H)
         # self.collide_horizontal(blocks)
         self.handle_move()
-        # print(self.collided_left)
 

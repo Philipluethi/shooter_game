@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="layering fixed + winner player seen on end screen">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="game over bug fixed (as while loop)">
       <change beforePath="$PROJECT_DIR$/Shootergame_1v1_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shootergame_1v1_code.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/player.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -397,7 +397,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721298771164</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="game over bug fixed (as while loop)">
+      <option name="closed" value="true" />
+      <created>1721412171881</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1721412171881</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -413,7 +421,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="shoot with direction" />
     <MESSAGE value="check_keys method" />
     <MESSAGE value="2 Players + Keys" />
     <MESSAGE value="bullet collision" />
@@ -438,7 +445,8 @@
     <MESSAGE value="fall when inside block" />
     <MESSAGE value="dx implemented" />
     <MESSAGE value="layering fixed + winner player seen on end screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="layering fixed + winner player seen on end screen" />
+    <MESSAGE value="game over bug fixed (as while loop)" />
+    <option name="LAST_COMMIT_MESSAGE" value="game over bug fixed (as while loop)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
