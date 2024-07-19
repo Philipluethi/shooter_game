@@ -14,8 +14,8 @@ GRAVITY = 1
 JUMP_SPEED = 15
 
 JUMP_LIMIT = 2
-BULLET_COOLDOWN = 1000 / 3
-WINNER = None
+BULLET_COOLDOWN = 1000 / 10
+
 
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode((SCREEN_W, SCREEN_H))
@@ -29,6 +29,11 @@ class MAIN:
         self.lives_font = pygame.font.SysFont("Arial", 30, True)
         self.title_font = pygame.font.SysFont("Arial", 50, True)
         self.subtitle_font = pygame.font.SysFont("Arial", 30)
+        self.winner = None
+        self.game_over = False
+
+        # self.game_over_flag = False
+
 
     def check_keys(self):
         keys = pygame.key.get_pressed()
@@ -82,14 +87,15 @@ class MAIN:
 
 
     def check_lives(self):
-        global WINNER
+
         if player_1.lives < 1:
-            WINNER = 2
-            main.game_over()
+            self.winner = 2
+            self.game_over = True
 
         if player_2.lives < 1:
-            WINNER = 1
-            main.game_over()
+            self.winner = 1
+            self.game_over = True
+
 
 
     def random_map(self):
@@ -114,26 +120,6 @@ class MAIN:
         text_rect = text_img.get_rect(center=(center_x, center_y))
         screen.blit(text_img, text_rect)
 
-    def game_over(self):
-        winner_color = None
-        screen.fill((0,0,0))
-        if WINNER == 1:
-            game_over_color = pygame.Color("red")
-            winner_color = "RED"
-            player_1.draw(screen)
-        elif WINNER == 2:
-            game_over_color = pygame.Color("blue")
-            winner_color = "BLUE"
-            player_2.draw(screen)
-        self.draw_text("GAME OVER", self.title_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2 - 50)
-        self.draw_text(f"Player {winner_color} wins", self.subtitle_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2)
-
-    def start_screen(self):
-        screen.fill(pygame.Color("white"))
-
-    # def update_1_player(self):
-
-
 
 
 # INSTANZEN
@@ -155,7 +141,7 @@ one_player = False
 main.random_map()
 
 while start_screen:
-    main.start_screen()
+    screen.fill(pygame.Color("white"))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             start_screen = False
@@ -182,17 +168,20 @@ while two_player:
         if event.type == pygame.QUIT:
             two_player = False
     screen.fill(pygame.Color("light blue"))
-
+    if main.game_over == True:
+        two_player = False
     keys = pygame.key.get_pressed()
     if keys[pygame.K_r]:
         blocks[1:] = []
         main.random_map()
+
     main.draw_elements(blocks, player_1, player_2)
     main.check_keys()
+    item.update(screen, player_1, player_2)
     player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
     player_2.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
-    item.update(screen, player_1, player_2)
     main.check_lives()
+    print(main.game_over)
 
     for block in blocks:
         if keys[pygame.K_i] or item.rect.colliderect(block.rect):
@@ -216,4 +205,29 @@ while one_player:
 
     pygame.display.update()
     clock.tick(FPS)
+
+while main.game_over:
+    screen.fill(pygame.Color("black"))
+    winner_color = None
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            main.game_over = False
+
+    if main.winner == 1:
+        game_over_color = pygame.Color("red")
+        winner_color = "RED"
+        player_1.draw(screen)
+
+    if main.winner == 2:
+        game_over_color = pygame.Color("blue")
+        winner_color = "BLUE"
+        player_2.draw(screen)
+
+    main.draw_text("GAME OVER", main.title_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2 - 50)
+    main.draw_text(f"Player {winner_color} wins", main.subtitle_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2)
+
+    pygame.display.update()
+    clock.tick(FPS)
+
+
 pygame.quit()
