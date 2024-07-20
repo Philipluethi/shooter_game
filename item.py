@@ -16,10 +16,26 @@ class ITEM:
         self.x_pos = random.randint(0, SCREEN_W - self.width)
         self.y_pos = random.randint(self.height, SCREEN_H -self.height)
 
-    def update(self, screen, player_1, player_2):
-        if self.collided == False:
-            self.draw(screen)
+    def player_get_bigger(self, player_n, player_1, player_2):
+        if player_n == 1:
+            player_1.width, player_1.height = 100, 100
+        if player_n == 2:
+            player_2.width, player_2.height = 100, 100
+
+    def collide_player(self,  player_1, player_2):
         if self.rect.colliderect(player_1.rect):
             self.collided = True
             print("collided player 1")
+            self.player_get_bigger(1, player_1, player_2)
+
+        if self.rect.colliderect(player_2.rect):
+            self.collided = True
+            print("collided player 2")
+            self.player_get_bigger(2, player_1, player_2)
+
+    def update(self, screen, player_1, player_2):
+        if self.collided == False:
+            self.draw(screen)
+        self.collide_player(player_1, player_2)
+
 

@@ -106,20 +106,19 @@ class MAIN:
                         blocks.append(BLOCK(row * BLOCK_H, col * BLOCK_H, BLOCK_W, BLOCK_H))
 
 
-    def draw_elements(self, blocks, player_1, player_2):
-        for block in blocks:
-            block.draw(screen)
-        player_1.draw(screen)
-        player_2.draw(screen)
-# F-String from Vid 3
-        self.draw_text(f"P1: {player_1.lives}", self.lives_font, (0,0,0), SCREEN_W - 100, 50)
-        self.draw_text(f"P2: {player_2.lives}", self.lives_font, (0,0,0), 100, 50)
-
     def draw_text(self, text, font, color, center_x, center_y):
         text_img = font.render(text, True, color)
         text_rect = text_img.get_rect(center=(center_x, center_y))
         screen.blit(text_img, text_rect)
 
+    def draw_elements(self, blocks, player_1, player_2):
+        for block in blocks:
+            block.draw(screen)
+        player_1.draw(screen, player_1.rect.x, player_1.rect.y, player_1.width, player_1.height)
+        player_2.draw(screen, player_2.rect.x, player_2.rect.y, player_2.width, player_2.height)
+# F-String from Vid 3
+        self.draw_text(f"P1: {player_1.lives}", self.lives_font, (0,0,0), SCREEN_W - 100, 50)
+        self.draw_text(f"P2: {player_2.lives}", self.lives_font, (0,0,0), 100, 50)
 
 
 # INSTANZEN

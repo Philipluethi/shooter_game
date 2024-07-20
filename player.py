@@ -23,7 +23,8 @@ class PLAYER:
         if self.player_number == 2:
             self.color = pygame.Color("blue")
 
-    def draw(self, screen):
+    def draw(self, screen, x, y, width, height):
+        self.rect = pygame.Rect(x, y, self.width, self.height)
         pygame.draw.rect(screen, self.color, self.rect)
 
     def move_left(self):
@@ -118,6 +119,6 @@ class PLAYER:
             bullet.update(screen, player_1, player_2)
         self.collide_border(SCREEN_W)
         self.collide_bottom(SCREEN_H)
-        # self.collide_horizontal(blocks)
         self.handle_move()
+        # self.collide_horizontal(blocks)
 
