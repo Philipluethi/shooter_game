@@ -181,7 +181,6 @@ while two_player:
     player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
     player_2.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
     main.check_lives()
-    print(main.game_over)
 
     for block in blocks:
         if keys[pygame.K_i] or item.rect.colliderect(block.rect):

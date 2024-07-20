@@ -108,6 +108,8 @@ class PLAYER:
     def collide_bottom(self, SCREEN_H):
         if self.rect.centery > SCREEN_H:
             self.rect.centery = 0
+        if self.rect.centery < 0:
+            self.rect.centery = SCREEN_H
 
     def update(self, GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H):
         self.gravity(GRAVITY)
