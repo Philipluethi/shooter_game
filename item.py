@@ -21,6 +21,7 @@ class ITEM:
             player_1.width, player_1.height = 100, 100
         if player_n == 2:
             player_2.width, player_2.height = 100, 100
+            player_2.inside_block = False
 
     def collide_player(self,  player_1, player_2):
         if self.rect.colliderect(player_1.rect):

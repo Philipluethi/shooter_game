@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="fall through top screen">
+    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="item get bigger">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shootergame_1v1_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shootergame_1v1_code.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/item.py" beforeDir="false" afterPath="$PROJECT_DIR$/item.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/player.py" afterDir="false" />
     </list>
@@ -423,7 +422,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721475300572</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="item get bigger">
+      <option name="closed" value="true" />
+      <created>1721477006868</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1721477006868</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -439,7 +446,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="bullet collision" />
     <MESSAGE value="doublejump + dodge down" />
     <MESSAGE value="print Player Lives" />
     <MESSAGE value="draw Player Lives" />
@@ -464,7 +470,8 @@
     <MESSAGE value="game over bug fixed (as while loop)" />
     <MESSAGE value="fall through ground" />
     <MESSAGE value="fall through top screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="fall through top screen" />
+    <MESSAGE value="item get bigger" />
+    <option name="LAST_COMMIT_MESSAGE" value="item get bigger" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

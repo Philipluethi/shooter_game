@@ -67,7 +67,9 @@ class PLAYER:
             if (self.rect.colliderect(block.rect)
                     and self.rect.top > block.rect.top
                     and self.rect.left < block.rect.centerx
-                    and self.rect.right > block.rect.centerx):
+                    and self.rect.right > block.rect.centerx
+                    and self.height < 50
+            ):
                 self.inside_block = True
 
             if (self.rect.colliderect(block.rect)
@@ -121,4 +123,5 @@ class PLAYER:
         self.collide_bottom(SCREEN_H)
         self.handle_move()
         # self.collide_horizontal(blocks)
+        print(player_1.dodge_ground)
 
