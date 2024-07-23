@@ -9,12 +9,12 @@ class ITEM:
         self.collided = False
 
     def draw(self, screen):
-        self.rect = pygame.Rect(self.x_pos, self.y_pos, self.width, self.height )
+        self.rect = pygame.Rect(self.x_pos, self.y_pos, self.width, self.height)
         pygame.draw.rect(screen, self.color, self.rect)
 
     def reroll_pos(self, SCREEN_W, SCREEN_H):
         self.x_pos = random.randint(0, SCREEN_W - self.width)
-        self.y_pos = random.randint(self.height, SCREEN_H -self.height)
+        self.y_pos = random.randint(self.height, SCREEN_H - self.height)
 
     def player_get_bigger(self, player_n, player_1, player_2):
         self.big_player_w = 80
@@ -25,7 +25,7 @@ class ITEM:
             player_1.bullet_h = 15
         if player_n == 2:
             player_2.width, player_2.height = self.big_player_w, self.big_player_h
-            player_2.inside_block = False
+            player_2.check_inside_block = False
             player_1.bullet_h = 15
 
     def collide_player(self,  player_1, player_2):
@@ -42,6 +42,6 @@ class ITEM:
     def update(self, screen, player_1, player_2):
         if self.collided == False:
             self.draw(screen)
-        self.collide_player(player_1, player_2)
+            self.collide_player(player_1, player_2)
 
 

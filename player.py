@@ -63,19 +63,22 @@ class PLAYER:
             self.bullets.append(new_bullet)
             self.last_shot = current_time
 
-
-    def collide_vertical(self, blocks):
-        self.touching_ground = False
+    def check_inside_block(self, blocks):
         self.inside_block = False
 
         for block in blocks:
             if (self.rect.colliderect(block.rect)
                     and self.rect.top > block.rect.top
-                    and self.rect.left < block.rect.centerx
-                    and self.rect.right > block.rect.centerx
+                    and self.rect.left < block.rect.right
+                    and self.rect.right > block.rect.left
                     and self.height < 50
             ):
                 self.inside_block = True
+
+    def collide_vertical(self, blocks):
+        self.touching_ground = False
+
+        for block in blocks:
 
             if (self.rect.colliderect(block.rect)
                     and self.dodge_ground == False
@@ -87,26 +90,18 @@ class PLAYER:
                         self.jump_count = 0
                         self.y_vel = 0
 
+    def stop_dodge(self, blocks):
+        for block in blocks:
             if (self.dodge_ground == True
                     and self.rect.colliderect(block.rect)
-                    and self.rect.top > block.rect.bottom - 5
-                    and self.y_vel > 0
+                    and self.rect.bottom < block.rect.bottom
+                    and self.rect.bottom > block.rect.centery
+
             ):
                 self.dodge_ground = False
+                print("dodge off")
 
-    # def collide_horizontal(self, blocks):
-    #     for block in blocks:
-    #         if (self.rect.colliderect(block.rect)
-    #                 and self.rect.left >= block.rect.right - 5
-    #                 and self.dx < 0
-    #                 ):
-    #             self.dx = 0
-    #             self.rect.left = block.rect.right
-    #             self.collided_left = True
-    #             print(f"collided left {self.dx} ")
-    #
-            # else:
-            #     self.collided_left = False
+
 
     def collide_border(self, SCREEN_W):
         if self.rect.centerx > SCREEN_W:
@@ -122,7 +117,9 @@ class PLAYER:
 
     def update(self, GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H):
         self.gravity(GRAVITY)
+        self.check_inside_block(blocks)
         self.collide_vertical(blocks)
+        self.stop_dodge(blocks)
         for bullet in self.bullets:
             bullet.update(screen, player_1, player_2)
         self.collide_border(SCREEN_W)
