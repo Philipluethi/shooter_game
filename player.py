@@ -84,7 +84,8 @@ class PLAYER:
 
             if (self.dodge_ground == True
                     and self.rect.colliderect(block.rect)
-                    and self.rect.centery >= block.rect.bottom
+                    and self.rect.top > block.rect.bottom - 5
+                    and self.y_vel > 0
             ):
                 self.dodge_ground = False
 
@@ -123,5 +124,5 @@ class PLAYER:
         self.collide_bottom(SCREEN_H)
         self.handle_move()
         # self.collide_horizontal(blocks)
-        print(player_1.dodge_ground)
+
 

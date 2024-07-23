@@ -18,9 +18,9 @@ class ITEM:
 
     def player_get_bigger(self, player_n, player_1, player_2):
         if player_n == 1:
-            player_1.width, player_1.height = 100, 100
+            player_1.width, player_1.height = 80, 80
         if player_n == 2:
-            player_2.width, player_2.height = 100, 100
+            player_2.width, player_2.height = 80, 80
             player_2.inside_block = False
 
     def collide_player(self,  player_1, player_2):

@@ -34,7 +34,8 @@ class MAIN:
 
         # self.game_over_flag = False
 
-
+    def print(self):
+        print(player_1.dodge_ground)
     def check_keys(self):
         keys = pygame.key.get_pressed()
 # P1
@@ -119,6 +120,7 @@ class MAIN:
 # F-String from Vid 3
         self.draw_text(f"P1: {player_1.lives}", self.lives_font, (0,0,0), SCREEN_W - 100, 50)
         self.draw_text(f"P2: {player_2.lives}", self.lives_font, (0,0,0), 100, 50)
+        self.print()
 
 
 # INSTANZEN
@@ -194,7 +196,7 @@ while one_player:
             one_player = False
     screen.fill(pygame.Color("grey"))
 
-    player_1.draw(screen)
+    player_1.draw(screen, player_1.rect.x, player_1.rect.y, player_1.width, player_1.height)
     for block in blocks:
         block.draw(screen)
     main.check_keys()
@@ -207,6 +209,8 @@ while one_player:
 while main.game_over:
     screen.fill(pygame.Color("black"))
     winner_color = None
+    main.check_keys()
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             main.game_over = False
@@ -214,15 +218,18 @@ while main.game_over:
     if main.winner == 1:
         game_over_color = pygame.Color("red")
         winner_color = "RED"
-        player_1.draw(screen)
+        player_1.draw(screen, player_1.rect.x, player_1.rect.y, player_1.width, player_1.height)
+        player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
+
 
     if main.winner == 2:
         game_over_color = pygame.Color("blue")
         winner_color = "BLUE"
-        player_2.draw(screen)
+        player_2.draw(screen, player_2.rect.x, player_2.rect.y, player_2.width, player_2.height)
+        player_2.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
 
-    main.draw_text("GAME OVER", main.title_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2 - 50)
-    main.draw_text(f"Player {winner_color} wins", main.subtitle_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2)
+    main.draw_text(f"Player {winner_color} wins", main.title_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2 - 50)
+    main.draw_text("GAME OVER", main.subtitle_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2)
 
     pygame.display.update()
     clock.tick(FPS)

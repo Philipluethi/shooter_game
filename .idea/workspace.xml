@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="item get bigger">
+    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="big player not inside block">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shootergame_1v1_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shootergame_1v1_code.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/item.py" beforeDir="false" afterPath="$PROJECT_DIR$/item.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/player.py" afterDir="false" />
     </list>
@@ -430,7 +431,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721477006868</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="big player not inside block">
+      <option name="closed" value="true" />
+      <created>1721479236123</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1721479236124</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -446,7 +455,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="doublejump + dodge down" />
     <MESSAGE value="print Player Lives" />
     <MESSAGE value="draw Player Lives" />
     <MESSAGE value="Game over screen + 2 player colors" />
@@ -471,14 +479,15 @@
     <MESSAGE value="fall through ground" />
     <MESSAGE value="fall through top screen" />
     <MESSAGE value="item get bigger" />
-    <option name="LAST_COMMIT_MESSAGE" value="item get bigger" />
+    <MESSAGE value="big player not inside block" />
+    <option name="LAST_COMMIT_MESSAGE" value="big player not inside block" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Shootergame_1v1_code.py</url>
-          <line>130</line>
+          <line>132</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
