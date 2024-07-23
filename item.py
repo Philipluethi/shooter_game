@@ -17,11 +17,16 @@ class ITEM:
         self.y_pos = random.randint(self.height, SCREEN_H -self.height)
 
     def player_get_bigger(self, player_n, player_1, player_2):
+        self.big_player_w = 80
+        self.big_player_h = 80
+
         if player_n == 1:
-            player_1.width, player_1.height = 80, 80
+            player_1.width, player_1.height = self.big_player_w, self.big_player_h
+            player_1.bullet_h = 15
         if player_n == 2:
-            player_2.width, player_2.height = 80, 80
+            player_2.width, player_2.height = self.big_player_w, self.big_player_h
             player_2.inside_block = False
+            player_1.bullet_h = 15
 
     def collide_player(self,  player_1, player_2):
         if self.rect.colliderect(player_1.rect):

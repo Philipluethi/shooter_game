@@ -3,10 +3,10 @@ import pygame
 class BULLET:
     COLOR = pygame.Color("black")
     SPEED = 10
-    WIDTH, HEIGHT = 10, 5
+    # WIDTH, HEIGHT = 10, 5
 
-    def __init__(self, x, y, direction, player_number):
-        self.rect = pygame.Rect(x, y, self.WIDTH, self.HEIGHT)
+    def __init__(self, x, y, w, h, direction, player_number):
+        self.rect = pygame.Rect(x, y, w, h)
         self.direction = direction
         self.bullet_number = player_number
         self.collided = False

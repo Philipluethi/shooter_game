@@ -4,6 +4,8 @@ class PLAYER:
 
     def __init__(self, player_number, x, y):
         self.width, self.height = 40, 40
+        self.bullet_w, self.bullet_h = 10, 5
+
         self.rect = pygame.Rect(x, y, self.width, self.height)
         self.direction = "right"
         self.x_vel = 5
@@ -17,6 +19,7 @@ class PLAYER:
         self.player_number = player_number
         self.lives = 10
         self.touching_ground = False
+
 
         if self.player_number == 1:
             self.color = pygame.Color("red")
@@ -54,7 +57,9 @@ class PLAYER:
         if current_time - self.last_shot > BULLET_COOLDOWN:
             bullet_x = self.rect.centerx
             bullet_y = self.rect.centery
-            new_bullet = BULLET(bullet_x, bullet_y, self.direction, self.player_number)
+
+
+            new_bullet = BULLET(bullet_x, bullet_y, self.bullet_w, self.bullet_h, self.direction, self.player_number)
             self.bullets.append(new_bullet)
             self.last_shot = current_time
 
