@@ -35,7 +35,7 @@ class MAIN:
         # self.game_over_flag = False
 
     def print(self):
-        print(player_1.dodge_ground)
+        pass
     def check_keys(self):
         keys = pygame.key.get_pressed()
 # P1

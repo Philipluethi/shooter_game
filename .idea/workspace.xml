@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="dodge debug">
+    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="item debug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shootergame_1v1_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shootergame_1v1_code.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/item.py" beforeDir="false" afterPath="$PROJECT_DIR$/item.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/player.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -461,7 +463,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721754492625</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="item debug">
+      <option name="closed" value="true" />
+      <created>1721998956162</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1721998956162</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -477,7 +487,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="MAIN CLASS" />
     <MESSAGE value="BLOCK class in separate file" />
     <MESSAGE value="BULLET class in separate file" />
     <MESSAGE value="RANDOM MAP als methode in MAIN" />
@@ -502,7 +511,8 @@
     <MESSAGE value="player stop dodge debuged" />
     <MESSAGE value="big bullet" />
     <MESSAGE value="dodge debug" />
-    <option name="LAST_COMMIT_MESSAGE" value="dodge debug" />
+    <MESSAGE value="item debug" />
+    <option name="LAST_COMMIT_MESSAGE" value="item debug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

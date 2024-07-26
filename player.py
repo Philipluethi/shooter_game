@@ -5,7 +5,6 @@ class PLAYER:
     def __init__(self, player_number, x, y):
         self.width, self.height = 40, 40
         self.bullet_w, self.bullet_h = 10, 5
-
         self.rect = pygame.Rect(x, y, self.width, self.height)
         self.direction = "right"
         self.x_vel = 5

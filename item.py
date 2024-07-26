@@ -20,6 +20,7 @@ class ITEM:
 
     def collide_player(self,  player_1, player_2):
         self.collided_player = None
+
         if self.rect.colliderect(player_1.rect):
             self.collided = True
             self.collided_player = player_1
@@ -33,19 +34,32 @@ class ITEM:
             self.rand_item()
 
     def rand_item(self):
-        self.effects =[
-            self.player_get_bigger()
+        # self.effect_duration = 5 * 1000
+        # self.effect_start = pygame.time.get_ticks()
+
+
+        self.effects = [
+            self.player_get_bigger,
+            self.player_get_smaller
         ]
+
+        random_effect = random.choice(self.effects)
+        random_effect()
+
+
     def player_get_bigger(self):
         self.collided_player.width, self.collided_player.height = 80, 80
         self.collided_player.bullet_w, self.collided_player.bullet_h = 30, 15
 
-
+    def player_get_smaller(self):
+        self.collided_player.width, self.collided_player.height = 20, 20
+        self.collided_player.bullet_w, self.collided_player.bullet_h = 10, 5
 
 
     def update(self, screen, player_1, player_2):
         if self.collided == False:
             self.draw(screen)
             self.collide_player(player_1, player_2)
+
 
 
