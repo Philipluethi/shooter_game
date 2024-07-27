@@ -52,14 +52,16 @@ class ITEM_BOX:
         self.collided_player_time = pygame.time.get_ticks()
 
 
-    def check_duration(self):
+    def check_duration(self, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H):
         if pygame.time.get_ticks() > self.collided_player_time + self.effect_duration:
             self.effect_running = False
             print("effect stop")
+            self.back_to_normal( PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
 
     def player_change_size(self, w, h, bullet_w, bullet_h):
         self.collided_player.width, self.collided_player.height = w, h
         self.collided_player.bullet_w, self.collided_player.bullet_h = bullet_w, bullet_h
+
 
     def player_get_bigger(self):
        self.player_change_size(80, 80, 30, 15)
@@ -67,12 +69,16 @@ class ITEM_BOX:
     def player_get_smaller(self):
         self.player_change_size(20, 20, 10, 5)
 
-    def update(self, screen, player_1, player_2):
+    def back_to_normal(self, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H):
+       self.player_change_size(PLAYER_W,PLAYER_H, BULLET_W, BULLET_H)
+
+
+    def update(self, screen, player_1, player_2, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H):
         if self.collided == False:
             self.draw(screen)
             self.collide_player(player_1, player_2)
         if self.effect_running:
-            self.check_duration()
+            self.check_duration(PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
 
 
 

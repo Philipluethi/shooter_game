@@ -38,6 +38,17 @@ class MAIN:
 
     def print(self):
         pass
+
+    def draw_elements(self, blocks, player_1, player_2):
+        for block in blocks:
+            block.draw(screen)
+        player_1.draw(screen, player_1.rect.x, player_1.rect.y, player_1.width, player_1.height)
+        player_2.draw(screen, player_2.rect.x, player_2.rect.y, player_2.width, player_2.height)
+# F-String from Vid 3
+        self.draw_text(f"P1: {player_1.lives}", self.lives_font, (0, 0, 0), SCREEN_W - 100, 50)
+        self.draw_text(f"P2: {player_2.lives}", self.lives_font, (0, 0, 0), 100, 50)
+
+
     def check_keys(self):
         keys = pygame.key.get_pressed()
 # P1
@@ -114,16 +125,6 @@ class MAIN:
         text_rect = text_img.get_rect(center=(center_x, center_y))
         screen.blit(text_img, text_rect)
 
-    def draw_elements(self, blocks, player_1, player_2):
-        for block in blocks:
-            block.draw(screen)
-        player_1.draw(screen, player_1.rect.x, player_1.rect.y, player_1.width, player_1.height)
-        player_2.draw(screen, player_2.rect.x, player_2.rect.y, player_2.width, player_2.height)
-# F-String from Vid 3
-        self.draw_text(f"P1: {player_1.lives}", self.lives_font, (0,0,0), SCREEN_W - 100, 50)
-        self.draw_text(f"P2: {player_2.lives}", self.lives_font, (0,0,0), 100, 50)
-        self.print()
-
 
 # INSTANZEN
 main = MAIN()
@@ -180,7 +181,7 @@ while two_player:
 
     main.draw_elements(blocks, player_1, player_2)
     main.check_keys()
-    item.update(screen, player_1, player_2)
+    item.update(screen, player_1, player_2, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
     player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
     player_2.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
     main.check_lives()
