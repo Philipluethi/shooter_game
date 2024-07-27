@@ -3,10 +3,10 @@ import pygame
 class PLAYER:
 
     def __init__(self, player_number, x, y, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H):
-        self.width, self.height = PLAYER_W, PLAYER_H
+        self.w, self.h = PLAYER_W, PLAYER_H
         self.bullet_w, self.bullet_h = BULLET_W, BULLET_H
 
-        self.rect = pygame.Rect(x, y, self.width, self.height)
+        self.rect = pygame.Rect(x, y, self.w, self.h)
         self.direction = "right"
         self.x_vel = 5
         self.dx = 0
@@ -26,8 +26,8 @@ class PLAYER:
         if self.player_number == 2:
             self.color = pygame.Color("blue")
 
-    def draw(self, screen, x, y, width, height):
-        self.rect = pygame.Rect(x, y, self.width, self.height)
+    def draw(self, screen, x, y, w, h):
+        self.rect = pygame.Rect(x, y, w, h)
         pygame.draw.rect(screen, self.color, self.rect)
 
     def move_left(self):
@@ -38,7 +38,6 @@ class PLAYER:
     def move_right(self):
         self.dx += self.x_vel
         self.direction = "right"
-
 
     def handle_move(self):
         self.rect.x += self.dx
@@ -71,7 +70,7 @@ class PLAYER:
                     and self.rect.top > block.rect.top
                     and self.rect.left < block.rect.right
                     and self.rect.right > block.rect.left
-                    and self.height < 50
+                    and self.h < 50
             ):
                 self.inside_block = True
 
@@ -115,15 +114,16 @@ class PLAYER:
             self.rect.centery = SCREEN_H
 
     def update(self, GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H):
+        self.draw(screen, self.rect.x, self.rect.y, self.w, self.h)
         self.gravity(GRAVITY)
         self.check_inside_block(blocks)
         self.collide_vertical(blocks)
         self.stop_dodge(blocks)
-        for bullet in self.bullets:
-            bullet.update(screen, player_1, player_2)
         self.collide_border(SCREEN_W)
         self.collide_bottom(SCREEN_H)
         self.handle_move()
+        for bullet in self.bullets:
+            bullet.update(screen, player_1, player_2)
         # self.collide_horizontal(blocks)
 
 

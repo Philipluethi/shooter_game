@@ -59,7 +59,7 @@ class ITEM_BOX:
             self.back_to_normal( PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
 
     def player_change_size(self, w, h, bullet_w, bullet_h):
-        self.collided_player.width, self.collided_player.height = w, h
+        self.collided_player.w, self.collided_player.h = w, h
         self.collided_player.bullet_w, self.collided_player.bullet_h = bullet_w, bullet_h
 
 

@@ -39,15 +39,18 @@ class MAIN:
     def print(self):
         pass
 
-    def draw_elements(self, blocks, player_1, player_2):
+    def update_elements(self, blocks, player_1, player_2):
+        player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
+        player_2.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
+        item.update(screen, player_1, player_2, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
+
         for block in blocks:
             block.draw(screen)
-        player_1.draw(screen, player_1.rect.x, player_1.rect.y, player_1.width, player_1.height)
-        player_2.draw(screen, player_2.rect.x, player_2.rect.y, player_2.width, player_2.height)
+            if keys[pygame.K_i] or item.rect.colliderect(block.rect):
+                item.reroll_pos(SCREEN_W, SCREEN_H)
 # F-String from Vid 3
         self.draw_text(f"P1: {player_1.lives}", self.lives_font, (0, 0, 0), SCREEN_W - 100, 50)
         self.draw_text(f"P2: {player_2.lives}", self.lives_font, (0, 0, 0), 100, 50)
-
 
     def check_keys(self):
         keys = pygame.key.get_pressed()
@@ -99,6 +102,10 @@ class MAIN:
             if keys[pygame.K_s]:
                 player_2.dodge_ground = True
 
+# MAP
+        if keys[pygame.K_r]:
+            blocks[1:] = []
+            main.random_map()
 
     def check_lives(self):
 
@@ -120,6 +127,7 @@ class MAIN:
                         blocks.append(BLOCK(row * BLOCK_H, col * BLOCK_H, BLOCK_W, BLOCK_H))
 
 
+# FROM VID 3
     def draw_text(self, text, font, color, center_x, center_y):
         text_img = font.render(text, True, color)
         text_rect = text_img.get_rect(center=(center_x, center_y))
@@ -127,14 +135,14 @@ class MAIN:
 
 
 # INSTANZEN
+
 main = MAIN()
 player_1 = PLAYER(1, 500, 0,  PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
 player_2 = PLAYER(2, 200, 0,  PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
+item = ITEM_BOX(SCREEN_W, SCREEN_H)
 blocks = [
     BLOCK(0, SCREEN_H - BLOCK_H, SCREEN_W, BLOCK_H)
 ]
-bullet = BULLET
-item = ITEM_BOX(SCREEN_W, SCREEN_H)
 
 
 # GAME LOOPS
@@ -174,21 +182,12 @@ while two_player:
     screen.fill(pygame.Color("light blue"))
     if main.game_over == True:
         two_player = False
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_r]:
-        blocks[1:] = []
-        main.random_map()
 
-    main.draw_elements(blocks, player_1, player_2)
+
+    main.update_elements(blocks, player_1, player_2)
     main.check_keys()
-    item.update(screen, player_1, player_2, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
-    player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
-    player_2.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
     main.check_lives()
 
-    for block in blocks:
-        if keys[pygame.K_i] or item.rect.colliderect(block.rect):
-            item.reroll_pos(SCREEN_W, SCREEN_H)
 
     pygame.display.update()
     clock.tick(FPS)
@@ -199,7 +198,7 @@ while one_player:
             one_player = False
     screen.fill(pygame.Color("grey"))
 
-    player_1.draw(screen, player_1.rect.x, player_1.rect.y, player_1.width, player_1.height)
+    player_1.draw(screen, player_1.rect.x, player_1.rect.y, player_1.w, player_1.h)
     for block in blocks:
         block.draw(screen)
     main.check_keys()
@@ -221,14 +220,12 @@ while main.game_over:
     if main.winner == 1:
         game_over_color = pygame.Color("red")
         winner_color = "RED"
-        player_1.draw(screen, player_1.rect.x, player_1.rect.y, player_1.width, player_1.height)
         player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
 
 
     if main.winner == 2:
         game_over_color = pygame.Color("blue")
         winner_color = "BLUE"
-        player_2.draw(screen, player_2.rect.x, player_2.rect.y, player_2.width, player_2.height)
         player_2.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
 
     main.draw_text(f"Player {winner_color} wins", main.title_font, game_over_color, SCREEN_W // 2, SCREEN_H // 2 - 50)

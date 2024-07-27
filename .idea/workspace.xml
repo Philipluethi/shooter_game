@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="item duration">
+    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="item back to normal size">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shootergame_1v1_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shootergame_1v1_code.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/item_box.py" beforeDir="false" afterPath="$PROJECT_DIR$/item_box.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/player.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -486,7 +487,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722103502270</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="item back to normal size">
+      <option name="closed" value="true" />
+      <created>1722104475957</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1722104475958</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +511,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="RANDOM MAP als methode in MAIN" />
     <MESSAGE value="Keys checked in MAIN" />
     <MESSAGE value="Lives checked in MAIN" />
     <MESSAGE value="PLAYER class in separate file" />
@@ -527,14 +535,15 @@
     <MESSAGE value="item debug" />
     <MESSAGE value="randm item" />
     <MESSAGE value="item duration" />
-    <option name="LAST_COMMIT_MESSAGE" value="item duration" />
+    <MESSAGE value="item back to normal size" />
+    <option name="LAST_COMMIT_MESSAGE" value="item back to normal size" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Shootergame_1v1_code.py</url>
-          <line>135</line>
+          <line>145</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
