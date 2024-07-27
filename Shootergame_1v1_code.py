@@ -3,16 +3,18 @@ import random
 from block import BLOCK
 from bullet import BULLET
 from player import PLAYER
-from  item import ITEM
+from item_box import ITEM_BOX
 
 pygame.init()
 
+FPS = 60
 SCREEN_W, SCREEN_H = 1000, 500
 BLOCK_W, BLOCK_H = 50, 50
-FPS = 60
+PLAYER_W, PLAYER_H = 40, 40
+BULLET_W, BULLET_H = 10, 5
+
 GRAVITY = 1
 JUMP_SPEED = 15
-
 JUMP_LIMIT = 2
 BULLET_COOLDOWN = 1000 / 10
 
@@ -125,13 +127,13 @@ class MAIN:
 
 # INSTANZEN
 main = MAIN()
-player_1 = PLAYER(1, 500, 0)
-player_2 = PLAYER(2, 200, 0)
+player_1 = PLAYER(1, 500, 0,  PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
+player_2 = PLAYER(2, 200, 0,  PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
 blocks = [
     BLOCK(0, SCREEN_H - BLOCK_H, SCREEN_W, BLOCK_H)
 ]
 bullet = BULLET
-item = ITEM(SCREEN_W, SCREEN_H)
+item = ITEM_BOX(SCREEN_W, SCREEN_H)
 
 
 # GAME LOOPS
