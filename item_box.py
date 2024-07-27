@@ -5,11 +5,9 @@ import random
 class ITEM_BOX:
     def __init__(self, SCREEN_W, SCREEN_H):
         self.width, self.height = 30, 30
-        self.rect = pygame.Rect(self.x_pos, self.y_pos, self.width, self.height)
         self.color = pygame.Color("yellow")
         self.reroll_pos(SCREEN_W, SCREEN_H)
         self.collided = False
-        self.collided_player = None
         self.effect_running = False
         self.effect_duration = 3000
 
@@ -19,6 +17,7 @@ class ITEM_BOX:
         ]
 
     def draw(self, screen):
+        self.rect = pygame.Rect(self.x_pos, self.y_pos, self.width, self.height)
         pygame.draw.rect(screen, self.color, self.rect)
 
     def reroll_pos(self, SCREEN_W, SCREEN_H):
