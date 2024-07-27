@@ -1,5 +1,6 @@
 import pygame
 
+
 class PLAYER:
 
     def __init__(self, player_number, x, y, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H):
@@ -20,7 +21,6 @@ class PLAYER:
         self.lives = 10
         self.touching_ground = False
 
-
         if self.player_number == 1:
             self.color = pygame.Color("red")
         if self.player_number == 2:
@@ -32,8 +32,8 @@ class PLAYER:
 
     def move_left(self):
         # if not self.collided_left:
-            self.dx -= self.x_vel
-            self.direction = "left"
+        self.dx -= self.x_vel
+        self.direction = "left"
 
     def move_right(self):
         self.dx += self.x_vel
@@ -50,13 +50,12 @@ class PLAYER:
     def jump(self, JUMP_SPEED):
         self.y_vel = -JUMP_SPEED
 
-    def shoot(self, BULLET, BULLET_COOLDOWN ):
+    def shoot(self, BULLET, BULLET_COOLDOWN):
         current_time = pygame.time.get_ticks()
 
         if current_time - self.last_shot > BULLET_COOLDOWN:
             bullet_x = self.rect.centerx
             bullet_y = self.rect.centery
-
 
             new_bullet = BULLET(bullet_x, bullet_y, self.bullet_w, self.bullet_h, self.direction, self.player_number)
             self.bullets.append(new_bullet)
@@ -70,8 +69,7 @@ class PLAYER:
                     and self.rect.top > block.rect.top
                     and self.rect.left < block.rect.right
                     and self.rect.right > block.rect.left
-                    and self.h < 50
-            ):
+                    and self.h < 50):
                 self.inside_block = True
 
     def collide_vertical(self, blocks):
@@ -80,26 +78,22 @@ class PLAYER:
         for block in blocks:
 
             if (self.rect.colliderect(block.rect)
-                    and self.dodge_ground == False
-                    and self.inside_block == False
+                    and not self.dodge_ground
+                    and not self.inside_block
                     and self.rect.bottom <= block.rect.centery
                     and self.y_vel > 0):
-                        self.rect.bottom = block.rect.top
-                        self.touching_ground = True
-                        self.jump_count = 0
-                        self.y_vel = 0
+                self.rect.bottom = block.rect.top
+                self.touching_ground = True
+                self.jump_count = 0
+                self.y_vel = 0
 
     def stop_dodge(self, blocks):
         for block in blocks:
-            if (self.dodge_ground == True
+            if (self.dodge_ground
                     and self.rect.colliderect(block.rect)
                     and self.rect.bottom < block.rect.bottom
-                    and self.rect.bottom > block.rect.centery
-
-            ):
+                    and self.rect.bottom > block.rect.centery):
                 self.dodge_ground = False
-
-
 
     def collide_border(self, SCREEN_W):
         if self.rect.centerx > SCREEN_W:
@@ -125,5 +119,3 @@ class PLAYER:
         for bullet in self.bullets:
             bullet.update(screen, player_1, player_2)
         # self.collide_horizontal(blocks)
-
-
