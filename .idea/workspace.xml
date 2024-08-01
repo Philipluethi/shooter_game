@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="bullet and block class perfected">
+    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="item classes perfected (all) 2">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shootergame_1v1_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shootergame_1v1_code.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/item_box.py" beforeDir="false" afterPath="$PROJECT_DIR$/item_box.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -524,7 +526,23 @@
       <option name="project" value="LOCAL" />
       <updated>1722108832334</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="item classes perfected (all)">
+      <option name="closed" value="true" />
+      <created>1722109155413</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1722109155413</updated>
+    </task>
+    <task id="LOCAL-00046" summary="item classes perfected (all) 2">
+      <option name="closed" value="true" />
+      <created>1722109268263</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1722109268263</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -540,8 +558,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="collide border" />
-    <MESSAGE value="start screen" />
     <MESSAGE value="start screen debug" />
     <MESSAGE value="single player screen" />
     <MESSAGE value="dodge debuged" />
@@ -565,6 +581,8 @@
     <MESSAGE value="main class perfected" />
     <MESSAGE value="player class perfected" />
     <MESSAGE value="bullet and block class perfected" />
-    <option name="LAST_COMMIT_MESSAGE" value="bullet and block class perfected" />
+    <MESSAGE value="item classes perfected (all)" />
+    <MESSAGE value="item classes perfected (all) 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="item classes perfected (all) 2" />
   </component>
 </project>

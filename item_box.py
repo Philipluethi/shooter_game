@@ -9,7 +9,7 @@ class ITEM_BOX:
         self.reroll_pos(SCREEN_W, SCREEN_H)
         self.collided = False
         self.effect_running = False
-        self.effect_duration = 3000
+        self.effect_duration = 5 * 1000
 
         self.effects = [
             self.player_get_bigger,

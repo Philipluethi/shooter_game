@@ -16,7 +16,7 @@ BULLET_W, BULLET_H = 10, 5
 GRAVITY = 1
 JUMP_SPEED = 15
 JUMP_LIMIT = 2
-BULLET_COOLDOWN = 1000 / 10
+BULLET_COOLDOWN = 1000 / 3
 
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode((SCREEN_W, SCREEN_H))
@@ -38,14 +38,15 @@ class MAIN:
         pass
 
     def update_elements(self):
+
         player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
         player_2.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
-        item.update(screen, player_1, player_2, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
+        for item in items:
+            item.update(screen, player_1, player_2, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
 
         for block in blocks:
             block.draw(screen)
-            if keys[pygame.K_i] or item.rect.colliderect(block.rect):
-                item.reroll_pos(SCREEN_W, SCREEN_H)
+
         # F-String from Vid 3
         self.draw_text(f"P1: {player_1.lives}", self.lives_font, (0, 0, 0), SCREEN_W - 100, 50)
         self.draw_text(f"P2: {player_2.lives}", self.lives_font, (0, 0, 0), 100, 50)
@@ -104,6 +105,14 @@ class MAIN:
             blocks[1:] = []
             main.random_map()
 
+        # ITEM
+        for item in items:
+            for block in blocks:
+                if keys[pygame.K_i] or item.rect.colliderect(block.rect):
+                    item.reroll_pos(SCREEN_W, SCREEN_H)
+
+
+
     def check_lives(self):
 
         if player_1.lives < 1:
@@ -116,7 +125,7 @@ class MAIN:
 
     def random_map(self):
         for col in range(SCREEN_H // BLOCK_H):
-            if col % random.randint(1, 2) == 0:
+            if col % random.randint(2, 3) == 0:
                 for row in range(SCREEN_W // BLOCK_W):
                     if row % random.randint(1, 5) == 0:
                         blocks.append(BLOCK(row * BLOCK_H, col * BLOCK_H, BLOCK_W, BLOCK_H))
@@ -133,7 +142,10 @@ class MAIN:
 main = MAIN()
 player_1 = PLAYER(1, 500, 0, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
 player_2 = PLAYER(2, 200, 0, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
-item = ITEM_BOX(SCREEN_W, SCREEN_H)
+items = [
+    ITEM_BOX(SCREEN_W, SCREEN_H),
+    ITEM_BOX(SCREEN_W, SCREEN_H)
+    ]
 blocks = [
     BLOCK(0, SCREEN_H - BLOCK_H, SCREEN_W, BLOCK_H)
 ]
