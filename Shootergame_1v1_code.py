@@ -182,14 +182,16 @@ while start_screen:
     clock.tick(FPS)
     pygame.display.update()
 
+# GAME-LOOP
+
 while two_player:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             two_player = False
-    screen.fill(pygame.Color("light blue"))
     if main.game_over:
         two_player = False
 
+    screen.fill(pygame.Color("light blue"))
     main.update_elements()
     main.check_keys()
     main.check_lives()

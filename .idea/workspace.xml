@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="item classes perfected (all) 2">
+    <list default="true" id="a5998520-f76c-4462-a2cc-516ed76f4d0c" name="Changes" comment="item debug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shootergame_1v1_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shootergame_1v1_code.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/item_box.py" beforeDir="false" afterPath="$PROJECT_DIR$/item_box.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,20 +39,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Python.Shootergame_1v1_code.executor&quot;: &quot;Run&quot;,
-    &quot;Python.bullet.executor&quot;: &quot;Run&quot;,
-    &quot;Python.chatGPT.executor&quot;: &quot;Run&quot;,
-    &quot;Python.player.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Philip/OneDrive - sluz/P/SCHULE/MATURA/Shootergame 1v1/Shootergame_1v1_code&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Python.Shootergame_1v1_code.executor": "Run",
+    "Python.bullet.executor": "Run",
+    "Python.chatGPT.executor": "Run",
+    "Python.player.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "full.screen.before.presentation.mode": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Philip/OneDrive - sluz/P/SCHULE/MATURA/Shootergame 1v1/Shootergame_1v1_code",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Philip\OneDrive - sluz\P\SCHULE\MATURA\Shootergame 1v1\Shootergame_1v1_code" />
@@ -542,7 +543,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722109268263</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="item debug">
+      <option name="closed" value="true" />
+      <created>1722515513628</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1722515513628</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -573,7 +582,6 @@
     <MESSAGE value="player stop dodge debuged" />
     <MESSAGE value="big bullet" />
     <MESSAGE value="dodge debug" />
-    <MESSAGE value="item debug" />
     <MESSAGE value="randm item" />
     <MESSAGE value="item duration" />
     <MESSAGE value="item back to normal size" />
@@ -583,6 +591,7 @@
     <MESSAGE value="bullet and block class perfected" />
     <MESSAGE value="item classes perfected (all)" />
     <MESSAGE value="item classes perfected (all) 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="item classes perfected (all) 2" />
+    <MESSAGE value="item debug" />
+    <option name="LAST_COMMIT_MESSAGE" value="item debug" />
   </component>
 </project>
