@@ -1,9 +1,9 @@
 import pygame
 import random
-from block import BLOCK
-from bullet import BULLET
-from player import PLAYER
-from item_box import ITEM_BOX
+from Block import BLOCK
+from Bullet import BULLET
+from Player import PLAYER
+from Effects import ITEM_BOX
 
 pygame.init()
 
