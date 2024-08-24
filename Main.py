@@ -31,6 +31,9 @@ class MAIN:
         self.winner = None
         self.game_over = False
 
+        self.background_img = pygame.image.load("graphics/background1.png").convert_alpha()
+        self.background_img = pygame.transform.scale(self.background_img, (SCREEN_W, SCREEN_H))
+
         # self.game_over_flag = False
 
     def print(self):
@@ -139,7 +142,9 @@ class MAIN:
 main = MAIN()
 player_1 = PLAYER(1, 500, 0, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
 player_2 = PLAYER(2, 200, 0, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
-blocks = [BLOCK(0, SCREEN_H - BLOCK_H, SCREEN_W, BLOCK_H)]
+blocks = []
+for i in range(SCREEN_W // BLOCK_W):
+    blocks.append(BLOCK(BLOCK_W * i, SCREEN_H - BLOCK_H , BLOCK_W, BLOCK_H))
 items = [
     ITEM_BOX(SCREEN_W, SCREEN_H),
     ITEM_BOX(SCREEN_W, SCREEN_H)
@@ -190,6 +195,7 @@ while two_player:
         two_player = False
 
     screen.fill(pygame.Color("light blue"))
+    screen.blit(main.background_img, (0,0))
     main.update_elements()
     main.check_keys()
     main.check_lives()
@@ -237,8 +243,3 @@ while main.game_over:
     clock.tick(FPS)
 
 pygame.quit()
-
-
-
-
-# IS THIS ON GITHUB?
