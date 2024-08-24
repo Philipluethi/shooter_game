@@ -22,13 +22,18 @@ class PLAYER:
         self.touching_ground = False
 
         if self.player_number == 1:
-            self.color = pygame.Color("red")
+            # self.color = pygame.Color("red")
+            self.player_img = pygame.image.load("graphics/red.png").convert_alpha()
+            self.player_img = pygame.transform.scale(self.player_img, (self.w, self.h))
         if self.player_number == 2:
-            self.color = pygame.Color("blue")
+            # self.color = pygame.Color("blue")
+            self.player_img = pygame.image.load("graphics/blue.png").convert_alpha()
+            self.player_img = pygame.transform.scale(self.player_img, (self.w, self.h))
 
     def draw(self, screen, x, y, w, h):
         self.rect = pygame.Rect(x, y, w, h)
-        pygame.draw.rect(screen, self.color, self.rect)
+        # pygame.draw.rect(screen, self.color, self.rect)
+        screen.blit(self.player_img, self.rect.topleft)
 
     def move_left(self):
         # if not self.collided_left:
