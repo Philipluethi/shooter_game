@@ -27,13 +27,20 @@ class PLAYER:
 
         if self.player_number == 2:
             # self.color = pygame.Color("blue")
-            self.player_img = pygame.image.load("graphics/blue.png").convert_alpha()
+            self.player_img = pygame.image.load("graphics/blue2.png").convert_alpha()
 
-    def draw(self, screen, x, y, w, h):
+    def draw(self, screen, x, y, w, h, PLAYER_W, PLAYER_H):
         self.player_img = pygame.transform.scale(self.player_img, (w, h))
         self.rect = pygame.Rect(x, y, w, h)
         # pygame.draw.rect(screen, self.color, self.rect)
         screen.blit(self.player_img, self.rect.topleft)
+
+    def load_img(self):
+        if self.player_number == 1:
+            self.player_img = pygame.image.load("graphics/red2.png").convert_alpha()
+
+        if self.player_number == 2:
+            self.player_img = pygame.image.load("graphics/blue2.png").convert_alpha()
 
     def move_left(self):
         # if not self.collided_left:
@@ -112,8 +119,8 @@ class PLAYER:
         if self.rect.centery < 0:
             self.rect.centery = SCREEN_H
 
-    def update(self, GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H):
-        self.draw(screen, self.rect.x, self.rect.y, self.w, self.h)
+    def update(self, GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H, PLAYER_W, PLAYER_H):
+        self.draw(screen, self.rect.x, self.rect.y, self.w, self.h,  PLAYER_W, PLAYER_H)
         self.gravity(GRAVITY)
         self.check_inside_block(blocks)
         self.collide_vertical(blocks)

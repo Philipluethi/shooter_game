@@ -10,6 +10,8 @@ class ITEM_BOX:
         self.collided = False
         self.effect_running = False
         self.effect_duration = 5 * 1000
+        self.img = pygame.image.load("graphics/itemBox.png")
+        self.img = pygame.transform.scale(self.img, (self.width, self.height))
 
         self.effects = [
             self.player_get_bigger,
@@ -18,7 +20,9 @@ class ITEM_BOX:
 
     def draw(self, screen):
         self.rect = pygame.Rect(self.x_pos, self.y_pos, self.width, self.height)
-        pygame.draw.rect(screen, self.color, self.rect)
+        # pygame.draw.rect(screen, self.color, self.rect)
+        screen.blit(self.img, self.rect.topleft)
+
 
     def reroll_pos(self, SCREEN_W, SCREEN_H):
         self.x_pos = random.randint(0, SCREEN_W - self.width)

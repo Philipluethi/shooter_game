@@ -42,8 +42,8 @@ class MAIN:
     def update_elements(self):
         for block in blocks:
             block.draw(screen)
-        player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
-        player_2.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
+        player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H, PLAYER_W, PLAYER_H)
+        player_2.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H, PLAYER_W, PLAYER_H)
         for item in items:
             item.update(screen, player_1, player_2, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
 
