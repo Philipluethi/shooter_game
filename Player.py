@@ -23,14 +23,14 @@ class PLAYER:
 
         if self.player_number == 1:
             # self.color = pygame.Color("red")
-            self.player_img = pygame.image.load("graphics/red.png").convert_alpha()
-            self.player_img = pygame.transform.scale(self.player_img, (self.w, self.h))
+            self.player_img = pygame.image.load("graphics/red2.png").convert_alpha()
+
         if self.player_number == 2:
             # self.color = pygame.Color("blue")
             self.player_img = pygame.image.load("graphics/blue.png").convert_alpha()
-            self.player_img = pygame.transform.scale(self.player_img, (self.w, self.h))
 
     def draw(self, screen, x, y, w, h):
+        self.player_img = pygame.transform.scale(self.player_img, (w, h))
         self.rect = pygame.Rect(x, y, w, h)
         # pygame.draw.rect(screen, self.color, self.rect)
         screen.blit(self.player_img, self.rect.topleft)

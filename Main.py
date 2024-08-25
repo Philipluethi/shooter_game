@@ -9,8 +9,8 @@ pygame.init()
 
 FPS = 60
 SCREEN_W, SCREEN_H = 1000, 500
-BLOCK_W, BLOCK_H = 50, 50
-PLAYER_W, PLAYER_H = 40, 40
+BLOCK_W = BLOCK_H = SCREEN_H // 8
+PLAYER_W = PLAYER_H = SCREEN_H // 9
 BULLET_W, BULLET_H = 10, 5
 GRAVITY = 1
 JUMP_SPEED = 15
@@ -124,11 +124,14 @@ class MAIN:
             self.game_over = True
 
     def random_map(self):
+        for row in range(SCREEN_W // BLOCK_W + 1):
+            blocks.append(BLOCK(BLOCK_W * row, SCREEN_H // BLOCK_H * BLOCK_H - BLOCK_H, BLOCK_W, BLOCK_H, BLOCK_W, BLOCK_H))
+
         for col in range(SCREEN_H // BLOCK_H):
             if col % random.randint(2, 3) == 0:
                 for row in range(SCREEN_W // BLOCK_W):
                     if row % random.randint(1, 5) == 0:
-                        blocks.append(BLOCK(row * BLOCK_H, col * BLOCK_H, BLOCK_W, BLOCK_H))
+                        blocks.append(BLOCK(row * BLOCK_H, col * BLOCK_H, BLOCK_W, BLOCK_H, BLOCK_W, BLOCK_H))
 
     # FROM VID 3
     def draw_text(self, text, font, color, center_x, center_y):
@@ -143,8 +146,7 @@ main = MAIN()
 player_1 = PLAYER(1, 500, 0, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
 player_2 = PLAYER(2, 200, 0, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
 blocks = []
-for i in range(SCREEN_W // BLOCK_W):
-    blocks.append(BLOCK(BLOCK_W * i, SCREEN_H - BLOCK_H , BLOCK_W, BLOCK_H))
+
 items = [
     ITEM_BOX(SCREEN_W, SCREEN_H),
     ITEM_BOX(SCREEN_W, SCREEN_H)
