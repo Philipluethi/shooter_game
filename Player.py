@@ -23,20 +23,21 @@ class PLAYER:
 
         if self.player_number == 1:
             # self.color = pygame.Color("red")
-            self.player_img = pygame.image.load("graphics/red2.png").convert_alpha()
+            self.original_img = pygame.image.load("graphics/red2.png").convert_alpha()
 
         if self.player_number == 2:
             # self.color = pygame.Color("blue")
-            self.player_img = pygame.image.load("graphics/blue2.png").convert_alpha()
+            self.original_img = pygame.image.load("graphics/blue2.png").convert_alpha()
 
     def draw(self, screen, x, y, w, h, PLAYER_W, PLAYER_H):
-        self.player_img = pygame.transform.scale(self.player_img, (w, h))
-        if self.direction == "left":
-            flipped_image = pygame.transform.flip(self.player_img, True, False)  # Flip horizontally
-            screen.blit(flipped_image, (self.rect.topleft))
-        else:
-            screen.blit(self.player_img, (self.rect.topleft))
         self.rect = pygame.Rect(x, y, w, h)
+        self.player_img = pygame.transform.scale(self.original_img, (w, h))
+        if self.direction == "left":
+            flipped_image = pygame.transform.flip(self.player_img, True, False)
+            screen.blit(flipped_image, self.rect)
+        else:
+            screen.blit(self.player_img, self.rect)
+
         # pygame.draw.rect(screen, self.color, self.rect)
 
     def load_img(self):
