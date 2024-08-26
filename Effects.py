@@ -3,15 +3,15 @@ import random
 
 
 class ITEM_BOX:
-    def __init__(self, SCREEN_W, SCREEN_H):
-        self.width, self.height = 30, 30
+    def __init__(self, SCREEN_W, SCREEN_H, ITEM_W):
+        self.width = self.height = ITEM_W
         self.color = pygame.Color("yellow")
         self.reroll_pos(SCREEN_W, SCREEN_H)
         self.collided = False
         self.effect_running = False
         self.effect_duration = 5 * 1000
-        self.img = pygame.image.load("graphics/itemBox.png")
-        self.img = pygame.transform.scale(self.img, (self.width, self.height))
+        self.original_img = pygame.image.load("graphics/itemBox2.png")
+        self.img = pygame.transform.scale(self.original_img, (self.width, self.height))
 
         self.effects = [
             self.player_get_bigger,
