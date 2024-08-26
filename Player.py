@@ -31,9 +31,13 @@ class PLAYER:
 
     def draw(self, screen, x, y, w, h, PLAYER_W, PLAYER_H):
         self.player_img = pygame.transform.scale(self.player_img, (w, h))
+        if self.direction == "left":
+            flipped_image = pygame.transform.flip(self.player_img, True, False)  # Flip horizontally
+            screen.blit(flipped_image, (self.rect.topleft))
+        else:
+            screen.blit(self.player_img, (self.rect.topleft))
         self.rect = pygame.Rect(x, y, w, h)
         # pygame.draw.rect(screen, self.color, self.rect)
-        screen.blit(self.player_img, self.rect.topleft)
 
     def load_img(self):
         if self.player_number == 1:
