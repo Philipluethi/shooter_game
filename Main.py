@@ -130,7 +130,7 @@ class MAIN:
             blocks.append(BLOCK(BLOCK_W * row, SCREEN_H // BLOCK_H * BLOCK_H - BLOCK_H, BLOCK_W, BLOCK_H, BLOCK_W, BLOCK_H))
 
         for col in range(SCREEN_H // BLOCK_H):
-            if col % random.randint(2, 3) == 0:
+            if col % random.randint(1, 4) == 0:
                 for row in range(SCREEN_W // BLOCK_W):
                     if row % random.randint(1, 5) == 0:
                         blocks.append(BLOCK(row * BLOCK_H, col * BLOCK_H, BLOCK_W, BLOCK_H, BLOCK_W, BLOCK_H))
