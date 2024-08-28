@@ -84,8 +84,8 @@ class PLAYER:
         for block in blocks:
             if (self.rect.colliderect(block.rect)
                     and self.rect.top > block.rect.top
-                    and self.rect.left < block.rect.right
-                    and self.rect.right > block.rect.left
+                    and self.rect.left < block.rect.centerx
+                    and self.rect.right > block.rect.centerx
                     and self.h < block.rect.h):
                 self.inside_block = True
 
