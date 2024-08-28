@@ -23,7 +23,6 @@ class ITEM_BOX:
         # pygame.draw.rect(screen, self.color, self.rect)
         screen.blit(self.img, self.rect.topleft)
 
-
     def reroll_pos(self, SCREEN_W, SCREEN_H):
         self.x_pos = random.randint(0, SCREEN_W - self.width)
         self.y_pos = random.randint(self.height, SCREEN_H - self.height)

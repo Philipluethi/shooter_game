@@ -29,7 +29,7 @@ class PLAYER:
             # self.color = pygame.Color("blue")
             self.original_img = pygame.image.load("graphics/blue2.png").convert_alpha()
 
-    def draw(self, screen, x, y, w, h, PLAYER_W, PLAYER_H):
+    def draw(self, screen, x, y, w, h):
         self.rect = pygame.Rect(x, y, w, h)
         self.player_img = pygame.transform.scale(self.original_img, (w, h))
         if self.direction == "left":
@@ -124,8 +124,8 @@ class PLAYER:
         if self.rect.centery < 0:
             self.rect.centery = SCREEN_H
 
-    def update(self, GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H, PLAYER_W, PLAYER_H):
-        self.draw(screen, self.rect.x, self.rect.y, self.w, self.h,  PLAYER_W, PLAYER_H)
+    def update(self, GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H):
+        self.draw(screen, self.rect.x, self.rect.y, self.w, self.h)
         self.gravity(GRAVITY)
         self.check_inside_block(blocks)
         self.collide_vertical(blocks)
