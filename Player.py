@@ -11,7 +11,7 @@ class PLAYER:
         self.direction = "right"
         self.x_vel = 5
         self.dx = 0
-        self.y_vel = 0
+        self.dy = 0
         self.jump_count = 0
         self.jump_pressed = False
         self.dodge_ground = False
@@ -61,11 +61,11 @@ class PLAYER:
         self.dx = 0
 
     def gravity(self, GRAVITY):
-        self.y_vel += GRAVITY
-        self.rect.y += self.y_vel
+        self.dy += GRAVITY
+        self.rect.y += self.dy
 
     def jump(self, JUMP_SPEED):
-        self.y_vel = -JUMP_SPEED
+        self.dy = -JUMP_SPEED
 
     def shoot(self, BULLET, BULLET_COOLDOWN):
         current_time = pygame.time.get_ticks()
@@ -86,7 +86,7 @@ class PLAYER:
                     and self.rect.top > block.rect.top
                     and self.rect.left < block.rect.right
                     and self.rect.right > block.rect.left
-                    and self.h < 50):
+                    and self.h < block.rect.h):
                 self.inside_block = True
 
     def collide_vertical(self, blocks):
@@ -98,11 +98,11 @@ class PLAYER:
                     and not self.dodge_ground
                     and not self.inside_block
                     and self.rect.bottom <= block.rect.centery
-                    and self.y_vel > 0):
+                    and self.dy > 0):
                 self.rect.bottom = block.rect.top
                 self.touching_ground = True
                 self.jump_count = 0
-                self.y_vel = 0
+                self.dy = 0
 
     def stop_dodge(self, blocks):
         for block in blocks:
