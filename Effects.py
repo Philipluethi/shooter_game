@@ -51,28 +51,32 @@ class ITEM_BOX:
         print("effect running")
         self.collided_player_time = pygame.time.get_ticks()
 
-    def check_duration(self, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H):
+    def check_duration(self, PLAYER_W, BULLET_W):
         if pygame.time.get_ticks() > self.collided_player_time + self.effect_duration:
             self.effect_running = False
             print("effect stop")
-            self.back_to_normal(PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
+            self.back_to_normal(PLAYER_W, BULLET_W)
 
-    def player_change_size(self, w, h, bullet_w, bullet_h):
-        self.collided_player.w, self.collided_player.h = w, h
-        self.collided_player.bullet_w, self.collided_player.bullet_h = bullet_w, bullet_h
+    def player_change_size(self, size_factor_player, size_factor_bullet):
+        self.collided_player.w *= size_factor_player
+        self.collided_player.h *= size_factor_player
+        self.collided_player.bullet_w *= size_factor_bullet
+        self.collided_player.bullet_h *= size_factor_bullet
 
     def player_get_bigger(self):
-        self.player_change_size(80, 80, 30, 15)
+        self.player_change_size(2, 2)
 
     def player_get_smaller(self):
-        self.player_change_size(20, 20, 10, 5)
+        self.player_change_size(0.5, 0.5)
 
-    def back_to_normal(self, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H):
-        self.player_change_size(PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
+    def back_to_normal(self, PLAYER_W, BULLET_W):
+        self.collided_player.w =  self.collided_player.h = PLAYER_W
+        self.collided_player.bullet_w = self.collided_player.bullet_h =  BULLET_W
+
 
     def update(self, screen, player_1, player_2, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H):
         if not self.collided:
             self.draw(screen)
             self.collide_player(player_1, player_2)
-        if self.effect_running:
-            self.check_duration(PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
+        elif self.effect_running:
+            self.check_duration(PLAYER_W, BULLET_W)
