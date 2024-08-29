@@ -40,6 +40,7 @@ class PLAYER:
 
         # pygame.draw.rect(screen, self.color, self.rect)
 
+
     def load_img(self):
         if self.player_number == 1:
             self.player_img = pygame.image.load("graphics/red2.png").convert_alpha()
@@ -93,16 +94,22 @@ class PLAYER:
         self.touching_ground = False
 
         for block in blocks:
-
             if (self.rect.colliderect(block.rect)
+                    and self.dy > 0
+                    and self.rect.bottom <= block.rect.top + self.dy
                     and not self.dodge_ground
                     and not self.inside_block
-                    and self.rect.bottom <= block.rect.centery
-                    and self.dy > 0):
+            ):
                 self.rect.bottom = block.rect.top
                 self.touching_ground = True
                 self.jump_count = 0
                 self.dy = 0
+
+
+
+
+
+
 
     def stop_dodge(self, blocks):
         for block in blocks:

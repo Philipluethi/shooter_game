@@ -39,7 +39,7 @@ class MAIN:
         # self.game_over_flag = False
 
     def print(self):
-        pass
+        print(player_1.dy)
 
     def update_elements(self):
         for block in blocks:
@@ -172,12 +172,10 @@ while start_screen:
     keys = pygame.key.get_pressed()
 
     if keys[pygame.K_2]:
-        print("2-PLAYER")
         start_screen = False
         two_player = True
 
     if keys[pygame.K_1]:
-        print("SINGLE PLAYER")
         start_screen = False
         one_player = True
 
@@ -203,6 +201,7 @@ while two_player:
     main.update_elements()
     main.check_keys()
     main.check_lives()
+    main.print()
 
     pygame.display.update()
     clock.tick(FPS)

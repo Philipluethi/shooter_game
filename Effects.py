@@ -33,13 +33,11 @@ class ITEM_BOX:
         if self.rect.colliderect(player_1.rect):
             self.collided = True
             self.collided_player = player_1
-            print("collided player 1")
             self.rand_item()
 
         if self.rect.colliderect(player_2.rect):
             self.collided = True
             self.collided_player = player_2
-            print("collided player 2")
             self.rand_item()
 
     def rand_item(self):
@@ -48,13 +46,11 @@ class ITEM_BOX:
         random_effect()
         # CHATGPT
         self.effect_running = True
-        print("effect running")
         self.collided_player_time = pygame.time.get_ticks()
 
     def check_duration(self, PLAYER_W, BULLET_W):
         if pygame.time.get_ticks() > self.collided_player_time + self.effect_duration:
             self.effect_running = False
-            print("effect stop")
             self.back_to_normal(PLAYER_W, BULLET_W)
 
     def player_change_size(self, size_factor_player, size_factor_bullet):
