@@ -39,13 +39,18 @@ class MAIN:
         # self.game_over_flag = False
 
     def print(self):
-        print(player_1.dy)
+        print(pygame.time.get_ticks())
+
+
 
     def update_elements(self):
+
         for block in blocks:
             block.draw(screen)
         player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
         player_2.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
+
+
         for item in items:
             item.update(screen, player_1, player_2, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
 
@@ -110,8 +115,8 @@ class MAIN:
         # ITEM
         for item in items:
             for block in blocks:
-                if keys[pygame.K_i] or item.rect.colliderect(block.rect):
-                    item.reroll_pos(SCREEN_W, SCREEN_H)
+                if keys[pygame.K_i]:
+                    item.rand_pos(SCREEN_W, SCREEN_H)
 
 
 
@@ -128,12 +133,26 @@ class MAIN:
     def random_map(self):
         for row in range(SCREEN_W // BLOCK_W + 1):
             blocks.append(BLOCK(BLOCK_W * row, SCREEN_H // BLOCK_H * BLOCK_H - BLOCK_H, BLOCK_W, BLOCK_H, BLOCK_W, BLOCK_H))
-
         for col in range(SCREEN_H // BLOCK_H):
             if col % random.randint(1, 4) == 0:
                 for row in range(SCREEN_W // BLOCK_W):
                     if row % random.randint(1, 5) == 0:
                         blocks.append(BLOCK(row * BLOCK_H, col * BLOCK_H, BLOCK_W, BLOCK_H, BLOCK_W, BLOCK_H))
+
+        for item in items:
+            # long_rect = pygame.Rect(item.rect.x, 0, item.rect.w, item.rect.h + SCREEN_H)
+            # pygame.draw.rect(screen, (0, 0, 0), long_rect)
+
+            for block in blocks:
+                if item.rect.colliderect(block.rect):
+                    item.rand_pos(SCREEN_W, SCREEN_H)
+
+            if player_1.rect.colliderect(item.rect.x, 0, item.rect.w, item.rect.h + SCREEN_H):
+                item.rand_pos(SCREEN_W, SCREEN_H)
+
+            if player_2.rect.colliderect(item.rect.x, 0, item.rect.w, item.rect.h + SCREEN_H):
+                item.rand_pos(SCREEN_W, SCREEN_H)
+
 
     # FROM VID 3
     def draw_text(self, text, font, color, center_x, center_y):
@@ -150,9 +169,11 @@ player_2 = PLAYER(2, 200, 0, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
 blocks = []
 
 items = [
-    ITEM_BOX(SCREEN_W, SCREEN_H, ITEM_W),
-    ITEM_BOX(SCREEN_W, SCREEN_H, ITEM_W)
-    ]
+ITEM_BOX(SCREEN_W, SCREEN_H, ITEM_W),
+ITEM_BOX(SCREEN_W, SCREEN_H, ITEM_W),
+ITEM_BOX(SCREEN_W, SCREEN_H, ITEM_W)
+
+]
 
 
 # GAME LOOPS

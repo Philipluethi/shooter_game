@@ -5,8 +5,10 @@ import random
 class ITEM_BOX:
     def __init__(self, SCREEN_W, SCREEN_H, ITEM_W):
         self.width = self.height = ITEM_W
+        self.x_pos = self.y_pos = 0
+        self.rect = pygame.Rect(self.x_pos, self.y_pos, self.width, self.height)
         self.color = pygame.Color("yellow")
-        self.reroll_pos(SCREEN_W, SCREEN_H)
+        self.rand_pos(SCREEN_W, SCREEN_H)
         self.collided = False
         self.effect_running = False
         self.effect_duration = 5 * 1000
@@ -23,9 +25,10 @@ class ITEM_BOX:
         # pygame.draw.rect(screen, self.color, self.rect)
         screen.blit(self.img, self.rect.topleft)
 
-    def reroll_pos(self, SCREEN_W, SCREEN_H):
+    def rand_pos(self, SCREEN_W, SCREEN_H):
         self.x_pos = random.randint(0, SCREEN_W - self.width)
         self.y_pos = random.randint(self.height, SCREEN_H - self.height)
+
 
     def collide_player(self, player_1, player_2):
         self.collided_player = False
