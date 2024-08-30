@@ -1,4 +1,5 @@
 import pygame
+from  Constants import *
 
 
 class PLAYER:
@@ -18,7 +19,8 @@ class PLAYER:
         self.bullets = []
         self.last_shot = pygame.time.get_ticks()
         self.player_number = player_number
-        self.lives = 10
+        self.lives = PLAYER_LIVES
+        self.previous_lives = self.lives
         self.touching_ground = False
 
         if self.player_number == 1:
@@ -104,12 +106,6 @@ class PLAYER:
                 self.touching_ground = True
                 self.jump_count = 0
                 self.dy = 0
-
-
-
-
-
-
 
     def stop_dodge(self, blocks):
         for block in blocks:

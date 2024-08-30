@@ -5,6 +5,7 @@ from Block import BLOCK
 from Bullet import BULLET
 from Player import PLAYER
 from Effects import ITEM_BOX
+from Interface import INTERFACE
 
 pygame.init()
 
@@ -22,9 +23,7 @@ class MAIN:
         # self.game_over_flag = False
 
     def print(self):
-        print(pygame.time.get_ticks())
-
-
+        print(f"lives {player_1.lives} , previous lives {player_1.previous_lives} ")
 
     def update_elements(self):
 
@@ -36,6 +35,8 @@ class MAIN:
 
         for item in items:
             item.update(screen, player_1, player_2, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
+
+        interface.update()
 
         # F-String from Vid 3
         self.draw_text(f"P1: {player_1.lives}", self.lives_font, (0, 0, 0), SCREEN_W - 100, 50)
@@ -61,6 +62,8 @@ class MAIN:
 
         if keys[pygame.K_SPACE]:
             player_1.shoot(BULLET, BULLET_COOLDOWN)
+
+
 
         if player_1.touching_ground:
             if keys[pygame.K_DOWN]:
@@ -102,7 +105,6 @@ class MAIN:
                     item.rand_pos(SCREEN_W, SCREEN_H)
 
 
-
     def check_lives(self):
 
         if player_1.lives < 1:
@@ -112,6 +114,14 @@ class MAIN:
         if player_2.lives < 1:
             self.winner = 1
             self.game_over = True
+
+        if player_1.lives < player_1.previous_lives:
+            interface.p1_lose_life()
+            player_1.previous_lives = player_1.lives
+
+        if player_2.lives < player_2.previous_lives:
+            interface.p2_lose_life()
+            player_2.previous_lives = player_2.lives
 
     def random_map(self):
         for row in range(SCREEN_W // BLOCK_W + 1):
@@ -145,8 +155,6 @@ class MAIN:
 
 
 
-
-
 # INSTANZEN
 
 main = MAIN()
@@ -158,8 +166,7 @@ ITEM_BOX(SCREEN_W, SCREEN_H, ITEM_W),
 ITEM_BOX(SCREEN_W, SCREEN_H, ITEM_W),
 ITEM_BOX(SCREEN_W, SCREEN_H, ITEM_W)
 ]
-
-
+interface = INTERFACE()
 
 
 # GAME LOOPS
