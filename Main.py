@@ -23,8 +23,7 @@ class MAIN:
         # self.game_over_flag = False
 
     def print(self):
-        print(f"lives {player_1.lives} , previous lives {player_1.previous_lives} ")
-
+        pass
     def update_elements(self):
 
         for block in blocks:
@@ -39,8 +38,8 @@ class MAIN:
         interface.update()
 
         # F-String from Vid 3
-        self.draw_text(f"P1: {player_1.lives}", self.lives_font, (0, 0, 0), SCREEN_W - 100, 50)
-        self.draw_text(f"P2: {player_2.lives}", self.lives_font, (0, 0, 0), 100, 50)
+        self.draw_text(player_1.lives, self.lives_font, (0, 0, 0), SCREEN_W - 100, interface.rect_p1_lives.centery)
+        self.draw_text(player_2.lives, self.lives_font, (0, 0, 0), 100, interface.rect_p2_lives.centery)
 
     def check_keys(self):
         keys = pygame.key.get_pressed()
@@ -149,7 +148,7 @@ class MAIN:
 
     # FROM VID 3
     def draw_text(self, text, font, color, center_x, center_y):
-        text_img = font.render(text, True, color)
+        text_img = font.render(str(text), True, color)
         text_rect = text_img.get_rect(center=(center_x, center_y))
         screen.blit(text_img, text_rect)
 
