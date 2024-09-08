@@ -1,24 +1,18 @@
 import pygame
 import random
+from Constants import *
 
 
 class ITEM_BOX:
     def __init__(self, SCREEN_W, SCREEN_H, ITEM_W):
         self.width = self.height = ITEM_W
         self.x_pos = self.y_pos = 0
+        self.rand_pos(SCREEN_W, SCREEN_H)
         self.rect = pygame.Rect(self.x_pos, self.y_pos, self.width, self.height)
         self.color = pygame.Color("yellow")
-        self.rand_pos(SCREEN_W, SCREEN_H)
-        self.collided = False
-        self.effect_running = False
-        self.effect_duration = 5 * 1000
+        self.item_running = False
         self.original_img = pygame.image.load("graphics/itemBox2.png")
         self.img = pygame.transform.scale(self.original_img, (self.width, self.height))
-
-        self.effects = [
-            self.player_get_bigger,
-            self.player_get_smaller
-        ]
 
     def draw(self, screen):
         self.rect = pygame.Rect(self.x_pos, self.y_pos, self.width, self.height)
@@ -31,30 +25,73 @@ class ITEM_BOX:
 
 
     def collide_player(self, player_1, player_2):
-        self.collided_player = False
+        self.item_running = False
 
         if self.rect.colliderect(player_1.rect):
-            self.collided = True
+            self.item_running = True
             self.collided_player = player_1
-            self.rand_item()
+            self.choose_effect_or_weapon(self.collided_player)
+
 
         if self.rect.colliderect(player_2.rect):
-            self.collided = True
+            self.item_running = True
             self.collided_player = player_2
-            self.rand_item()
+            self.choose_effect_or_weapon(self.collided_player)
 
-    def rand_item(self):
+    def choose_effect_or_weapon(self, collided_player):
+        self.possible_items = [EFFECT, WEAPON]
+
         # CHATGPT
-        random_effect = random.choice(self.effects)
-        random_effect()
-        # CHATGPT
-        self.effect_running = True
+        self.selected_item = random.choice(self.possible_items)
+
+        print(self.selected_item)
+        # selected_item(collided_player)
+        self.selected_item(self.collided_player)
+
+        self.item_running = True
         self.collided_player_time = pygame.time.get_ticks()
 
-    def check_duration(self, PLAYER_W, BULLET_W):
-        if pygame.time.get_ticks() > self.collided_player_time + self.effect_duration:
-            self.effect_running = False
-            self.back_to_normal(PLAYER_W, BULLET_W)
+
+
+
+    # def check_duration(self, PLAYER_W, BULLET_W):
+    #     if pygame.time.get_ticks() > self.collided_player_time + ITEM_DUR:
+    #         self.effect_running = False
+    #         self.back_to_normal(PLAYER_W, BULLET_W)
+
+
+
+    def update(self, screen, player_1, player_2, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H):
+        if not self.item_running:
+            self.draw(screen)
+            self.collide_player(player_1, player_2)
+            # self.check_duration()
+
+
+
+class ITEM:
+    def __init__(self, collided_player, possible_items):
+        self.collided_player = collided_player
+        self.possible_items = possible_items
+        self.choose_rand()
+
+
+    def choose_rand(self):
+        self.selected_item = random.choice(self.possible_items)
+        self.selected_item()
+
+    def back_to_normal(self):
+        self.collided_player.w = self.collided_player.h = PLAYER_W
+        self.collided_player.bullet_w = self.collided_player.bullet_h = BULLET_W
+
+
+
+class EFFECT(ITEM):
+    def __init__(self, collided_player):
+        self.collided_player = collided_player
+        self.possible_effects = [self.player_get_bigger, self.player_get_smaller]
+        super().__init__(collided_player, self.possible_effects)
+
 
     def player_change_size(self, size_factor_player, size_factor_bullet):
         self.collided_player.w *= size_factor_player
@@ -68,14 +105,15 @@ class ITEM_BOX:
     def player_get_smaller(self):
         self.player_change_size(0.5, 0.5)
 
-    def back_to_normal(self, PLAYER_W, BULLET_W):
-        self.collided_player.w =  self.collided_player.h = PLAYER_W
-        self.collided_player.bullet_w = self.collided_player.bullet_h =  BULLET_W
 
+class WEAPON(ITEM):
+    def __init__(self, collided_player):
+        self.collided_player = collided_player
+        self.possible_weapons = [self.pistol, self.sniper]
+        super().__init__(collided_player, self.possible_weapons)
 
-    def update(self, screen, player_1, player_2, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H):
-        if not self.collided:
-            self.draw(screen)
-            self.collide_player(player_1, player_2)
-        elif self.effect_running:
-            self.check_duration(PLAYER_W, BULLET_W)
+    def pistol(self):
+        print("pistol")
+
+    def sniper(self):
+        print("sniper")

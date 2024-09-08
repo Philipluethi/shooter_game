@@ -1,5 +1,5 @@
 import pygame
-from Constants import  *
+from Constants import *
 from Player import PLAYER
 
 class INTERFACE:

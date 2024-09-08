@@ -1,5 +1,5 @@
 import pygame
-
+from Constants import *
 
 class BULLET:
     COLOR = pygame.Color("black")

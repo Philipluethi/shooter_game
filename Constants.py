@@ -1,7 +1,8 @@
 import pygame
 
 FPS = 60
-SCREEN_W, SCREEN_H = 1200, 600
+SCREEN_W = 1000
+SCREEN_H = SCREEN_W // 2
 
 BLOCK_W = BLOCK_H = SCREEN_H // 7
 
@@ -15,6 +16,7 @@ JUMP_LIMIT = 2
 BULLET_COOLDOWN = 1000 / 3
 
 ITEM_W = int(BLOCK_W * 0.5)
+ITEM_DUR = 1000 * 5
 
 
 

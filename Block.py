@@ -1,5 +1,5 @@
 import pygame
-
+from Constants import *
 
 class BLOCK:
     COLOR = pygame.Color("dark green")

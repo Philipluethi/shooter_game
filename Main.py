@@ -1,6 +1,6 @@
 import pygame
 import random
-from Constants import  *
+from Constants import *
 from Block import BLOCK
 from Bullet import BULLET
 from Player import PLAYER
@@ -161,9 +161,8 @@ player_1 = PLAYER(1, 500, 0, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
 player_2 = PLAYER(2, 200, 0, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
 blocks = []
 items = [
-ITEM_BOX(SCREEN_W, SCREEN_H, ITEM_W),
-ITEM_BOX(SCREEN_W, SCREEN_H, ITEM_W),
 ITEM_BOX(SCREEN_W, SCREEN_H, ITEM_W)
+
 ]
 interface = INTERFACE()
 
