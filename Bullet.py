@@ -2,6 +2,8 @@ import pygame
 from Constants import *
 # from Main import interface
 
+
+
 class BULLET:
     COLOR = pygame.Color("black")
     SPEED = 10
@@ -16,7 +18,7 @@ class BULLET:
         self.damage = damage
 
 
-    def draw(self, screen):
+    def draw(self):
         pygame.draw.rect(screen, self.COLOR, self.rect)
 
     def collide_player(self, player_1, player_2, interface):
@@ -30,11 +32,11 @@ class BULLET:
             player_2.lives -= self.damage
             interface.p2_lose_life(self.damage)
 
-    def update(self, screen, player_1, player_2, interface):
+    def update(self, player_1, player_2, interface):
         if not self.collided:
             if self.direction == "right":
                 self.rect.x += self.SPEED
             elif self.direction == "left":
                 self.rect.x -= self.SPEED
-            self.draw(screen)
+            self.draw()
             self.collide_player(player_1, player_2, interface)

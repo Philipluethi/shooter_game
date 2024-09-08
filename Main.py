@@ -6,6 +6,7 @@ from Bullet import BULLET
 from Player import PLAYER
 from Effects import *
 from Interface import INTERFACE
+from Instances import *
 
 pygame.init()
 
@@ -31,16 +32,16 @@ class MAIN:
 
     def update_elements(self):
         for block in blocks:
-            block.draw(screen)
+            block.draw()
 
-        player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
-        player_2.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
+        player_1.update(blocks)
+        player_2.update(blocks)
 
         for bullet in player_1.bullets:
-            bullet.update(screen, player_1, player_2, interface)
+            bullet.update(player_1, player_2, interface)
 
         for bullet in player_2.bullets:
-            bullet.update(screen, player_1, player_2, interface)
+            bullet.update(player_1, player_2, interface)
 
         interface.update()
 
@@ -49,7 +50,7 @@ class MAIN:
         self.draw_text(player_2.lives, self.lives_font, (0, 0, 0), 100, interface.rect_p2_lives.centery)
 
         for item in items:
-            item.update(screen, player_1, player_2, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
+            item.update(player_1, player_2)
     def check_keys(self):
         keys = pygame.key.get_pressed()
         # P1
@@ -61,7 +62,7 @@ class MAIN:
 
         if keys[pygame.K_UP]:
             if not player_1.jump_pressed and player_1.jump_count < JUMP_LIMIT:
-                player_1.jump(JUMP_SPEED)
+                player_1.jump()
                 player_1.jump_count += 1
                 player_1.jump_pressed = True
         if event.type == pygame.KEYUP:
@@ -69,7 +70,7 @@ class MAIN:
                 player_1.jump_pressed = False
 
         if keys[pygame.K_SPACE]:
-            player_1.shoot(BULLET, BULLET_COOLDOWN)
+            player_1.shoot(BULLET)
 
 
 
@@ -87,7 +88,7 @@ class MAIN:
 
         if keys[pygame.K_w]:
             if not player_2.jump_pressed and player_2.jump_count < JUMP_LIMIT:
-                player_2.jump(JUMP_SPEED)
+                player_2.jump()
                 player_2.jump_count += 1
                 player_2.jump_pressed = True
         if event.type == pygame.KEYUP:
@@ -95,7 +96,7 @@ class MAIN:
                 player_2.jump_pressed = False
 
         if keys[pygame.K_CAPSLOCK]:
-            player_2.shoot(BULLET, BULLET_COOLDOWN)
+            player_2.shoot(BULLET)
 
         if player_2.touching_ground:
             if keys[pygame.K_s]:
@@ -110,7 +111,7 @@ class MAIN:
         for item in items:
             for block in blocks:
                 if keys[pygame.K_i]:
-                    item.rand_pos(SCREEN_W, SCREEN_H)
+                    item.rand_pos()
 
 
     def check_lives(self):
@@ -133,12 +134,12 @@ class MAIN:
 
     def random_map(self):
         for row in range(SCREEN_W // BLOCK_W + 1):
-            blocks.append(BLOCK(BLOCK_W * row, SCREEN_H // BLOCK_H * BLOCK_H - BLOCK_H, BLOCK_W, BLOCK_H, BLOCK_W, BLOCK_H))
+            blocks.append(BLOCK(BLOCK_W * row, SCREEN_H // BLOCK_H * BLOCK_H - BLOCK_H, BLOCK_W, BLOCK_H))
         for col in range(SCREEN_H // BLOCK_H):
             if col % random.randint(1, 4) == 0:
                 for row in range(SCREEN_W // BLOCK_W):
                     if row % random.randint(1, 5) == 0:
-                        blocks.append(BLOCK(row * BLOCK_H, col * BLOCK_H, BLOCK_W, BLOCK_H, BLOCK_W, BLOCK_H))
+                        blocks.append(BLOCK(row * BLOCK_H, col * BLOCK_H, BLOCK_W, BLOCK_H))
 
         for item in items:
             # long_rect = pygame.Rect(item.rect.x, 0, item.rect.w, item.rect.h + SCREEN_H)
@@ -146,10 +147,10 @@ class MAIN:
 
             for block in blocks:
                 if item.rect.colliderect(block.rect):
-                    item.rand_pos(SCREEN_W, SCREEN_H)
+                    item.rand_pos()
 
             if player_1.rect.colliderect(item.rect.x, 0, item.rect.w, item.rect.h + SCREEN_H):
-                item.rand_pos(SCREEN_W, SCREEN_H)
+                item.rand_pos()
 
             if player_2.rect.colliderect(item.rect.x, 0, item.rect.w, item.rect.h + SCREEN_H):
                 item.rand_pos(SCREEN_W, SCREEN_H)
@@ -163,18 +164,7 @@ class MAIN:
 
 
 
-# INSTANZEN
-
 main = MAIN()
-player_1 = PLAYER(1, 500, 0, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
-player_2 = PLAYER(2, 200, 0, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
-blocks = []
-items = [
-ITEM_BOX(SCREEN_W, SCREEN_H, ITEM_W)
-
-]
-interface = INTERFACE()
-
 
 # GAME LOOPS
 

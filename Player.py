@@ -1,10 +1,12 @@
 import pygame
 from Constants import *
+# from Instances import blocks
+
 
 
 class PLAYER:
 
-    def __init__(self, player_number, x, y, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H):
+    def __init__(self, player_number, x, y):
         self.w, self.h = PLAYER_W, PLAYER_H
         self.rect = pygame.Rect(x, y, self.w, self.h)
         self.direction = "right"
@@ -35,7 +37,7 @@ class PLAYER:
             # self.color = pygame.Color("blue")
             self.original_img = pygame.image.load("graphics/blue2.png").convert_alpha()
 
-    def draw(self, screen, x, y, w, h):
+    def draw(self, x, y, w, h):
         self.rect = pygame.Rect(x, y, w, h)
         self.player_img = pygame.transform.scale(self.original_img, (w, h))
         if self.direction == "left":
@@ -67,14 +69,14 @@ class PLAYER:
         self.rect.x += self.dx
         self.dx = 0
 
-    def gravity(self, GRAVITY):
+    def gravity(self):
         self.dy += GRAVITY
         self.rect.y += self.dy
 
-    def jump(self, JUMP_SPEED):
+    def jump(self):
         self.dy = -JUMP_SPEED
 
-    def shoot(self, BULLET, BULLET_COOLDOWN):
+    def shoot(self, BULLET):
         current_time = pygame.time.get_ticks()
 
         if current_time - self.last_shot > self.bullet_cooldown:
@@ -119,26 +121,26 @@ class PLAYER:
                     and self.rect.bottom > block.rect.centery):
                 self.dodge_ground = False
 
-    def collide_border(self, SCREEN_W):
+    def collide_border(self):
         if self.rect.centerx > SCREEN_W:
             self.rect.centerx = 0
         if self.rect.centerx < 0:
             self.rect.centerx = SCREEN_W
 
-    def collide_bottom(self, SCREEN_H):
+    def collide_bottom(self):
         if self.rect.centery > SCREEN_H:
             self.rect.centery = 0
         if self.rect.centery < 0:
             self.rect.centery = SCREEN_H
 
-    def update(self, GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H):
-        self.draw(screen, self.rect.x, self.rect.y, self.w, self.h)
-        self.gravity(GRAVITY)
+    def update(self, blocks):
+        self.draw(self.rect.x, self.rect.y, self.w, self.h)
+        self.gravity()
         self.check_inside_block(blocks)
         self.collide_vertical(blocks)
         self.stop_dodge(blocks)
-        self.collide_border(SCREEN_W)
-        self.collide_bottom(SCREEN_H)
+        self.collide_border()
+        self.collide_bottom()
         self.handle_move()
 
 

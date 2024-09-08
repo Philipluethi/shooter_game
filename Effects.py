@@ -3,11 +3,13 @@ import random
 from Constants import *
 
 
+
+
 class ITEM_BOX:
-    def __init__(self, SCREEN_W, SCREEN_H, ITEM_W):
+    def __init__(self):
         self.width = self.height = ITEM_W
         self.x_pos = self.y_pos = 0
-        self.rand_pos(SCREEN_W, SCREEN_H)
+        self.rand_pos()
         self.rect = pygame.Rect(self.x_pos, self.y_pos, self.width, self.height)
         self.color = pygame.Color("yellow")
         self.item_running = False
@@ -15,14 +17,12 @@ class ITEM_BOX:
         self.img = pygame.transform.scale(self.original_img, (self.width, self.height))
 
 
-
-
-    def draw(self, screen):
+    def draw(self):
         self.rect = pygame.Rect(self.x_pos, self.y_pos, self.width, self.height)
         # pygame.draw.rect(screen, self.color, self.rect)
         screen.blit(self.img, self.rect.topleft)
 
-    def rand_pos(self, SCREEN_W, SCREEN_H):
+    def rand_pos(self):
         self.x_pos = random.randint(0, SCREEN_W - self.width)
         self.y_pos = random.randint(self.height, SCREEN_H - self.height)
 
@@ -55,16 +55,16 @@ class ITEM_BOX:
         self.collided_player_time = pygame.time.get_ticks()
 
 
-    # def check_duration(self, PLAYER_W, BULLET_W):
+    # def check_duration(self):
     #     if pygame.time.get_ticks() > self.collided_player_time + ITEM_DUR:
     #         self.effect_running = False
-    #         self.back_to_normal(PLAYER_W, BULLET_W)
+    #         self.back_to_normal()
 
 
 
-    def update(self, screen, player_1, player_2, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H):
+    def update(self, player_1, player_2):
         if not self.item_running:
-            self.draw(screen)
+            self.draw()
             self.collide_player(player_1, player_2)
             # self.check_duration()
 

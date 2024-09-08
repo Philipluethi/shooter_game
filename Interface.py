@@ -2,6 +2,8 @@ import pygame
 from Constants import *
 from Player import PLAYER
 
+
+
 class INTERFACE:
     def __init__(self):
         self.w = SCREEN_W / 4
