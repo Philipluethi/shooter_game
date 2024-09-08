@@ -88,6 +88,7 @@ class PLAYER:
             self.last_shot = current_time
 
     def check_inside_block(self, blocks):
+        pass
         self.inside_block = False
 
         for block in blocks:
@@ -98,15 +99,16 @@ class PLAYER:
                     and self.h < block.rect.h):
                 self.inside_block = True
 
+
     def collide_vertical(self, blocks):
         self.touching_ground = False
 
         for block in blocks:
             if (self.rect.colliderect(block.rect)
-                    and self.dy > 0
-                    and self.rect.bottom <= block.rect.top + self.dy
+                    and self.dy >= 0
+                    and self.rect.bottom < block.rect.top + self.dy + 5
                     and not self.dodge_ground
-                    and not self.inside_block
+                    # and not self.inside_block
             ):
                 self.rect.bottom = block.rect.top
                 self.touching_ground = True

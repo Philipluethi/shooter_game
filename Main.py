@@ -27,7 +27,7 @@ class MAIN:
         if keys[pygame.K_t]:
             weapon = WEAPON(player_1)
             weapon.sniper()
-
+        print(player_1.dy)
 
     def update_elements(self):
         for block in blocks:
@@ -134,13 +134,17 @@ class MAIN:
         #     player_2.previous_lives = player_2.lives
 
     def random_map(self):
+
         for row in range(SCREEN_W // BLOCK_W + 1):
             blocks.append(BLOCK(BLOCK_W * row, SCREEN_H // BLOCK_H * BLOCK_H - BLOCK_H, BLOCK_W, BLOCK_H))
+
         for col in range(SCREEN_H // BLOCK_H):
-            if col % random.randint(1, 4) == 0:
+            if col % 2 == 0:
                 for row in range(SCREEN_W // BLOCK_W):
-                    if row % random.randint(1, 5) == 0:
+                    if row % random.randint(1, 3) == 0:
                         blocks.append(BLOCK(row * BLOCK_H, col * BLOCK_H, BLOCK_W, BLOCK_H))
+
+
 
         for item in items:
             # long_rect = pygame.Rect(item.rect.x, 0, item.rect.w, item.rect.h + SCREEN_H)

@@ -13,5 +13,4 @@ player_2 = PLAYER(2, 200, 0)
 interface = INTERFACE()
 blocks = []
 items = []
-for i in range(ITEM_COUNT):
-    items.append(ITEM_BOX())
+
