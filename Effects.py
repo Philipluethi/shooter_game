@@ -55,8 +55,6 @@ class ITEM_BOX:
         self.collided_player_time = pygame.time.get_ticks()
 
 
-
-
     # def check_duration(self, PLAYER_W, BULLET_W):
     #     if pygame.time.get_ticks() > self.collided_player_time + ITEM_DUR:
     #         self.effect_running = False
@@ -85,7 +83,9 @@ class ITEM:
     def back_to_normal(self):
         self.collided_player.w = self.collided_player.h = PLAYER_W
         self.collided_player.bullet_w = self.collided_player.bullet_h = BULLET_W
-        self.collided_player.b
+        self.collided_player.bullet_cooldown = BULLET_COOLDOWN
+        self.collided_player.bullet_damage = BULLET_DAMAGE
+        self.collided_player.bullet_w, self.collided_player.bullet_h = BULLET_W, BULLET_H
 
 
 
@@ -112,16 +112,15 @@ class EFFECT(ITEM):
 
 class WEAPON(ITEM):
     def __init__(self, collided_player):
-        self.possible_weapons = [self.pistol, self.sniper]
+        self.possible_weapons = [self.smg, self.sniper]
         super().__init__(collided_player, self.possible_weapons)
 
-    def pistol(self):
+    def smg(self):
         self.collided_player.bullet_cooldown = 1000 / 10
-        self.collided_player.bullet_w = self.collided_player.bullet_h = BULLET_W / 4
         self.collided_player.bullet_damage = BULLET_DAMAGE / 2
+        self.collided_player.bullet_w = self.collided_player.bullet_h = BULLET_W / 4
 
-
-        print("pistol")
+        print("smg")
 
     def sniper(self):
         print("sniper")
