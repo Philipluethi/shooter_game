@@ -21,7 +21,6 @@ class MAIN:
         self.background_img = pygame.image.load("graphics/background1.png").convert_alpha()
         self.background_img = pygame.transform.scale(self.background_img, (SCREEN_W, SCREEN_H))
 
-        # self.game_over_flag = False
 
     def test(self):
         keys = pygame.key.get_pressed()
@@ -34,8 +33,7 @@ class MAIN:
         for block in blocks:
             block.draw()
 
-        player_1.update(blocks)
-        player_2.update(blocks)
+        interface.update()
 
         for bullet in player_1.bullets:
             bullet.update(player_1, player_2, interface)
@@ -43,14 +41,17 @@ class MAIN:
         for bullet in player_2.bullets:
             bullet.update(player_1, player_2, interface)
 
-        interface.update()
+        player_1.update(blocks)
+        player_2.update(blocks)
+
+        for item in items:
+            item.update(player_1, player_2, items)
 
         # F-String from Vid 3
         self.draw_text(player_1.lives, self.lives_font, (0, 0, 0), SCREEN_W - 100, interface.rect_p1_lives.centery)
         self.draw_text(player_2.lives, self.lives_font, (0, 0, 0), 100, interface.rect_p2_lives.centery)
 
-        for item in items:
-            item.update(player_1, player_2, items)
+
 
     def check_keys(self):
         keys = pygame.key.get_pressed()
