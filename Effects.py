@@ -119,11 +119,15 @@ class WEAPON(ITEM):
         super().__init__(collided_player, self.possible_weapons)
 
     def smg(self):
-        self.collided_player.bullet_cooldown = 1000 / 10
+        self.collided_player.bullet_cooldown = BULLET_COOLDOWN / 3
         self.collided_player.bullet_damage = BULLET_DAMAGE / 2
         self.collided_player.bullet_w = self.collided_player.bullet_h = BULLET_W / 4
 
         print("smg")
 
     def sniper(self):
+        self.collided_player.bullet_cooldown = BULLET_COOLDOWN * 3
+        self.collided_player.bullet_damage = BULLET_DAMAGE * 3
+        self.collided_player.bullet_w, self.collided_player.bullet_h = BULLET_W * 1.5, BULLET_H * 0.5
+
         print("sniper")

@@ -27,7 +27,7 @@ class MAIN:
         keys = pygame.key.get_pressed()
         if keys[pygame.K_t]:
             weapon = WEAPON(player_1)
-            weapon.smg()
+            weapon.sniper()
 
 
     def update_elements(self):
