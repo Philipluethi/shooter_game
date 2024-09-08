@@ -88,7 +88,6 @@ class ITEM:
 
 class EFFECT(ITEM):
     def __init__(self, collided_player):
-        self.collided_player = collided_player
         self.possible_effects = [self.player_get_bigger, self.player_get_smaller]
         super().__init__(collided_player, self.possible_effects)
 
@@ -108,7 +107,6 @@ class EFFECT(ITEM):
 
 class WEAPON(ITEM):
     def __init__(self, collided_player):
-        self.collided_player = collided_player
         self.possible_weapons = [self.pistol, self.sniper]
         super().__init__(collided_player, self.possible_weapons)
 
