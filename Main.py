@@ -51,6 +51,7 @@ class MAIN:
 
         for item in items:
             item.update(player_1, player_2)
+
     def check_keys(self):
         keys = pygame.key.get_pressed()
         # P1
@@ -113,7 +114,6 @@ class MAIN:
                 if keys[pygame.K_i]:
                     item.rand_pos()
 
-
     def check_lives(self):
 
         if player_1.lives < 1:
@@ -153,7 +153,11 @@ class MAIN:
                 item.rand_pos()
 
             if player_2.rect.colliderect(item.rect.x, 0, item.rect.w, item.rect.h + SCREEN_H):
-                item.rand_pos(SCREEN_W, SCREEN_H)
+                item.rand_pos()
+
+    def random_items(self):
+        if len(items) < ITEM_COUNT:
+            items.append(ITEM_BOX())
 
 
     # FROM VID 3
@@ -162,6 +166,12 @@ class MAIN:
         text_rect = text_img.get_rect(center=(center_x, center_y))
         screen.blit(text_img, text_rect)
 
+    def update(self):
+        self.update_elements()
+        self.check_keys()
+        self.check_lives()
+        self.random_items()
+        self.test()
 
 
 main = MAIN()
@@ -198,6 +208,7 @@ while start_screen:
     clock.tick(FPS)
     pygame.display.update()
 
+
 # MAIN-LOOP
 
 while two_player:
@@ -209,10 +220,8 @@ while two_player:
 
     screen.fill(pygame.Color("light blue"))
     screen.blit(main.background_img, (0,0))
-    main.update_elements()
-    main.check_keys()
-    main.check_lives()
-    main.test()
+    main.update()
+
 
     pygame.display.update()
     clock.tick(FPS)

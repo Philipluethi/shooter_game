@@ -11,7 +11,7 @@ class ITEM_BOX:
         self.x_pos = self.y_pos = 0
         self.rand_pos()
         self.rect = pygame.Rect(self.x_pos, self.y_pos, self.width, self.height)
-        self.color = pygame.Color("yellow")
+        # self.color = pygame.Color("yellow")
         self.item_running = False
         self.original_img = pygame.image.load("graphics/itemBox2.png")
         self.img = pygame.transform.scale(self.original_img, (self.width, self.height))
@@ -34,12 +34,14 @@ class ITEM_BOX:
             self.item_running = True
             self.collided_player = player_1
             self.choose_effect_or_weapon(self.collided_player)
+            self.collided_player_time = pygame.time.get_ticks()
 
 
         if self.rect.colliderect(player_2.rect):
             self.item_running = True
             self.collided_player = player_2
             self.choose_effect_or_weapon(self.collided_player)
+            self.collided_player_time = pygame.time.get_ticks()
 
     def choose_effect_or_weapon(self, collided_player):
         self.possible_items = [EFFECT, WEAPON]
@@ -52,21 +54,19 @@ class ITEM_BOX:
         self.item_instanz = self.selected_item(self.collided_player)
         self.item_instanz.choose_rand()
         self.item_running = True
-        self.collided_player_time = pygame.time.get_ticks()
 
-
-    # def check_duration(self):
-    #     if pygame.time.get_ticks() > self.collided_player_time + ITEM_DUR:
-    #         self.effect_running = False
-    #         self.back_to_normal()
-
-
+    def check_duration(self):
+        if pygame.time.get_ticks() > self.collided_player_time + ITEM_DUR:
+            self.item_instanz.back_to_normal()
+            print("effect over")
 
     def update(self, player_1, player_2):
         if not self.item_running:
             self.draw()
             self.collide_player(player_1, player_2)
-            # self.check_duration()
+
+        else:
+            self.check_duration()
 
 
 

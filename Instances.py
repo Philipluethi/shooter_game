@@ -10,8 +10,8 @@ from Interface import INTERFACE
 
 player_1 = PLAYER(1, 500, 0)
 player_2 = PLAYER(2, 200, 0)
-blocks = []
-items = [
-    ITEM_BOX()
-        ]
 interface = INTERFACE()
+blocks = []
+items = []
+for i in range(ITEM_COUNT):
+    items.append(ITEM_BOX())
