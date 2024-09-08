@@ -50,7 +50,7 @@ class MAIN:
         self.draw_text(player_2.lives, self.lives_font, (0, 0, 0), 100, interface.rect_p2_lives.centery)
 
         for item in items:
-            item.update(player_1, player_2)
+            item.update(player_1, player_2, items)
 
     def check_keys(self):
         keys = pygame.key.get_pressed()
@@ -253,11 +253,11 @@ while main.game_over:
 
     if main.winner == 1:
         winner_color = "red"
-        player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
+        player_1.update(blocks)
 
     if main.winner == 2:
         winner_color = "blue"
-        player_2.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
+        player_2.update(blocks)
 
     main.draw_text(f"Player {main.winner} wins", main.title_font, pygame.Color(winner_color), SCREEN_W // 2, SCREEN_H // 2 - 50)
     main.draw_text("GAME OVER", main.subtitle_font, pygame.Color(winner_color), SCREEN_W // 2, SCREEN_H // 2)

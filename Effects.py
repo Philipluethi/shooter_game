@@ -55,18 +55,21 @@ class ITEM_BOX:
         self.item_instanz.choose_rand()
         self.item_running = True
 
-    def check_duration(self):
+    def check_duration(self, items):
         if pygame.time.get_ticks() > self.collided_player_time + ITEM_DUR:
             self.item_instanz.back_to_normal()
             print("effect over")
+            items.remove(self)
 
-    def update(self, player_1, player_2):
+
+    def update(self, player_1, player_2, items):
         if not self.item_running:
             self.draw()
             self.collide_player(player_1, player_2)
 
         else:
-            self.check_duration()
+            self.check_duration(items)
+
 
 
 
