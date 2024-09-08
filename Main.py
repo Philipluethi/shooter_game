@@ -4,7 +4,7 @@ from Constants import *
 from Block import BLOCK
 from Bullet import BULLET
 from Player import PLAYER
-from Effects import ITEM_BOX
+from Effects import *
 from Interface import INTERFACE
 
 pygame.init()
@@ -22,18 +22,25 @@ class MAIN:
 
         # self.game_over_flag = False
 
-    def print(self):
-        pass
-    def update_elements(self):
+    def test(self):
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_t]:
+            weapon = WEAPON(player_1)
+            weapon.pistol()
 
+
+    def update_elements(self):
         for block in blocks:
             block.draw(screen)
+
         player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
         player_2.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
 
+        for bullet in player_1.bullets:
+            bullet.update(screen, player_1, player_2, interface)
 
-        for item in items:
-            item.update(screen, player_1, player_2, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
+        for bullet in player_2.bullets:
+            bullet.update(screen, player_1, player_2, interface)
 
         interface.update()
 
@@ -41,6 +48,8 @@ class MAIN:
         self.draw_text(player_1.lives, self.lives_font, (0, 0, 0), SCREEN_W - 100, interface.rect_p1_lives.centery)
         self.draw_text(player_2.lives, self.lives_font, (0, 0, 0), 100, interface.rect_p2_lives.centery)
 
+        for item in items:
+            item.update(screen, player_1, player_2, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H)
     def check_keys(self):
         keys = pygame.key.get_pressed()
         # P1
@@ -113,14 +122,14 @@ class MAIN:
         if player_2.lives < 1:
             self.winner = 1
             self.game_over = True
-
-        if player_1.lives < player_1.previous_lives:
-            interface.p1_lose_life()
-            player_1.previous_lives = player_1.lives
-
-        if player_2.lives < player_2.previous_lives:
-            interface.p2_lose_life()
-            player_2.previous_lives = player_2.lives
+        #
+        # if player_1.lives < player_1.previous_lives:
+        #     interface.p1_lose_life()
+        #     player_1.previous_lives = player_1.lives
+        #
+        # if player_2.lives < player_2.previous_lives:
+        #     interface.p2_lose_life()
+        #     player_2.previous_lives = player_2.lives
 
     def random_map(self):
         for row in range(SCREEN_W // BLOCK_W + 1):
@@ -213,7 +222,7 @@ while two_player:
     main.update_elements()
     main.check_keys()
     main.check_lives()
-    main.print()
+    main.test()
 
     pygame.display.update()
     clock.tick(FPS)

@@ -14,6 +14,9 @@ class ITEM_BOX:
         self.original_img = pygame.image.load("graphics/itemBox2.png")
         self.img = pygame.transform.scale(self.original_img, (self.width, self.height))
 
+
+
+
     def draw(self, screen):
         self.rect = pygame.Rect(self.x_pos, self.y_pos, self.width, self.height)
         # pygame.draw.rect(screen, self.color, self.rect)
@@ -44,10 +47,10 @@ class ITEM_BOX:
         # CHATGPT
         self.selected_item = random.choice(self.possible_items)
 
-        print(self.selected_item)
+        # print(self.selected_item)
         # selected_item(collided_player)
-        self.selected_item(self.collided_player)
-
+        self.item_instanz = self.selected_item(self.collided_player)
+        self.item_instanz.choose_rand()
         self.item_running = True
         self.collided_player_time = pygame.time.get_ticks()
 
@@ -73,7 +76,6 @@ class ITEM:
     def __init__(self, collided_player, possible_items):
         self.collided_player = collided_player
         self.possible_items = possible_items
-        self.choose_rand()
 
 
     def choose_rand(self):
@@ -83,6 +85,7 @@ class ITEM:
     def back_to_normal(self):
         self.collided_player.w = self.collided_player.h = PLAYER_W
         self.collided_player.bullet_w = self.collided_player.bullet_h = BULLET_W
+        self.collided_player.b
 
 
 
@@ -100,9 +103,11 @@ class EFFECT(ITEM):
 
     def player_get_bigger(self):
         self.player_change_size(2, 2)
+        print("bigger")
 
     def player_get_smaller(self):
         self.player_change_size(0.5, 0.5)
+        print("smaller")
 
 
 class WEAPON(ITEM):
@@ -111,6 +116,11 @@ class WEAPON(ITEM):
         super().__init__(collided_player, self.possible_weapons)
 
     def pistol(self):
+        self.collided_player.bullet_cooldown = 1000 / 10
+        self.collided_player.bullet_w = self.collided_player.bullet_h = BULLET_W / 4
+        self.collided_player.bullet_damage = BULLET_DAMAGE / 2
+
+
         print("pistol")
 
     def sniper(self):

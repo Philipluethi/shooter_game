@@ -6,8 +6,6 @@ class PLAYER:
 
     def __init__(self, player_number, x, y, PLAYER_W, PLAYER_H, BULLET_W, BULLET_H):
         self.w, self.h = PLAYER_W, PLAYER_H
-        self.bullet_w, self.bullet_h = BULLET_W, BULLET_H
-
         self.rect = pygame.Rect(x, y, self.w, self.h)
         self.direction = "right"
         self.x_vel = 5
@@ -16,12 +14,18 @@ class PLAYER:
         self.jump_count = 0
         self.jump_pressed = False
         self.dodge_ground = False
-        self.bullets = []
-        self.last_shot = pygame.time.get_ticks()
         self.player_number = player_number
         self.lives = PLAYER_LIVES
         self.previous_lives = self.lives
         self.touching_ground = False
+
+        self.bullet_w, self.bullet_h = BULLET_W, BULLET_H
+        self.bullet_damage = BULLET_DAMAGE
+        self.bullets = []
+        self.last_shot = pygame.time.get_ticks()
+        self.bullet_cooldown = BULLET_COOLDOWN
+
+
 
         if self.player_number == 1:
             # self.color = pygame.Color("red")
@@ -73,11 +77,11 @@ class PLAYER:
     def shoot(self, BULLET, BULLET_COOLDOWN):
         current_time = pygame.time.get_ticks()
 
-        if current_time - self.last_shot > BULLET_COOLDOWN:
+        if current_time - self.last_shot > self.bullet_cooldown:
             bullet_x = self.rect.centerx
             bullet_y = self.rect.centery
 
-            new_bullet = BULLET(bullet_x, bullet_y, self.bullet_w, self.bullet_h, self.direction, self.player_number)
+            new_bullet = BULLET(bullet_x, bullet_y, self.bullet_w, self.bullet_h, self.direction, self.player_number, self.bullet_damage)
             self.bullets.append(new_bullet)
             self.last_shot = current_time
 
@@ -136,6 +140,6 @@ class PLAYER:
         self.collide_border(SCREEN_W)
         self.collide_bottom(SCREEN_H)
         self.handle_move()
-        for bullet in self.bullets:
-            bullet.update(screen, player_1, player_2)
+
+
         # self.collide_horizontal(blocks)

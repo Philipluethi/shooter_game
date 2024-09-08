@@ -19,11 +19,11 @@ class INTERFACE:
         pygame.draw.rect(screen, pygame.Color("red"), self.rect_p1_lives)
 
 
-    def p1_lose_life(self):
-        self.rect_p1_lives.w -= (1 / PLAYER_LIVES) * (self.w - self.border*3)
+    def p1_lose_life(self, damage):
+        self.rect_p1_lives.w -= (damage / PLAYER_LIVES) * (self.w - self.border*3)
 
-    def p2_lose_life(self):
-        self.rect_p2_lives.w -= (1 / PLAYER_LIVES) * (self.w - self.border*3)
+    def p2_lose_life(self, damage):
+        self.rect_p2_lives.w -= (damage / PLAYER_LIVES) * (self.w - self.border*3)
 
     def update(self):
         self.draw()
