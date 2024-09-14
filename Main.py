@@ -70,10 +70,10 @@ class MAIN:
         interface.update()
 
         for bullet in player_1.bullets:
-            bullet.update_bot(interface, bot_1)
+            bullet.update_bot(bot_1, player_1, interface)
 
         for bullet in bot_1.bullets:
-            bullet.update_bot(interface, bot_1)
+            bullet.update_bot(bot_1, player_1, interface)
 
         player_1.update(blocks)
         bot_1.update(blocks)
