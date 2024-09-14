@@ -72,7 +72,7 @@ class MAIN:
 
         player_1.update(blocks)
         bot_1.update(blocks)
-        bot_1.update_controlls(BULLET)
+        bot_1.update_controlls(BULLET, player_1)
 
         for item in items:
             item.update(player_1, player_2, items)
