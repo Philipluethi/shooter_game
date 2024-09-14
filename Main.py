@@ -6,6 +6,7 @@ from Bullet import BULLET
 from Player import PLAYER
 from Effects import *
 from Interface import INTERFACE
+from Bot import BOT
 from Instances import *
 
 pygame.init()
@@ -27,7 +28,7 @@ class MAIN:
         if keys[pygame.K_t]:
             weapon = WEAPON(player_1)
             weapon.sniper()
-        print(player_1.dy)
+        print(bot_1.lives)
 
     def update_elements(self):
         for block in blocks:
@@ -36,13 +37,16 @@ class MAIN:
         interface.update()
 
         for bullet in player_1.bullets:
-            bullet.update(player_1, player_2, interface)
+            bullet.update(player_1, player_2, interface, bot_1)
 
         for bullet in player_2.bullets:
-            bullet.update(player_1, player_2, interface)
+            bullet.update(player_1, player_2, interface, bot_1)
 
         player_1.update(blocks)
         player_2.update(blocks)
+        # bot_1.update(blocks)
+        # bot_1.update_controlls(BULLET)
+
 
         for item in items:
             item.update(player_1, player_2, items)
@@ -50,6 +54,32 @@ class MAIN:
         # F-String from Vid 3
         self.draw_text(player_1.lives, self.lives_font, (0, 0, 0), SCREEN_W - 100, interface.rect_p1_lives.centery)
         self.draw_text(player_2.lives, self.lives_font, (0, 0, 0), 100, interface.rect_p2_lives.centery)
+
+
+
+
+    def update_elements_1p(self):
+        for block in blocks:
+            block.draw()
+
+        interface.update()
+
+        for bullet in player_1.bullets:
+            bullet.update(player_1, player_2, interface, bot_1)
+
+        for bullet in bot_1.bullets:
+            bullet.update(player_1, player_2, interface, bot_1)
+
+        player_1.update(blocks)
+        bot_1.update(blocks)
+        bot_1.update_controlls(BULLET)
+
+        for item in items:
+            item.update(player_1, player_2, items)
+
+        # F-String from Vid 3
+        self.draw_text(player_1.lives, self.lives_font, (0, 0, 0), SCREEN_W - 100, interface.rect_p1_lives.centery)
+        self.draw_text(bot_1.lives, self.lives_font, (0, 0, 0), 100, interface.rect_p2_lives.centery)
 
 
 
@@ -121,7 +151,7 @@ class MAIN:
             self.winner = 2
             self.game_over = True
 
-        if player_2.lives < 1:
+        if player_2.lives < 1 or bot_1.lives < 1:
             self.winner = 1
             self.game_over = True
         #
@@ -178,6 +208,13 @@ class MAIN:
         self.random_items()
         self.test()
 
+    def update_1p(self):
+        self.update_elements_1p()
+        self.check_keys()
+        self.check_lives()
+        self.random_items()
+        self.test()
+
 
 main = MAIN()
 
@@ -185,9 +222,8 @@ main = MAIN()
 
 start_screen = True
 two_player = False
+one_player = False
 main.random_map()
-
-# one_player = False
 
 while start_screen:
 
@@ -231,21 +267,20 @@ while two_player:
     pygame.display.update()
     clock.tick(FPS)
 
-# while one_player:
-#     for event in pygame.event.get():
-#         if event.type == pygame.QUIT:
-#             one_player = False
-#     screen.fill(pygame.Color("grey"))
-#
-#     player_1.draw(screen, player_1.rect.x, player_1.rect.y, player_1.w, player_1.h)
-#     for block in blocks:
-#         block.draw(screen)
-#     main.check_keys()
-#     main.check_lives()
-#     player_1.update(GRAVITY, blocks, screen, player_1, player_2, SCREEN_W, SCREEN_H)
-#
-#     pygame.display.update()
-#     clock.tick(FPS)
+while one_player:
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            one_player = False
+    if main.game_over:
+        one_player = False
+
+    screen.fill(pygame.Color("light blue"))
+    screen.blit(main.background_img, (0, 0))
+    main.update_1p()
+
+    pygame.display.update()
+    clock.tick(FPS)
 
 while main.game_over:
     screen.fill(pygame.Color("black"))

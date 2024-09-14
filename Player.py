@@ -27,8 +27,6 @@ class PLAYER:
         self.last_shot = pygame.time.get_ticks()
         self.bullet_cooldown = BULLET_COOLDOWN
 
-
-
         if self.player_number == 1:
             # self.color = pygame.Color("red")
             self.original_img = pygame.image.load("graphics/red2.png").convert_alpha()

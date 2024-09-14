@@ -27,5 +27,7 @@ class INTERFACE:
     def p2_lose_life(self, damage):
         self.rect_p2_lives.w -= (damage / PLAYER_LIVES) * (self.w - self.border*3)
 
+
+
     def update(self):
         self.draw()

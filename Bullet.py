@@ -21,7 +21,7 @@ class BULLET:
     def draw(self):
         pygame.draw.rect(screen, self.COLOR, self.rect)
 
-    def collide_player(self, player_1, player_2, interface):
+    def collide_player(self, player_1, player_2, interface, bot_1):
         if self.rect.colliderect(player_1.rect) and self.bullet_number == 2:
             self.collided = True
             player_1.lives -= self.damage
@@ -32,11 +32,16 @@ class BULLET:
             player_2.lives -= self.damage
             interface.p2_lose_life(self.damage)
 
-    def update(self, player_1, player_2, interface):
+        if self.rect.colliderect(bot_1.rect) and self.bullet_number == 1:
+            self.collided = True
+            bot_1.lives -= self.damage
+            interface.p2_lose_life(self.damage)
+
+    def update(self, player_1, player_2, interface, bot_1):
         if not self.collided:
             if self.direction == "right":
                 self.rect.x += self.SPEED
             elif self.direction == "left":
                 self.rect.x -= self.SPEED
             self.draw()
-            self.collide_player(player_1, player_2, interface)
+            self.collide_player(player_1, player_2, interface, bot_1)
