@@ -78,17 +78,18 @@ class ITEM:
         self.collided_player = collided_player
         self.possible_items = possible_items
 
-
     def choose_rand(self):
         self.selected_item = random.choice(self.possible_items)
         self.selected_item()
 
     def back_to_normal(self):
+
         self.collided_player.w = self.collided_player.h = PLAYER_W
         self.collided_player.bullet_w = self.collided_player.bullet_h = BULLET_W
         self.collided_player.bullet_cooldown = BULLET_COOLDOWN
         self.collided_player.bullet_damage = BULLET_DAMAGE
         self.collided_player.bullet_w, self.collided_player.bullet_h = BULLET_W, BULLET_H
+
 
 
 

@@ -25,23 +25,27 @@ class MAIN:
 
 
     def test(self):
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_t]:
-            weapon = WEAPON(player_1)
-            weapon.sniper()
-        print(screen.get_width())
+        # keys = pygame.key.get_pressed()
+        # if keys[pygame.K_t]:
+        #     weapon = WEAPON(player_1)
+        #     weapon.sniper()
+
+        pass
+
 
     def update_elements(self):
+        screen.blit(self.background_img, (0, 0))
+
         for block in blocks:
             block.draw()
 
         interface.update()
 
         for bullet in player_1.bullets:
-            bullet.update(player_1, player_2, interface, bot_1)
+            bullet.update(player_1, player_2, interface)
 
         for bullet in player_2.bullets:
-            bullet.update(player_1, player_2, interface, bot_1)
+            bullet.update(player_1, player_2, interface)
 
         player_1.update(blocks)
         player_2.update(blocks)
@@ -66,10 +70,10 @@ class MAIN:
         interface.update()
 
         for bullet in player_1.bullets:
-            bullet.update(player_1, player_2, interface, bot_1)
+            bullet.update_bot(interface, bot_1)
 
         for bullet in bot_1.bullets:
-            bullet.update(player_1, player_2, interface, bot_1)
+            bullet.update_bot(interface, bot_1)
 
         player_1.update(blocks)
         bot_1.update(blocks)
@@ -270,8 +274,7 @@ while two_player:
     if main.game_over:
         two_player = False
 
-    screen.fill(pygame.Color("light blue"))
-    screen.blit(main.background_img, (0,0))
+    # screen.fill(pygame.Color("light blue"))
     main.update()
 
 
