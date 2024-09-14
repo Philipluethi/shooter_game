@@ -122,16 +122,16 @@ class PLAYER:
                 self.dodge_ground = False
 
     def collide_border(self):
-        if self.rect.centerx > SCREEN_W:
+        if self.rect.centerx > screen.get_width():
             self.rect.centerx = 0
         if self.rect.centerx < 0:
-            self.rect.centerx = SCREEN_W
+            self.rect.centerx = screen.get_width()
 
     def collide_bottom(self):
-        if self.rect.centery > SCREEN_H:
+        if self.rect.centery > screen.get_height():
             self.rect.centery = 0
         if self.rect.centery < 0:
-            self.rect.centery = SCREEN_H
+            self.rect.centery = screen.get_height()
 
     def update(self, blocks):
         self.draw(self.rect.x, self.rect.y, self.w, self.h)

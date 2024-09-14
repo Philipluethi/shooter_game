@@ -23,8 +23,8 @@ class ITEM_BOX:
         screen.blit(self.img, self.rect.topleft)
 
     def rand_pos(self):
-        self.x_pos = random.randint(0, SCREEN_W - self.width)
-        self.y_pos = random.randint(self.height, SCREEN_H - self.height)
+        self.x_pos = random.randint(0, screen.get_width() - self.width)
+        self.y_pos = random.randint(self.height, screen.get_height() - self.height)
 
 
     def collide_player(self, player_1, player_2):

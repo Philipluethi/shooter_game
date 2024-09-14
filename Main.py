@@ -8,6 +8,7 @@ from Effects import *
 from Interface import INTERFACE
 from Bot import BOT
 from Instances import *
+from pygame.locals import *
 
 pygame.init()
 
@@ -20,7 +21,7 @@ class MAIN:
         self.game_over = False
 
         self.background_img = pygame.image.load("graphics/background1.png").convert_alpha()
-        self.background_img = pygame.transform.scale(self.background_img, (SCREEN_W, SCREEN_H))
+        self.background_img = pygame.transform.scale(self.background_img, (screen.get_width(), screen.get_height()))
 
 
     def test(self):
@@ -28,7 +29,7 @@ class MAIN:
         if keys[pygame.K_t]:
             weapon = WEAPON(player_1)
             weapon.sniper()
-        print(bot_1.lives)
+        print(screen.get_width())
 
     def update_elements(self):
         for block in blocks:
@@ -52,7 +53,7 @@ class MAIN:
             item.update(player_1, player_2, items)
 
         # F-String from Vid 3
-        self.draw_text(player_1.lives, self.lives_font, (0, 0, 0), SCREEN_W - 100, interface.rect_p1_lives.centery)
+        self.draw_text(player_1.lives, self.lives_font, (0, 0, 0), screen.get_width() - 100, interface.rect_p1_lives.centery)
         self.draw_text(player_2.lives, self.lives_font, (0, 0, 0), 100, interface.rect_p2_lives.centery)
 
 
@@ -78,7 +79,7 @@ class MAIN:
             item.update(player_1, player_2, items)
 
         # F-String from Vid 3
-        self.draw_text(player_1.lives, self.lives_font, (0, 0, 0), SCREEN_W - 100, interface.rect_p1_lives.centery)
+        self.draw_text(player_1.lives, self.lives_font, (0, 0, 0), screen.get_width() - 100, interface.rect_p1_lives.centery)
         self.draw_text(bot_1.lives, self.lives_font, (0, 0, 0), 100, interface.rect_p2_lives.centery)
 
 
@@ -171,29 +172,29 @@ class MAIN:
 
     def random_map(self):
 
-        for row in range(SCREEN_W // BLOCK_W + 1):
-            blocks.append(BLOCK(BLOCK_W * row, SCREEN_H // BLOCK_H * BLOCK_H - BLOCK_H, BLOCK_W, BLOCK_H))
+        for row in range(screen.get_width() // BLOCK_W + 1):
+            blocks.append(BLOCK(BLOCK_W * row, screen.get_height() // BLOCK_H * BLOCK_H - BLOCK_H, BLOCK_W, BLOCK_H))
 
-        for col in range(SCREEN_H // BLOCK_H):
+        for col in range(screen.get_height() // BLOCK_H):
             if col % 2 == 0:
-                for row in range(SCREEN_W // BLOCK_W):
+                for row in range(screen.get_width() // BLOCK_W):
                     if row % random.randint(1, 3) == 0:
                         blocks.append(BLOCK(row * BLOCK_H, col * BLOCK_H, BLOCK_W, BLOCK_H))
 
 
 
         for item in items:
-            # long_rect = pygame.Rect(item.rect.x, 0, item.rect.w, item.rect.h + SCREEN_H)
+            # long_rect = pygame.Rect(item.rect.x, 0, item.rect.w, item.rect.h + screen.get_height())
             # pygame.draw.rect(screen, (0, 0, 0), long_rect)
 
             for block in blocks:
                 if item.rect.colliderect(block.rect):
                     item.rand_pos()
 
-            if player_1.rect.colliderect(item.rect.x, 0, item.rect.w, item.rect.h + SCREEN_H):
+            if player_1.rect.colliderect(item.rect.x, 0, item.rect.w, item.rect.h + screen.get_height()):
                 item.rand_pos()
 
-            if player_2.rect.colliderect(item.rect.x, 0, item.rect.w, item.rect.h + SCREEN_H):
+            if player_2.rect.colliderect(item.rect.x, 0, item.rect.w, item.rect.h + screen.get_height()):
                 item.rand_pos()
 
     def random_items(self):
@@ -237,10 +238,10 @@ while start_screen:
         if event.type == pygame.QUIT:
             start_screen = False
     screen.fill(pygame.Color("white"))
-    main.draw_text("CHOOSE A GAME MODE", main.title_font, pygame.Color("black"), SCREEN_W // 2, SCREEN_H // 2 - 150)
-    main.draw_text("press 1 for single player", main.subtitle_font, pygame.Color("black"), SCREEN_W // 2, SCREEN_H // 2)
-    main.draw_text("press 2 for two-player", main.subtitle_font, pygame.Color("black"), SCREEN_W // 2, SCREEN_H // 2 + 50)
-    main.draw_text("hold h for info", main.subtitle_font, pygame.Color("black"), SCREEN_W // 2, SCREEN_H // 2 + 100)
+    main.draw_text("CHOOSE A GAME MODE", main.title_font, pygame.Color("black"), screen.get_width() // 2, screen.get_height() // 2 - 150)
+    main.draw_text("press 1 for single player", main.subtitle_font, pygame.Color("black"), screen.get_width() // 2, screen.get_height() // 2)
+    main.draw_text("press 2 for two-player", main.subtitle_font, pygame.Color("black"), screen.get_width() // 2, screen.get_height() // 2 + 50)
+    main.draw_text("hold h for info", main.subtitle_font, pygame.Color("black"), screen.get_width() // 2, screen.get_height() // 2 + 100)
 
 
     keys = pygame.key.get_pressed()
@@ -309,8 +310,8 @@ while main.game_over:
         winner_color = "blue"
         player_2.update(blocks)
 
-    main.draw_text(f"Player {main.winner} wins", main.title_font, pygame.Color(winner_color), SCREEN_W // 2, SCREEN_H // 2 - 50)
-    main.draw_text("GAME OVER", main.subtitle_font, pygame.Color(winner_color), SCREEN_W // 2, SCREEN_H // 2)
+    main.draw_text(f"Player {main.winner} wins", main.title_font, pygame.Color(winner_color), screen.get_width() // 2, screen.get_height() // 2 - 50)
+    main.draw_text("GAME OVER", main.subtitle_font, pygame.Color(winner_color), screen.get_width() // 2, screen.get_height() // 2)
 
     pygame.display.update()
     clock.tick(FPS)
