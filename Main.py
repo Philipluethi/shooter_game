@@ -146,12 +146,9 @@ class MAIN:
                     item.rand_pos()
 
         # INFO
-        info_on = False
-        if not info_on:
-            if keys[pygame.K_h]:
-                interface.draw_info()
-                # if keys[pygame.K_h]:
-                #     info_on = True
+        if keys[pygame.K_h]:
+            interface.draw_info()
+
 
 
     def check_lives(self):
@@ -239,6 +236,12 @@ while start_screen:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             start_screen = False
+    screen.fill(pygame.Color("white"))
+    main.draw_text("CHOOSE A GAME MODE", main.title_font, pygame.Color("black"), SCREEN_W // 2, SCREEN_H // 2 - 150)
+    main.draw_text("press 1 for single player", main.subtitle_font, pygame.Color("black"), SCREEN_W // 2, SCREEN_H // 2)
+    main.draw_text("press 2 for two-player", main.subtitle_font, pygame.Color("black"), SCREEN_W // 2, SCREEN_H // 2 + 50)
+    main.draw_text("hold h for info", main.subtitle_font, pygame.Color("black"), SCREEN_W // 2, SCREEN_H // 2 + 100)
+
 
     keys = pygame.key.get_pressed()
 
@@ -250,10 +253,8 @@ while start_screen:
         start_screen = False
         one_player = True
 
-    screen.fill(pygame.Color("white"))
-    main.draw_text("CHOOSE A GAME MODE", main.title_font, pygame.Color("black"), SCREEN_W // 2, SCREEN_H // 2 - 150)
-    main.draw_text("press 1 for single player", main.subtitle_font, pygame.Color("black"), SCREEN_W // 2, SCREEN_H // 2)
-    main.draw_text("press 2 for two-player", main.subtitle_font, pygame.Color("black"), SCREEN_W // 2, SCREEN_H // 2 + 50)
+    if keys[pygame.K_h]:
+        interface.draw_info()
 
     clock.tick(FPS)
     pygame.display.update()
