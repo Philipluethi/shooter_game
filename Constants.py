@@ -3,14 +3,16 @@ import pygame
 FPS = 60
 SCREEN_W = 1000
 SCREEN_H = SCREEN_W // 2
+SCREEN_RATIO = SCREEN_H / SCREEN_W
+
 
 BLOCK_W = BLOCK_H = SCREEN_H // 7
 
 PLAYER_W = PLAYER_H = BLOCK_H * 0.9
 PLAYER_2_START_X = SCREEN_W / 4
-PLAYER_2_START_Y = SCREEN_H / 4
-PLAYER_1_START_X = SCREEN_W - SCREEN_W / 4
-PLAYER_1_START_Y = SCREEN_H / 4
+PLAYER_2_START_Y = SCREEN_H / 2
+PLAYER_1_START_X = SCREEN_W - PLAYER_2_START_X
+PLAYER_1_START_Y = PLAYER_2_START_Y
 
 PLAYER_LIVES = 5
 BULLET_DAMAGE = 1
@@ -26,8 +28,8 @@ ITEM_COUNT = 2
 ITEM_W = int(BLOCK_W * 0.5)
 ITEM_DUR = 1000 * 5
 
-screen = pygame.display.set_mode((SCREEN_W, SCREEN_H))
+screen = pygame.display.set_mode((SCREEN_W, SCREEN_H), pygame.RESIZABLE)
+screen_rect = screen.get_rect()
 pygame.display.set_caption("Bullet Rush")
 clock = pygame.time.Clock()
-
 

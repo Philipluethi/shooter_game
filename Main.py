@@ -145,6 +145,15 @@ class MAIN:
                 if keys[pygame.K_i]:
                     item.rand_pos()
 
+        # INFO
+        info_on = False
+        if not info_on:
+            if keys[pygame.K_h]:
+                interface.draw_info()
+                # if keys[pygame.K_h]:
+                #     info_on = True
+
+
     def check_lives(self):
 
         if player_1.lives < 1:
