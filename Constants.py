@@ -29,3 +29,5 @@ ITEM_DUR = 1000 * 5
 screen = pygame.display.set_mode((SCREEN_W, SCREEN_H))
 pygame.display.set_caption("Bullet Rush")
 clock = pygame.time.Clock()
+
+
