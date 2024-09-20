@@ -38,7 +38,6 @@ class MAIN:
 
         for block in blocks:
             block.draw()
-
         interface.update()
 
         for bullet in player_1.bullets:
@@ -175,9 +174,9 @@ class MAIN:
         #     player_2.previous_lives = player_2.lives
 
     def random_map(self):
-
-        for row in range(screen.get_width() // BLOCK_W + 1):
-            blocks.append(BLOCK(BLOCK_W * row, screen.get_height() // BLOCK_H * BLOCK_H - BLOCK_H, BLOCK_W, BLOCK_H))
+        last_row = (screen.get_height() // BLOCK_H) * BLOCK_H - BLOCK_H
+        for col in range(screen.get_width() // BLOCK_W + 1):
+            blocks.append(BLOCK(BLOCK_W * col, last_row, BLOCK_W, BLOCK_H))
 
         for col in range(screen.get_height() // BLOCK_H):
             if col % 2 == 0:
@@ -237,30 +236,23 @@ one_player = False
 main.random_map()
 
 while start_screen:
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             start_screen = False
     screen.fill(pygame.Color("white"))
-    main.draw_text("CHOOSE A GAME MODE", main.title_font, pygame.Color("black"), screen.get_width() // 2, screen.get_height() // 2 - 150)
-    main.draw_text("press 1 for single player", main.subtitle_font, pygame.Color("black"), screen.get_width() // 2, screen.get_height() // 2)
-    main.draw_text("press 2 for two-player", main.subtitle_font, pygame.Color("black"), screen.get_width() // 2, screen.get_height() // 2 + 50)
-    main.draw_text("hold h for info", main.subtitle_font, pygame.Color("black"), screen.get_width() // 2, screen.get_height() // 2 + 100)
-
-
+    main.draw_text("CHOOSE A GAME MODE", main.title_font, pygame.Color("black"), screen.get_width() // 2, screen.get_height()//2-150)
+    main.draw_text("press 1 for single player",main.subtitle_font, pygame.Color("black"),screen.get_width()//2,screen.get_height()//2)
+    main.draw_text("press 2 for two-player",main.subtitle_font,pygame.Color("black"), screen.get_width()//2,screen.get_height()//2+50)
+    main.draw_text("hold h for info", main.subtitle_font, pygame.Color("black"), screen.get_width() // 2,screen.get_height()//2+100)
     keys = pygame.key.get_pressed()
-
     if keys[pygame.K_2]:
         start_screen = False
         two_player = True
-
     if keys[pygame.K_1]:
         start_screen = False
         one_player = True
-
     if keys[pygame.K_h]:
         interface.draw_info()
-
     clock.tick(FPS)
     pygame.display.update()
 
