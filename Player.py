@@ -28,12 +28,10 @@ class PLAYER:
         self.bullet_cooldown = BULLET_COOLDOWN
 
         if self.player_number == 1:
-            # self.color = pygame.Color("red")
-            self.original_img = pygame.image.load("graphics/red2.png").convert_alpha()
+            self.original_img = pygame.image.load("graphics/player_red.png").convert_alpha()
 
         if self.player_number == 2:
-            # self.color = pygame.Color("blue")
-            self.original_img = pygame.image.load("graphics/blue2.png").convert_alpha()
+            self.original_img = pygame.image.load("graphics/player_blue.png").convert_alpha()
 
     def draw(self, x, y, w, h):
         self.rect = pygame.Rect(x, y, w, h)
@@ -49,10 +47,10 @@ class PLAYER:
 
     def load_img(self):
         if self.player_number == 1:
-            self.player_img = pygame.image.load("graphics/red2.png").convert_alpha()
+            self.player_img = pygame.image.load("graphics/player_red.png").convert_alpha()
 
         if self.player_number == 2:
-            self.player_img = pygame.image.load("graphics/blue2.png").convert_alpha()
+            self.player_img = pygame.image.load("graphics/player_blue.png").convert_alpha()
 
     def move_left(self):
         # if not self.collided_left:
