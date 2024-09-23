@@ -176,13 +176,13 @@ class MAIN:
     def random_map(self):
         last_row = (screen.get_height() // BLOCK_H) * BLOCK_H - BLOCK_H
         for col in range(screen.get_width() // BLOCK_W + 1):
-            blocks.append(BLOCK(BLOCK_W * col, last_row, BLOCK_W, BLOCK_H))
+            blocks.append(BLOCK(BLOCK_W * col, last_row))
 
         for col in range(screen.get_height() // BLOCK_H):
             if col % 2 == 0:
                 for row in range(screen.get_width() // BLOCK_W):
                     if row % random.randint(1, 3) == 0:
-                        blocks.append(BLOCK(row * BLOCK_H, col * BLOCK_H, BLOCK_W, BLOCK_H))
+                        blocks.append(BLOCK(row * BLOCK_H, col * BLOCK_H))
 
 
 
