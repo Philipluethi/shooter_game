@@ -53,7 +53,6 @@ class PLAYER:
             self.player_img = pygame.image.load("graphics/player_blue.png").convert_alpha()
 
     def move_left(self):
-        # if not self.collided_left:
         self.dx -= self.x_vel
         self.direction = "left"
 
@@ -83,18 +82,17 @@ class PLAYER:
             self.bullets.append(new_bullet)
             self.last_shot = current_time
 
-    def check_inside_block(self, blocks):
-        pass
-        self.inside_block = False
-
-        for block in blocks:
-            if (self.rect.colliderect(block.rect)
-                    and self.rect.top > block.rect.top
-                    and self.rect.left < block.rect.centerx
-                    and self.rect.right > block.rect.centerx
-                    and self.h < block.rect.h):
-                self.inside_block = True
-
+    # def check_inside_block(self, blocks):
+    #     pass
+    #     self.inside_block = False
+    #
+    #     for block in blocks:
+    #         if (self.rect.colliderect(block.rect)
+    #                 and self.rect.top > block.rect.top
+    #                 and self.rect.left < block.rect.centerx
+    #                 and self.rect.right > block.rect.centerx
+    #                 and self.h < block.rect.h):
+    #             self.inside_block = True
 
     def collide_vertical(self, blocks):
         self.touching_ground = False
@@ -104,7 +102,6 @@ class PLAYER:
                     and self.dy >= 0
                     and self.rect.bottom < block.rect.top + self.dy + 5
                     and not self.dodge_ground
-                    # and not self.inside_block
             ):
                 self.rect.bottom = block.rect.top
                 self.touching_ground = True
@@ -115,8 +112,7 @@ class PLAYER:
         for block in blocks:
             if (self.dodge_ground
                     and self.rect.colliderect(block.rect)
-                    and self.rect.bottom < block.rect.bottom
-                    and self.rect.bottom > block.rect.centery):
+                    and self.rect.centery > block.rect.bottom):
                 self.dodge_ground = False
 
     def collide_border(self):
@@ -134,7 +130,7 @@ class PLAYER:
     def update(self, blocks):
         self.draw(self.rect.x, self.rect.y, self.w, self.h)
         self.gravity()
-        self.check_inside_block(blocks)
+        # self.check_inside_block(blocks)
         self.collide_vertical(blocks)
         self.stop_dodge(blocks)
         self.collide_border()

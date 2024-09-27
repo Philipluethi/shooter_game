@@ -85,11 +85,9 @@ class MAIN:
         self.draw_text(player_1.lives, self.lives_font, (0, 0, 0), screen.get_width() - 100, interface.rect_p1_lives.centery)
         self.draw_text(bot_1.lives, self.lives_font, (0, 0, 0), 100, interface.rect_p2_lives.centery)
 
-
-
     def check_keys(self):
-        keys = pygame.key.get_pressed()
         # P1
+        keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             player_1.move_left()
 
@@ -101,6 +99,7 @@ class MAIN:
                 player_1.jump()
                 player_1.jump_count += 1
                 player_1.jump_pressed = True
+
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_UP:
                 player_1.jump_pressed = False
