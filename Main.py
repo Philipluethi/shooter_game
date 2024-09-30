@@ -25,10 +25,12 @@ class MAIN:
 
 
     def test(self):
-        # keys = pygame.key.get_pressed()
-        # if keys[pygame.K_t]:
-        #     weapon = WEAPON(player_1)
-        #     weapon.sniper()
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_t]:
+            weapon = WEAPON(player_1)
+            weapon.sniper()
+            weapon = WEAPON(player_2)
+            weapon.smg()
 
         pass
 

@@ -83,12 +83,12 @@ class ITEM:
         self.selected_item()
 
     def back_to_normal(self):
-
         self.collided_player.w = self.collided_player.h = PLAYER_W
         self.collided_player.bullet_w = self.collided_player.bullet_h = BULLET_W
         self.collided_player.bullet_cooldown = BULLET_COOLDOWN
         self.collided_player.bullet_damage = BULLET_DAMAGE
         self.collided_player.bullet_w, self.collided_player.bullet_h = BULLET_W, BULLET_H
+        self.collided_player.choose_default_skin()
 
 
 
@@ -123,12 +123,11 @@ class WEAPON(ITEM):
         self.collided_player.bullet_cooldown = BULLET_COOLDOWN / 3
         self.collided_player.bullet_damage = BULLET_DAMAGE / 2
         self.collided_player.bullet_w = self.collided_player.bullet_h = BULLET_W / 4
-
-        print("smg")
+        self.collided_player.choose_smg_skin()
 
     def sniper(self):
         self.collided_player.bullet_cooldown = BULLET_COOLDOWN * 3
         self.collided_player.bullet_damage = BULLET_DAMAGE * 3
         self.collided_player.bullet_w, self.collided_player.bullet_h = BULLET_W * 1.5, BULLET_H * 0.5
+        self.collided_player.choose_sniper_skin()
 
-        print("sniper")

@@ -26,13 +26,28 @@ class PLAYER:
         self.bullets = []
         self.last_shot = pygame.time.get_ticks()
         self.bullet_cooldown = BULLET_COOLDOWN
+        self.choose_default_skin()
 
+    def choose_default_skin(self):
         if self.player_number == 1:
-            self.original_img = pygame.image.load("graphics/player_red.png").convert_alpha()
+            self.original_img = pygame.image.load("graphics/player_red_pistol.png").convert_alpha()
 
         if self.player_number == 2:
-            self.original_img = pygame.image.load("graphics/player_blue.png").convert_alpha()
+            self.original_img = pygame.image.load("graphics/player_blue_pistol.png").convert_alpha()
 
+    def choose_smg_skin(self):
+        if self.player_number == 1:
+            self.original_img = pygame.image.load("graphics/player_red_smg.png").convert_alpha()
+
+        if self.player_number == 2:
+            self.original_img = pygame.image.load("graphics/player_blue_smg.png").convert_alpha()
+
+    def choose_sniper_skin(self):
+        if self.player_number == 1:
+            self.original_img = pygame.image.load("graphics/player_red_sniper.png").convert_alpha()
+
+        if self.player_number == 2:
+            self.original_img = pygame.image.load("graphics/player_blue_sniper.png").convert_alpha()
     def draw(self, x, y, w, h):
         self.rect = pygame.Rect(x, y, w, h)
         self.player_img = pygame.transform.scale(self.original_img, (w, h))
@@ -75,10 +90,9 @@ class PLAYER:
         current_time = pygame.time.get_ticks()
 
         if current_time - self.last_shot > self.bullet_cooldown:
-            bullet_x = self.rect.centerx
-            bullet_y = self.rect.centery
-
-            new_bullet = BULLET(bullet_x, bullet_y, self.bullet_w, self.bullet_h, self.direction, self.player_number, self.bullet_damage)
+            new_bullet = BULLET(self.rect.centerx, self.rect.centery,
+                                self.bullet_w, self.bullet_h, self.direction,
+                                self.player_number, self.bullet_damage)
             self.bullets.append(new_bullet)
             self.last_shot = current_time
 
