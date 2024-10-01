@@ -110,11 +110,9 @@ class EFFECT(ITEM):
 
     def player_get_bigger(self):
         self.player_change_size(2, 2)
-        print("bigger")
-
+        self.collided_player.bullet_damage *= 2
     def player_get_smaller(self):
         self.player_change_size(0.5, 0.5)
-        print("smaller")
 
 
 class WEAPON(ITEM):
