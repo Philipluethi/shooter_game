@@ -22,17 +22,20 @@ class MAIN:
 
         self.background_img = pygame.image.load("graphics/background1.png").convert_alpha()
         self.background_img = pygame.transform.scale(self.background_img, (screen.get_width(), screen.get_height()))
+        self.t_pressed = False
 
 
     def test(self):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_t]:
-            weapon = WEAPON(player_1)
-            weapon.sniper()
-            weapon = WEAPON(player_2)
-            weapon.smg()
 
-        pass
+        if keys[pygame.K_t] and not self.t_pressed:
+            # weapon = WEAPON(player_1)
+            # weapon.sniper()
+            # weapon = WEAPON(player_2)
+            # weapon.smg()
+            effect = EFFECT(player_1)
+            effect.player_change_size(2,2)
+            self.t_pressed = True
 
 
     def update_elements(self):

@@ -114,7 +114,7 @@ class PLAYER:
         for block in blocks:
             if (self.rect.colliderect(block.rect)
                     and self.dy >= 0
-                    and self.rect.bottom < block.rect.top + self.dy + 5
+                    and self.rect.bottom < block.rect.top + self.dy + 3
                     and not self.dodge_ground
             ):
                 self.rect.bottom = block.rect.top
@@ -126,7 +126,8 @@ class PLAYER:
         for block in blocks:
             if (self.dodge_ground
                     and self.rect.colliderect(block.rect)
-                    and self.rect.centery > block.rect.bottom):
+                    and self.dy >= 0
+                    and self.rect.top > block.rect.bottom - self.dy):
                 self.dodge_ground = False
 
     def collide_border(self):
