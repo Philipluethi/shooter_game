@@ -1,6 +1,9 @@
+import math
+
 import pygame
 import random
 from Constants import *
+from Instances import *
 
 
 
@@ -24,7 +27,7 @@ class ITEM_BOX:
 
     def rand_pos(self):
         self.x_pos = random.randint(0, screen.get_width() - self.width)
-        self.y_pos = random.randint(self.height, screen.get_height() - self.height)
+        self.y_pos = random.randint(interface.rect_p1.h, screen.get_height() - self.height)
 
 
     def collide_player(self, player_1, player_2):

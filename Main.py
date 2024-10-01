@@ -1,5 +1,4 @@
-import pygame
-import random
+
 from Constants import *
 from Block import BLOCK
 from Bullet import BULLET
@@ -27,7 +26,6 @@ class MAIN:
 
     def test(self):
         keys = pygame.key.get_pressed()
-
         if keys[pygame.K_t] and not self.t_pressed:
             # weapon = WEAPON(player_1)
             # weapon.sniper()
@@ -36,6 +34,12 @@ class MAIN:
             effect = EFFECT(player_1)
             effect.player_change_size(2,2)
             self.t_pressed = True
+
+
+        # no_go_zones = range(math.ceil(PLAYER_2_START_X), math.ceil(PLAYER_2_START_X) + math.ceil(PLAYER_W))
+        # print(no_go_zones)
+        # print(choice([i for i in range(0, 9) if i not in [2, 5, 7]]))
+
 
 
     def update_elements(self):
@@ -149,9 +153,8 @@ class MAIN:
 
         # ITEM
         for item in items:
-            for block in blocks:
-                if keys[pygame.K_i]:
-                    item.rand_pos()
+            if keys[pygame.K_i]:
+                item.rand_pos()
 
         # INFO
         if keys[pygame.K_h]:
@@ -189,20 +192,21 @@ class MAIN:
                         blocks.append(BLOCK(row * BLOCK_H, col * BLOCK_H))
 
 
-
+    def check_item_collision(self):
         for item in items:
-            # long_rect = pygame.Rect(item.rect.x, 0, item.rect.w, item.rect.h + screen.get_height())
-            # pygame.draw.rect(screen, (0, 0, 0), long_rect)
-
             for block in blocks:
                 if item.rect.colliderect(block.rect):
                     item.rand_pos()
 
-            if player_1.rect.colliderect(item.rect.x, 0, item.rect.w, item.rect.h + screen.get_height()):
+            if item.rect.colliderect(interface.rect_p1):
+                item.rand_pos
+
+            if item.rect.colliderect(PLAYER_1_START_X, 0, PLAYER_W, screen.get_height()):
+                item.rand_pos()
+            if item.rect.colliderect(PLAYER_2_START_X, 0, PLAYER_W, screen.get_height()):
                 item.rand_pos()
 
-            if player_2.rect.colliderect(item.rect.x, 0, item.rect.w, item.rect.h + screen.get_height()):
-                item.rand_pos()
+
 
     def random_items(self):
         if len(items) < ITEM_COUNT:
@@ -220,6 +224,7 @@ class MAIN:
         self.check_keys()
         self.check_lives()
         self.random_items()
+        self.check_item_collision()
         self.test()
 
     def update_1p(self):
@@ -227,6 +232,7 @@ class MAIN:
         self.check_keys()
         self.check_lives()
         self.random_items()
+        self.check_item_collision()
         self.test()
 
 
@@ -238,6 +244,7 @@ start_screen = True
 two_player = False
 one_player = False
 main.random_map()
+main.random_items()
 
 while start_screen:
     for event in pygame.event.get():

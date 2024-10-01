@@ -1,4 +1,7 @@
 import pygame
+import math
+import random
+from random import choice
 
 
 FPS = 60
@@ -30,7 +33,7 @@ JUMP_LIMIT = 2
 BULLET_COOLDOWN = 1000 / 3
 
 
-ITEM_COUNT = 2
+ITEM_COUNT = 30
 ITEM_W = int(BLOCK_W * 0.5)
 ITEM_DUR = 1000 * 5
 

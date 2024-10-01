@@ -11,6 +11,7 @@ class INTERFACE:
         self.border = 5
         self.rect_p2 = pygame.Rect(10, 10, self.w, self.h)
         self.rect_p1 = pygame.Rect(screen.get_width() - 10 - self.w, 10, self.w, self.h)
+
         self.rect_p2_lives = pygame.Rect(15, 15, self.w - self.border*2 , self.h - self.border*2)
         self.rect_p1_lives = pygame.Rect(screen.get_width() - self.w - 5, 15, self.w - self.border*2, self.h - self.border*2)
         self.info_rect = pygame.Rect(0, 0, screen.get_width(), screen.get_height())
