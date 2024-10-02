@@ -4,7 +4,7 @@ from Constants import *
 from Block import BLOCK
 from Bullet import BULLET
 from Player import PLAYER
-from Effects import *
+from Items import *
 from Interface import INTERFACE
 from Bot import BOT
 from Constants import *
