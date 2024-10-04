@@ -21,12 +21,13 @@ class INTERFACE:
         self.info_img = pygame.transform.scale(self.info_img, (screen.get_width(), screen.get_width() * self.info_img_ratio))
 
 
-    def draw(self):
-        pygame.draw.rect(screen, (255, 255, 255), self.rect_p2)
+    def draw_p1(self):
         pygame.draw.rect(screen, (255, 255, 255), self.rect_p1)
-        pygame.draw.rect(screen, pygame.Color("blue"), self.rect_p2_lives)
         pygame.draw.rect(screen, pygame.Color("red"), self.rect_p1_lives)
 
+    def draw_p2(self):
+        pygame.draw.rect(screen, (255, 255, 255), self.rect_p2)
+        pygame.draw.rect(screen, pygame.Color("blue"), self.rect_p2_lives)
 
     def p1_lose_life(self, damage):
         self.rect_p1_lives.w -= (damage / PLAYER_LIVES) * (self.w - self.border*3)
@@ -38,4 +39,5 @@ class INTERFACE:
         screen.blit(self.info_img, self.info_rect)
 
     def update(self):
-        self.draw()
+        self.draw_p1()
+        self.draw_p2()

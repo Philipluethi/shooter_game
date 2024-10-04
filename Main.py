@@ -40,6 +40,15 @@ class MAIN:
         # print(no_go_zones)
         # print(choice([i for i in range(0, 9) if i not in [2, 5, 7]]))
 
+    def draw_lives_p1(self):
+        # F-String from Vid 3
+        self.draw_text(player_1.lives, self.lives_font, (0, 0, 0), screen.get_width() - 100, interface.rect_p1_lives.centery)
+
+    def draw_lives_p2(self):
+        self.draw_text(player_2.lives, self.lives_font, (0, 0, 0), 100, interface.rect_p2_lives.centery)
+
+    def draw_lives_bot(self):
+        self.draw_text(bot_1.lives, self.lives_font, (0, 0, 0), 100, interface.rect_p2_lives.centery)
 
 
     def update_elements(self):
@@ -64,9 +73,9 @@ class MAIN:
         for item in items:
             item.update(player_1, player_2, items)
 
-        # F-String from Vid 3
-        self.draw_text(player_1.lives, self.lives_font, (0, 0, 0), screen.get_width() - 100, interface.rect_p1_lives.centery)
-        self.draw_text(player_2.lives, self.lives_font, (0, 0, 0), 100, interface.rect_p2_lives.centery)
+        self.draw_lives_p1()
+        self.draw_lives_p2()
+
 
 
 
@@ -91,9 +100,8 @@ class MAIN:
             item.update(player_1, player_2, items)
 
         # F-String from Vid 3
-        self.draw_text(player_1.lives, self.lives_font, (0, 0, 0), screen.get_width() - 100, interface.rect_p1_lives.centery)
-        self.draw_text(bot_1.lives, self.lives_font, (0, 0, 0), 100, interface.rect_p2_lives.centery)
-
+        self.draw_lives_p1()
+        self.draw_lives_bot()
     def check_keys(self):
         # P1
         keys = pygame.key.get_pressed()
@@ -151,13 +159,13 @@ class MAIN:
             blocks[1:] = []
             main.random_map()
 
-        # ITEM
-        for item in items:
-            if keys[pygame.K_i]:
-                item.rand_pos()
+        # # ITEM
+        # for item in items:
+        #     if keys[pygame.K_i]:
+        #         item.rand_pos()
 
         # INFO
-        if keys[pygame.K_h]:
+        if keys[pygame.K_i]:
             interface.draw_info()
 
 
@@ -168,7 +176,12 @@ class MAIN:
             self.winner = 2
             self.game_over = True
 
-        if player_2.lives < 1 or bot_1.lives < 1:
+
+        if player_2.lives < 1:
+            self.winner = 1
+            self.game_over = True
+
+        if bot_1.lives < 1:
             self.winner = 1
             self.game_over = True
         #
@@ -246,7 +259,9 @@ one_player = False
 main.random_map()
 main.random_items()
 
+# F-string VID 3
 while start_screen:
+    chosen_event = None
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             start_screen = False
@@ -254,15 +269,17 @@ while start_screen:
     main.draw_text("CHOOSE A GAME MODE", main.title_font, pygame.Color("black"), screen.get_width() // 2, screen.get_height()//2-150)
     main.draw_text("press 1 for single player",main.subtitle_font, pygame.Color("black"),screen.get_width()//2,screen.get_height()//2)
     main.draw_text("press 2 for two-player",main.subtitle_font,pygame.Color("black"), screen.get_width()//2,screen.get_height()//2+50)
-    main.draw_text("hold h for info", main.subtitle_font, pygame.Color("black"), screen.get_width() // 2,screen.get_height()//2+100)
+    main.draw_text("hold i for info", main.subtitle_font, pygame.Color("black"), screen.get_width() // 2,screen.get_height()//2+100)
     keys = pygame.key.get_pressed()
     if keys[pygame.K_2]:
         start_screen = False
         two_player = True
+        chosen_event = "2p"
     if keys[pygame.K_1]:
         start_screen = False
         one_player = True
-    if keys[pygame.K_h]:
+        chosen_event = "1p"
+    if keys[pygame.K_i]:
         interface.draw_info()
     clock.tick(FPS)
     pygame.display.update()
@@ -311,10 +328,21 @@ while main.game_over:
     if main.winner == 1:
         winner_color = "red"
         player_1.update(blocks)
+        interface.draw_p1()
+        main.draw_lives_p1()
 
     if main.winner == 2:
         winner_color = "blue"
-        player_2.update(blocks)
+        if chosen_event == "2p":
+            player_2.update(blocks)
+            interface.draw_p2()
+            main.draw_lives_p2()
+        elif chosen_event == "1p":
+            bot_1.update(blocks)
+            bot_1.update_controlls(BULLET, player_1)
+            interface.draw_p2()
+            main.draw_lives_bot()
+
 
     main.draw_text(f"Player {main.winner} wins", main.title_font, pygame.Color(winner_color), screen.get_width() // 2, screen.get_height() // 2 - 50)
     main.draw_text("GAME OVER", main.subtitle_font, pygame.Color(winner_color), screen.get_width() // 2, screen.get_height() // 2)
