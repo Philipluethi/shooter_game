@@ -1,6 +1,5 @@
 import pygame
 from Constants import *
-# from Instances import blocks
 
 
 
@@ -57,8 +56,6 @@ class PLAYER:
         else:
             screen.blit(self.player_img, self.rect)
 
-        # pygame.draw.rect(screen, self.color, self.rect)
-
 
     def load_img(self):
         if self.player_number == 1:
@@ -96,27 +93,14 @@ class PLAYER:
             self.bullets.append(new_bullet)
             self.last_shot = current_time
 
-    # def check_inside_block(self, blocks):
-    #     pass
-    #     self.inside_block = False
-    #
-    #     for block in blocks:
-    #         if (self.rect.colliderect(block.rect)
-    #                 and self.rect.top > block.rect.top
-    #                 and self.rect.left < block.rect.centerx
-    #                 and self.rect.right > block.rect.centerx
-    #                 and self.h < block.rect.h):
-    #             self.inside_block = True
 
     def collide_vertical(self, blocks):
         self.touching_ground = False
-
         for block in blocks:
             if (self.rect.colliderect(block.rect)
                     and self.dy >= 0
                     and self.rect.bottom < block.rect.top + self.dy + 3
-                    and not self.dodge_ground
-            ):
+                    and not self.dodge_ground):
                 self.rect.bottom = block.rect.top
                 self.touching_ground = True
                 self.jump_count = 0
@@ -145,7 +129,6 @@ class PLAYER:
     def update(self, blocks):
         self.draw(self.rect.x, self.rect.y, self.w, self.h)
         self.gravity()
-        # self.check_inside_block(blocks)
         self.collide_vertical(blocks)
         self.stop_dodge(blocks)
         self.collide_border()
@@ -153,4 +136,3 @@ class PLAYER:
         self.handle_move()
 
 
-        # self.collide_horizontal(blocks)

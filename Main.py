@@ -25,20 +25,18 @@ class MAIN:
 
 
     def test(self):
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_t] and not self.t_pressed:
-            # weapon = WEAPON(player_1)
-            # weapon.sniper()
-            # weapon = WEAPON(player_2)
-            # weapon.smg()
-            effect = EFFECT(player_1)
-            effect.player_change_size(2,2)
-            self.t_pressed = True
+        pass
+        # keys = pygame.key.get_pressed()
+        # if keys[pygame.K_t] and not self.t_pressed:
+        #     # weapon = WEAPON(player_1)
+        #     # weapon.sniper()
+        #     # weapon = WEAPON(player_2)
+        #     # weapon.smg()
+        #     effect = EFFECT(player_1)
+        #     effect.player_change_size(2,2)
+        #     self.t_pressed = True
 
 
-        # no_go_zones = range(math.ceil(PLAYER_2_START_X), math.ceil(PLAYER_2_START_X) + math.ceil(PLAYER_W))
-        # print(no_go_zones)
-        # print(choice([i for i in range(0, 9) if i not in [2, 5, 7]]))
 
     def draw_lives_p1(self):
         # F-String from Vid 3
@@ -66,8 +64,7 @@ class MAIN:
 
         player_1.update(blocks)
         player_2.update(blocks)
-        # bot_1.update(blocks)
-        # bot_1.update_controlls(BULLET)
+
 
 
         for item in items:
@@ -159,10 +156,6 @@ class MAIN:
             blocks[1:] = []
             main.random_map()
 
-        # # ITEM
-        # for item in items:
-        #     if keys[pygame.K_i]:
-        #         item.rand_pos()
 
         # INFO
         if keys[pygame.K_i]:
@@ -184,14 +177,6 @@ class MAIN:
         if bot_1.lives < 1:
             self.winner = 1
             self.game_over = True
-        #
-        # if player_1.lives < player_1.previous_lives:
-        #     interface.p1_lose_life()
-        #     player_1.previous_lives = player_1.lives
-        #
-        # if player_2.lives < player_2.previous_lives:
-        #     interface.p2_lose_life()
-        #     player_2.previous_lives = player_2.lives
 
     def random_map(self):
         last_row = (screen.get_height() // BLOCK_H) * BLOCK_H - BLOCK_H
@@ -294,7 +279,6 @@ while two_player:
     if main.game_over:
         two_player = False
 
-    # screen.fill(pygame.Color("light blue"))
     main.update()
 
 

@@ -22,7 +22,6 @@ class ITEM_BOX:
 
     def draw(self):
         self.rect = pygame.Rect(self.x_pos, self.y_pos, self.width, self.height)
-        # pygame.draw.rect(screen, self.color, self.rect)
         screen.blit(self.img, self.rect.topleft)
 
     def rand_pos(self):
@@ -48,12 +47,7 @@ class ITEM_BOX:
 
     def choose_effect_or_weapon(self, collided_player):
         self.possible_items = [EFFECT, WEAPON]
-
-        # CHATGPT
         self.selected_item = random.choice(self.possible_items)
-
-        # print(self.selected_item)
-        # selected_item(collided_player)
         self.item_instanz = self.selected_item(self.collided_player)
         self.item_instanz.choose_rand()
         self.item_running = True

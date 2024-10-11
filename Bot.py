@@ -11,14 +11,10 @@ class BOT(PLAYER):
 
         self.possible_methods = [self.move_left, self.move_right]
         self.last_movement_time = pygame.time.get_ticks()
-        # self.movement_delay = 500
-        # self.last_movement_delay = pygame.time.get_ticks()
         self.last_jump_time = pygame.time.get_ticks()
-
         self.last_shoot_time = pygame.time.get_ticks()
 
     def random_movements(self, BULLET, player_1):
-        # self.random_method = random.choice(self.possible_methods)
         self.movement_intervall = 2500
 
         if pygame.time.get_ticks() > self.last_movement_time + self.movement_intervall:

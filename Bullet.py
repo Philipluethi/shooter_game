@@ -1,6 +1,5 @@
 import pygame
 from Constants import *
-# from Main import interface
 
 
 
@@ -8,7 +7,6 @@ class BULLET:
     COLOR = pygame.Color("black")
     SPEED = 10
 
-    # WIDTH, HEIGHT = 10, 5
 
     def __init__(self, x, y, w, h, direction, player_number, damage):
         self.rect = pygame.Rect(x, y, w, h)
