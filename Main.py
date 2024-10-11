@@ -252,8 +252,8 @@ while start_screen:
             start_screen = False
     screen.fill(pygame.Color("white"))
     main.draw_text("CHOOSE A GAME MODE", main.title_font, pygame.Color("black"), screen.get_width() // 2, screen.get_height()//2-150)
-    main.draw_text("press 1 for single player",main.subtitle_font, pygame.Color("black"),screen.get_width()//2,screen.get_height()//2)
-    main.draw_text("press 2 for two-player",main.subtitle_font,pygame.Color("black"), screen.get_width()//2,screen.get_height()//2+50)
+    main.draw_text("press 1 for Player VS Bot",main.subtitle_font, pygame.Color("black"),screen.get_width()//2,screen.get_height()//2)
+    main.draw_text("press 2 for Player VS Player",main.subtitle_font,pygame.Color("black"), screen.get_width()//2,screen.get_height()//2+50)
     main.draw_text("hold i for info", main.subtitle_font, pygame.Color("black"), screen.get_width() // 2,screen.get_height()//2+100)
     keys = pygame.key.get_pressed()
     if keys[pygame.K_2]:
